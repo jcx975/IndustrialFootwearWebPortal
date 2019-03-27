@@ -1,0 +1,17 @@
+
+.fw-box {
+	margin: 5px;
+	padding: 20px;
+	text-align: center;
+	background-color:lightblue;
+	box-shadow: 5px 5px 8px gray;
+}
+
+.fw-box p {
+	font-size: 14pt;
+}
+
+.welcome-banner {
+	margin-bottom: 50px;
+	text-align: center;
+}
