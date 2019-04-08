@@ -1,0 +1,29 @@
+
+.fw-box {
+	margin: 5px;
+	padding: 20px;
+	text-align: center;
+	border-radius: 10px;
+	background-color:rgb(226, 241, 255);
+	box-shadow: 5px 5px 8px gray;
+}
+
+.fw-box p {
+	font-size: 14pt;
+}
+
+.welcome-banner {
+	margin-bottom: 50px;
+	text-align: center;
+}
+
+.company-profile {
+	border-radius: 10px;
+	padding: 10px;
+	width: 100%;
+	background-color: rgb(226, 241, 255);
+}
+
+.profile-name {
+	font-size: 24px;
+}
