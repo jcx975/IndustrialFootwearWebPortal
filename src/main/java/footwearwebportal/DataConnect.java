@@ -75,11 +75,11 @@ public class DataConnect {
 		}
 	}
 
-	public static boolean userlookup(String user, String pass) throws SQLException {
+	public boolean userlookup(String user, String pass) throws SQLException {
 		instance.newConnection();
 		boolean result = false;
 		PreparedStatement lookup = dbconn
-				.prepareStatement("SELECT count(*) from user WHERE username = ? and password = ?");
+				.prepareStatement("SELECT count(*) from footwearportal.user WHERE username = ? and password = ?");
 		lookup.setString(1, user);
 		lookup.setString(2, pass);
 
