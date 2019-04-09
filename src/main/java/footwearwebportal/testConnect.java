@@ -18,8 +18,6 @@ public class testConnect {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-
 	}
 
 	private static void createProfile(DataConnect data) throws  SQLException {

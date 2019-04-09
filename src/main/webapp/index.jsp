@@ -6,7 +6,7 @@
 	String pass = request.getParameter("password");
 
 	if (user != null && !user.trim().equals("")) {
-		DataConnect data = new DataConnect();
+		DataConnect data = serverInit.getConnection();
 		boolean flag = false;
 		try {
 			flag = data.userlookup(user, pass);

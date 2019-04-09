@@ -18,7 +18,7 @@ public class DataConnect {
 	}
 
 	// Establish connection to MySQL server
-	private Connection newConnection() {
+	Connection newConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 
@@ -92,7 +92,6 @@ public class DataConnect {
 
 
 	public boolean userlookup(String user, String pass) throws SQLException {
-		instance.newConnection();
 		boolean result = false;
 		PreparedStatement lookup = dbconn
 				.prepareStatement("SELECT count(*) from footwearportal.user WHERE username = ? and password = ?");
@@ -106,12 +105,10 @@ public class DataConnect {
 			result = true;
 		}
 
-		dbconn.close();
 		return result;
 	}
 
 	public boolean userCreate(String UID, String user, String pass, String group, String firstName, String lastName) throws SQLException {
-		instance.newConnection();
 		PreparedStatement lookup = dbconn.prepareStatement("insert into footwearportal.user values(?, ?, ?, ?, ?, ?)");
 		lookup.setString(1, UID);
 		lookup.setString(2, user);
@@ -121,12 +118,10 @@ public class DataConnect {
 		lookup.setString(6, lastName);
 
 		lookup.executeUpdate();
-		dbconn.close();
 		return true;
 	}
 
 	public ArrayList<CompanyData> allCompanyProfiles() throws SQLException {
-		instance.newConnection();
 		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.company");
 		ResultSet rs = lookup.executeQuery();
 		ArrayList<CompanyData> companyResult = new ArrayList<>();
@@ -136,12 +131,10 @@ public class DataConnect {
 					rs.getString(3), rs.getString(4)));
 		}
 
-		dbconn.close();
 		return companyResult;
 	}
 
 	public boolean profileCreate(String companyID, String companyName, String city, String state) throws SQLException {
-		instance.newConnection();
 		PreparedStatement lookup = dbconn.prepareStatement("insert into footwearportal.company values (?, ?, ?, ?)");
 		lookup.setString(1, companyID);
 		lookup.setString(2, companyName);
@@ -150,7 +143,6 @@ public class DataConnect {
 
 		lookup.executeUpdate();
 		System.out.println("New company profile: " + lookup.toString());
-		dbconn.close();
 		return true;
 	}
 }
