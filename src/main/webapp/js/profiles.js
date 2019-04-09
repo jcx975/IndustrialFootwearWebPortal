@@ -5,20 +5,20 @@ $( document ).ready( function()
 {
 	$( "#profiles-search" ).on( "keyup", profileSearch );
 	
-	// Generate random company names for testing purposes.
-	// In the future this won't be done in JavaScript, we'll be reading
-	// from the database server-side.
-	for ( let i = 0; i < 1001; i++ )
-	{
-		let length = Math.floor( Math.random() * 10 ) + 1
-
-		companyNames[ i ] = generateName( length );
-	}
-
-	// Sort company names alphabetically
-	companyNames.sort();
-
-	createProfileElements( companyNames );
+	// // Generate random company names for testing purposes.
+	// // In the future this won't be done in JavaScript, we'll be reading
+	// // from the database server-side.
+	// for ( let i = 0; i < 1001; i++ )
+	// {
+	// 	let length = Math.floor( Math.random() * 10 ) + 1
+	//
+	// 	companyNames[ i ] = generateName( length );
+	// }
+	//
+	// // Sort company names alphabetically
+	// companyNames.sort();
+	//
+	// createProfileElements( companyNames );
 } );
 
 // Create a random string of letters of a certain length to simulate
