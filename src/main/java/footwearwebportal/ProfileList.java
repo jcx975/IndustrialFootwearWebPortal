@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Collections;
 
 public class ProfileList extends  HttpServlet {
 	DataConnect data = serverInit.getConnection();
@@ -13,10 +13,9 @@ public class ProfileList extends  HttpServlet {
 	public String createList() throws IOException, SQLException {
 		StringWriter out = new StringWriter();
 		ArrayList<CompanyData> companyData = data.allCompanyProfiles();
-		Iterator<CompanyData> itr = companyData.iterator();
+		Collections.sort(companyData);
 
-		while(itr.hasNext()){
-			CompanyData company = itr.next();
+		for (CompanyData company : companyData) {
 			out.append("<div class=\"col-md-6 mb-5 profile-container\">");
 			out.append("<div class=\"company-profile\">");
 			out.append("<p class=\"profile-name\">" + company.companyName + "</p>");
