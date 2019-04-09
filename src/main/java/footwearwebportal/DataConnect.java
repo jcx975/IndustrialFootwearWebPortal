@@ -72,6 +72,24 @@ public class DataConnect {
 			return false;
 		}
 	}
+	
+
+	public boolean entry(String id, String name, String city, String state) {
+
+		try {
+			instance.dbentry("INSERT INTO company ( `companyID`, `companyName`,`city`,`state``) " +
+								"VALUES ("+id+",'"+name+"',"+city+",'"+state+");");	
+								System.out.println("TESTING WORKING");
+			return true;
+		}
+		catch ( Exception err ) {
+			err.getStackTrace();
+			err.printStackTrace();
+			return false;
+		}
+	}
+
+
 
 	public boolean userlookup(String user, String pass) throws SQLException {
 		instance.newConnection();
