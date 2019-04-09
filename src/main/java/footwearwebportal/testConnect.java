@@ -9,11 +9,13 @@ import java.util.Scanner;
 public class testConnect {
 	public static void main(String[] args){
 		DataConnect data = new DataConnect();
+		data.newConnection();
 		try {
 			//data.userCreate("5", "tim", "password", "rm", "Tim", "Jensen");
 			//System.out.println(data.userlookup("tim", "password"));
 			//createProfile(data);
 			printAllProfile(data.allCompanyProfiles());
+			data.closeConnection();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

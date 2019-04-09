@@ -72,7 +72,11 @@ public class DataConnect {
 			return false;
 		}
 	}
-	
+
+	public boolean closeConnection() throws SQLException {
+		dbconn.close();
+		return true;
+	}
 
 	public boolean entry(String id, String name, String city, String state) {
 

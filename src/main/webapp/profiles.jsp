@@ -1,3 +1,5 @@
+<%@ page import="footwearwebportal.ProfileList" %>
+<%@ page import="sun.java2d.cmm.Profile" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +12,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script src="profiles.js"></script>
+	<script src="js/profiles.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-2">
@@ -45,6 +47,7 @@
 		<div class="row">
 			<div class="col-md-12 mb-2">
 				<h2>Current Profiles:</h2>
+
 			</div>
 			<div class="col-md-12 mb-2">
 				<div class="form-group">
@@ -54,7 +57,11 @@
 			</div>
 		</div>
 		<div class="row" id="profiles-list">
-
+			<jsp:useBean id="profiles" class="footwearwebportal.ProfileList"/>
+			<%
+				ProfileList profileList = new ProfileList();
+				out.print(profileList.createList());
+			%>
 		</div>
 	</div>
 </body>
