@@ -2,18 +2,13 @@ package footwearwebportal;/*
  */
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DataConnect {
-	static DataConnect instance = new DataConnect();
-	static Connection dbconn;
-	ResultSet results = null;
-	PreparedStatement sql;
-	String dpwd = null;
-	StringBuilder sb = new StringBuilder();
-
-	// change URL to your database server as needed
-	String dbPath = "jdbc:mysql://localhost:3306";
+	private static DataConnect instance = new DataConnect();
+	private static Connection dbconn;
+	private PreparedStatement sql;
 
 	public static DataConnect getInstance() {
 		if (instance == null) {
@@ -23,11 +18,13 @@ public class DataConnect {
 	}
 
 	// Establish connection to MySQL server
-	public Connection newConnection() {
+	private Connection newConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 
 			try {
+				// change URL to your database server as needed
+				String dbPath = "jdbc:mysql://localhost:3306";
 				dbconn = DriverManager.getConnection(dbPath, "root", "password");
 				System.out.println("Connected to database");
 				return dbconn;
@@ -44,6 +41,7 @@ public class DataConnect {
 		try {
 
 			dbconn = instance.newConnection();
+			assert dbconn != null;
 			sql = dbconn.prepareStatement(query);
 			ResultSet results;
 			results = sql.executeQuery();
@@ -95,7 +93,6 @@ public class DataConnect {
 	}
 
 	public boolean userCreate(String UID, String user, String pass, String group, String firstName, String lastName) throws SQLException {
-		boolean result = true;
 		instance.newConnection();
 		PreparedStatement lookup = dbconn.prepareStatement("insert into footwearportal.user values(?, ?, ?, ?, ?, ?)");
 		lookup.setString(1, UID);
@@ -107,6 +104,35 @@ public class DataConnect {
 
 		lookup.executeUpdate();
 		dbconn.close();
-		return result;
+		return true;
+	}
+
+	public ArrayList<CompanyData> allCompanyProfiles() throws SQLException {
+		instance.newConnection();
+		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.company");
+		ResultSet rs = lookup.executeQuery();
+		ArrayList<CompanyData> companyResult = new ArrayList<>();
+
+		while(rs.next()){
+			companyResult.add(new CompanyData(rs.getString(1), rs.getString(2),
+					rs.getString(3), rs.getString(4)));
+		}
+
+		dbconn.close();
+		return companyResult;
+	}
+
+	public boolean profileCreate(String companyID, String companyName, String city, String state) throws SQLException {
+		instance.newConnection();
+		PreparedStatement lookup = dbconn.prepareStatement("insert into footwearportal.company values (?, ?, ?, ?)");
+		lookup.setString(1, companyID);
+		lookup.setString(2, companyName);
+		lookup.setString(3, city);
+		lookup.setString(4, state);
+
+		lookup.executeUpdate();
+		System.out.println("New company profile: " + lookup.toString());
+		dbconn.close();
+		return true;
 	}
 }
