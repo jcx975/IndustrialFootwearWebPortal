@@ -1,6 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 		 pageEncoding="ISO-8859-1" %>
 
+<%
+	String user = request.getParameter("username");
+	String pass = request.getParameter("password");
+
+	if (user != null && !user.trim().equals("")) {
+		DataConnect data = new DataConnect();
+		boolean flag = false;
+		try {
+			flag = data.userlookup(user, pass);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if (flag) {
+%>
+<script type="text/javascript">window.location.replace("retailmanager.html");</script>
+<%
+} else {
+%>
+<script type="text/javascript">window.location.replace("error.html");</script>
+<%
+		}
+	}
+%>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,30 +71,6 @@
 						<button class="btn btn-lg btn-primary btn-block mb-3" type="submit" formmethod="post">Sign in
 						</button>
 					</form>
-					<%
-						String user = request.getParameter("username");
-						String pass = request.getParameter("password");
-
-						if (user != null && !user.trim().equals("")) {
-							DataConnect data = new DataConnect();
-							boolean flag = false;
-							try {
-								flag = data.userlookup(user, pass);
-							} catch (SQLException e) {
-								e.printStackTrace();
-							}
-							if (flag) {
-								%>
-								<script type="text/javascript">window.location.replace("retailmanager.html");</script>
-								<%
-								} else {
-								%>
-								<script type="text/javascript">window.location.replace("error.html");</script>
-								<%
-							}
-						}
-					%>
-
 					<a href="#">Reset password</a>
 				</div>
 			</div>
