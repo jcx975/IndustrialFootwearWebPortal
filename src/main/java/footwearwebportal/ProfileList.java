@@ -21,7 +21,9 @@ public class ProfileList extends  HttpServlet {
 			out.append("<div class=\"company-profile\">");
 			out.append("<p class=\"profile-name\">" + company.companyName + "</p>");
 			out.append("<p>" + company.city + ", " + company.state + "</p>");
-			out.append("<a href=\"company.jsp\" class=\"btn btn-primary\">View Details</a>");
+			out.append("<form action=\"company.jsp\" method=\"GET\"");
+			out.append("<input type=\"hidden\" name=\"id\" value=\"" + company.id + "\">");
+			out.append("<input class=\"btn btn-primary\" type=\"submit\" value=\"View Details\"></form>");
 			out.append("</div>");
 			out.append("</div>");
 		}
