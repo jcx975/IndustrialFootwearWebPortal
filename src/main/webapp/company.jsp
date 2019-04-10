@@ -1,3 +1,6 @@
+<%@ page import="footwearwebportal.ProfileList" %>
+<%@ page import="java.sql.SQLException" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,12 +8,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Edit company</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" media="screen" href="main.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="css/main.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script src="company.js"></script>
+<%--	<script src="js/company.js"></script>--%>
 </head>
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-2">
@@ -35,7 +38,9 @@
 	<div class="container mb-5">
 		<div class="row">
 			<div class="col-md-12 company-buttons-container">
-				<button type="button" class="mr-4 btn btn-primary">< Back</button>
+				<button onclick="window.location.href='profiles.jsp'" type="button" class="btn btn-lg btn-primary mt-auto"><
+					Back
+				</button>
 				<button type="button" class="btn btn-danger">Delete Profile</button>
 				<button type="button" class="btn btn-success">Update Profile</button>
 				<hr>
@@ -131,10 +136,16 @@
 				</div>
 				<div class="col-md-4">
 					<h4>Current information:</h4>
-					<p id="currentCompanyName"></p>
-					<p id="currentState"></p>
-					<p id="currentCity"></p>
-					<p id="currentEmail"></p>
+					<jsp:useBean id="company" class="footwearwebportal.ProfileList"/>
+					<%
+						String id = request.getParameter("id");
+						ProfileList profileList = new ProfileList();
+						try {
+							out.print(profileList.createProfile(id));
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					%>
 				</div>
 			<!-- </form> -->
 		</div>

@@ -30,4 +30,16 @@ public class ProfileList extends  HttpServlet {
 
 		return out.toString();
 	}
+
+	public String createProfile(String companyID) throws IOException, SQLException {
+		StringWriter out = new StringWriter();
+		CompanyData company = data.getCompany(companyID);
+
+		out.append("<p id=\"currentCompanyName\">" + company.companyName + "</p>");
+		out.append("<p id=\"currentCompanyCity\">" + company.city + "</p>");
+		out.append("<p id=\"currentCompanyState\">" + company.state + "</p>");
+		out.append("<p id=\"currentCompanyEmail\">example@email.com</p>");
+
+		return out.toString();
+	}
 }
