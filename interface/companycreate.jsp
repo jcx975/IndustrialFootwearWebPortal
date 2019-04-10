@@ -18,7 +18,7 @@
 </head>
 <body>
 <%@ page import="java.io.*" %> 
-<%@ page import="db.*" %>
+<%@ page import="footwearwebportal.*" %>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-2">
 		<ul class="navbar-nav">
 			<li class="nav-item active">
@@ -153,8 +153,8 @@
 		
 		
 		if (name!= null&&!name.trim().equals("")){
-			DBentry DBentry=new DBentry();
-			boolean flag=DBentry.entry(name,Loc);
+			DataConnect DBentry=new DataConnect();
+			boolean flag=DBentry.entry(id,name,city,state);
 			if(flag) {%><script type="text/javascript">alert("Entry Success");</script><%
 				}
 			else { %><script type="text/javascript">alert("Entry Failure");</script><% }
