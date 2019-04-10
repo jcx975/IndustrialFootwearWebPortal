@@ -1,5 +1,5 @@
 <%@ page import="footwearwebportal.ProfileList" %>
-<%@ page import="sun.java2d.cmm.Profile" %>
+<%@ page import="java.sql.SQLException" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +38,7 @@
 		<div class="row">
 			<div class="col-md-12 mb-5">
 				<div class="form-group">
-					<button type="button" class="btn btn-success">Create new company profile</button>
+					<button onclick="window.location.href='companycreate.jsp'" type="button" class="btn btn-lg btn-primary mt-auto">Create new company profile</button>
 				</div>
 			</div>
 		</div>
@@ -60,7 +60,11 @@
 			<jsp:useBean id="profiles" class="footwearwebportal.ProfileList"/>
 			<%
 				ProfileList profileList = new ProfileList();
-				out.print(profileList.createList());
+				try {
+					out.print(profileList.createList());
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			%>
 		</div>
 	</div>

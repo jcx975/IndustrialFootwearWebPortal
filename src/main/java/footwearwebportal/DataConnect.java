@@ -93,8 +93,6 @@ public class DataConnect {
 		}
 	}
 
-
-
 	public boolean userlookup(String user, String pass) throws SQLException {
 		boolean result = false;
 		PreparedStatement lookup = dbconn
@@ -148,5 +146,26 @@ public class DataConnect {
 		lookup.executeUpdate();
 		System.out.println("New company profile: " + lookup.toString());
 		return true;
+	}
+
+	public CompanyData getCompany(String companyID) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.company where companyID = ?");
+		lookup.setString(1, companyID);
+		String id = "";
+		String name = "";
+		String city = "";
+		String state = "";
+		ResultSet rs = lookup.executeQuery();
+
+		while(rs.next()){
+			id = rs.getString(1);
+			name = rs.getString(2);
+			city = rs.getString(3);
+			state = rs.getString(4);
+		}
+
+		CompanyData result = new CompanyData(id, name, city, state);
+
+		return result;
 	}
 }
