@@ -1,23 +1,16 @@
 
-var information = {
-	name: "Test Company",
-	state: "MN",
-	city: "Winona",
-	email: "cool@example.com",
-	comment: ""
-};
-
 $( document ).ready( function()
 {
-	$( "#company-name-header" ).text( information.name );
-	$( "#companyName" ).val( information.name );
-	$( "#state" ).val( information.state );
-	$( "#city" ).val( information.city );
-	$( "#email" ).val( information.email );
-	$( "#comment" ).text( information.comment );
-
-	$( "#currentCompanyName" ).text( "Name: " + information.name );
-	$( "#currentState" ).text( "State: " + information.state );
-	$( "#currentCity" ).text( "City: " + information.city );
-	$( "#currentEmail" ).html( "Email: <a href='mailto: " + information.email + "'>" + information.email );
+	$( "#edit-button" ).on( "click", editCompany );
 } );
+
+function editCompany()
+{
+	$( "#delete-button" ).remove();
+	$( "#edit-button" ).remove();
+	$( "#top-buttons" ).append( "<button type='button' id='cancel-button' class='btn btn-danger'>Cancel</button>" );
+	$( "#top-buttons" ).append( "<button type='button' id='save-button' class='btn btn-success'>Save Profile</button>" );
+	$( "#cancel-button" ).on( "click", function() { window.location.reload( false ) } );
+	$( "#save-button" ).on( "click", function() { $( "#company-form" ).submit() } );
+	$( "#edit-form" ).show();
+}
