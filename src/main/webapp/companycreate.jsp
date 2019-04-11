@@ -153,7 +153,8 @@
 			e.printStackTrace();
 		}
 		if (flag) {%>
-<script type="text/javascript">alert("Entry Success");</script>
+<script type="text/javascript">alert("Succesfully created profile!");
+window.location.replace("profiles.jsp")</script>
 <%
 } else { %>
 <script type="text/javascript">alert("Entry Failure");</script>

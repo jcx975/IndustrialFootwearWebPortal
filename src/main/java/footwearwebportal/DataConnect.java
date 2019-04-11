@@ -111,7 +111,8 @@ public class DataConnect {
 	}
 
 	boolean userCreate(String user, String pass, String group, String firstName, String lastName, String email) throws SQLException {
-		PreparedStatement lookup = dbconn.prepareStatement("insert into footwearportal.user(username, password, `group`, firstName, lastName, email) values(?, ?, ?, ?, ?, ?)");
+		PreparedStatement lookup = dbconn.prepareStatement("insert into " +
+				"footwearportal.user(username, password, `group`, firstName, lastName, email) values(?, ?, ?, ?, ?, ?)");
 		lookup.setString(1, user);
 		lookup.setString(2, pass);
 		lookup.setString(3, group);
@@ -137,7 +138,8 @@ public class DataConnect {
 	}
 
 	public boolean profileCreate(String companyName, String city, String state, String email, String comments) throws SQLException {
-		PreparedStatement lookup = dbconn.prepareStatement("insert into footwearportal.company(companyName, city, state, email, comments) values (?, ?, ?, ?, ?)");
+		PreparedStatement lookup = dbconn.prepareStatement("insert into " +
+				"footwearportal.company(companyName, city, state, email, comments) values (?, ?, ?, ?, ?)");
 		lookup.setString(1, companyName);
 		lookup.setString(2, city);
 		lookup.setString(3, state);
@@ -177,6 +179,23 @@ public class DataConnect {
 		lookup.setString(1, companyID);
 
 		lookup.executeUpdate();
+		return true;
+	}
+
+	@SuppressWarnings("Duplicates")
+	public boolean updateProfile(String companyID, String companyName, String city, String state, String email, String comments) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("update footwearportal.company " +
+				"SET companyName = ?, city = ?, state = ?, email = ?, comments = ? " +
+				"WHERE companyID = ?");
+		lookup.setString(1, companyName);
+		lookup.setString(2, city);
+		lookup.setString(3, state);
+		lookup.setString(4, email);
+		lookup.setString(5, comments);
+		lookup.setString(6,companyID);
+
+		lookup.executeUpdate();
+		System.out.println("Update company profile: " + lookup.toString());
 		return true;
 	}
 }

@@ -66,7 +66,6 @@
 					Back
 				</button>
 				<button onclick="window.location.href='deletecompany.jsp?id=<%=id%>'" type="button" class="btn btn-danger">Delete Profile</button>
-				<button type="button" class="btn btn-success">Update Profile</button>
 				<hr>
 			</div>
 		</div>
@@ -75,17 +74,17 @@
 		<div class="row">
 			<!-- <form> -->
 				<div class="col-md-8">
-					<form class="needs-validation" novalidate>
+					<form class="needs-validation" novalidate action="editcompany.jsp" method="post">
 						<h2 class="mb-3">Company information</h2>
 						<div class="mb-3 form-group">
 							<label for="companyName">Company Name</label>
-							<input type="text" class="form-control" id="companyName">
+							<input type="text" class="form-control" id="companyName" name="companyName" value="<%=companyName%>">
 						</div>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="state">State:</label>
-									<select class="form-control" id="state">
+									<select class="form-control" id="state" name="state">
 											<option value="AL">Alabama</option>
 											<option value="AK">Alaska</option>
 											<option value="AZ">Arizona</option>
@@ -137,25 +136,30 @@
 											<option value="WV">West Virginia</option>
 											<option value="WI">Wisconsin</option>
 											<option value="WY">Wyoming</option>
-										</select>	
+										</select>
+									<script type="text/javascript">
+                                        document.getElementById('state').value = '<%=state%>';
+									</script>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="city">City:</label>
-									<input type="text" class="form-control" id="city">
+									<input type="text" class="form-control" id="city" name="city" value="<%=city%>">
 								</div>
 							</div>
 						</div>
 						<div class="mb-3 form-group">
 							<label for="comment">Comment:</label>
-							<textarea class="form-control" rows="5" id="comment"></textarea>
+							<textarea class="form-control" rows="5" id="comment" name="comments"><%=comments%></textarea>
 						</div>
 						<h2>Contact information</h2>
 						<div class="form-group">
 							<label for="email">Email:</label>
-							<input type="email" class="form-control" id="email">
+							<input type="email" class="form-control" id="email" name="email" value="<%=email%>">
 						</div>
+						<input type="hidden" value="<%=id%>" name="id" />
+						<button type="submit" class="btn btn-success" formmethod="post">Submit</button>
 					</form>
 				</div>
 				<div class="col-md-4">
@@ -173,3 +177,28 @@
 	</div>
 </body>
 </html>
+
+<%
+	id = request.getParameter("id");
+	companyName = request.getParameter("companyName");
+	city = request.getParameter("city");
+	state = request.getParameter("state");
+	email = request.getParameter("email");
+	comments = request.getParameter("comments");
+
+
+	if (companyName != null && !companyName.trim().equals("") && id != null && !id.trim().equals("")) {
+		boolean flag = false;
+		try {
+			flag = data.updateProfile(id, companyName, city, state, email, comments);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if (flag) {%>
+<script type="text/javascript">alert("Successfully update profile!");
+window.location.replace("company.jsp?id=<%=id%>")</script>
+<%
+} else { %>
+<script type="text/javascript">alert("Update Failure");</script>
+<% }
+}%>
