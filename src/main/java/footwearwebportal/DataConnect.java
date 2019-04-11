@@ -171,4 +171,12 @@ public class DataConnect {
 
 		return new CompanyData(id, name, city, state, email, comments);
 	}
+
+	public boolean deleteProfile(String companyID) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("delete from footwearportal.company where companyID = ?");
+		lookup.setString(1, companyID);
+
+		lookup.executeUpdate();
+		return true;
+	}
 }

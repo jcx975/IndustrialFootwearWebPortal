@@ -62,10 +62,10 @@
 	<div class="container mb-5">
 		<div class="row">
 			<div class="col-md-12 company-buttons-container">
-				<button onclick="window.location.href='company.jsp?id=<%=id%>'" type="button" class="btn btn-lg btn-primary mt-auto"><
+				<button onclick="window.location.href='company.jsp?id=<%=id%>'" type="button" class="btn btn-primary mt-auto"><
 					Back
 				</button>
-				<button type="button" class="btn btn-danger">Delete Profile</button>
+				<button onclick="window.location.href='deletecompany.jsp?id=<%=id%>'" type="button" class="btn btn-danger">Delete Profile</button>
 				<button type="button" class="btn btn-success">Update Profile</button>
 				<hr>
 			</div>

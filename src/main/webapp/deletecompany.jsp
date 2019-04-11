@@ -1,33 +1,47 @@
-<%@ page import="footwearwebportal.ProfileList" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="footwearwebportal.*" %>
-<%
+<%@ page contentType="text/html; charset=ISO-8859-1"
+		 pageEncoding="ISO-8859-1" %>
 
+<%
 	String id = request.getParameter("id");
+	String delete = request.getParameter("delete");
 	String companyName = "";
-	String city = "";
-	String state = "";
-	String email = "";
-	String comments = "";
 
 	DataConnect data = serverInit.getConnection();
+
+	if (delete != null && !delete.trim().equals("")) {
+		boolean flag = false;
+		try {
+			flag = data.deleteProfile(delete);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if (flag) {%>
+		<script type="text/javascript">alert("Delete Success");
+        window.location.replace("profiles.jsp");</script>
+		<%
+		} else { %>
+		<script type="text/javascript">alert("Delete Failure");
+        window.location.replace("company.jsp?id=<%=id%>")</script>
+		<% }
+		}
+
 	try {
 		CompanyData company = data.getCompany(id);
 		companyName = company.getCompanyName();
-		city = company.getCity();
-		state = company.getState();
-		email = company.getEmail();
-		comments = company.getComments();
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
 
-%><!DOCTYPE html>
+%>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title><%=companyName%></title>
+	<title>Deleting <%=companyName%>
+	</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" media="screen" href="css/main.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -56,28 +70,29 @@
 		</div>
 	</div>
 </div>
-<div class="container mb-5">
-	<div class="row">
-		<div class="col-md-12 company-buttons-container">
-			<button onclick="window.location.href='profiles.jsp'" type="button" class="btn btn-primary mt-auto"><
-				Back
-			</button>
-			<button onclick="window.location.href='deletecompany.jsp?id=<%=id%>'" type="button" class="btn btn-danger">Delete Profile</button>
-			<button onclick="window.location.href='editcompany.jsp?id=<%=id%>'" type="button" class="btn btn-success">Update Profile</button>
-			<hr>
-		</div>
-	</div>
-</div>
+
 <div class="container">
 	<div class="row">
-		<div class="col-md-4">
-			<h4><p id="currentCompanyName"><%=companyName%></p></h4>
-			<p id="currentCompanyCity"><%=city%></p>
-			<p id="currentCompanyState"><%=state%></p>
-			<p id="currentCompanyEmail"><%=email%></p>
-			<p id="currentCompanyComment"><%=comments%></p>
+		<div>
+			Are you sure you want to delete company: <%=companyName%> ?
 		</div>
 	</div>
+	<div class="container mb-5">
+		<div class="row">
+			<div class="col-md-12 company-buttons-container">
+				<button onclick="window.location.href='deletecompany.jsp?delete=<%=id%>'" type="button"
+						class="btn btn-primary mt-auto">
+					Yes, delete company profile
+				</button>
+				<button onclick="window.location.href='company.jsp?id=<%=id%>'" type="button" class="btn btn-success">
+					No, go back
+				</button>
+				<hr>
+			</div>
+		</div>
+	</div>
+
 </div>
+
 </body>
 </html>
