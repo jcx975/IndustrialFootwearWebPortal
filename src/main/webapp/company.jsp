@@ -63,7 +63,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8" id="edit-form">
-				<form class="needs-validation" novalidate action="company.jsp" id="company-form" method="POST">
+				<form class="needs-validation" novalidate action="company.jsp?id=<%=id%>" id="company-form" method="POST">
 					<input type="hidden" value="<%=id%>" name="id">
 					<h2 class="mb-3">Company information</h2>
 					<div class="mb-3 form-group">
@@ -163,3 +163,28 @@
 	</div>
 </body>
 </html>
+
+<%
+	id = request.getParameter("id");
+	companyName = request.getParameter("companyName");
+	city = request.getParameter("city");
+	state = request.getParameter("state");
+	email = request.getParameter("email");
+	comments = request.getParameter("comments");
+
+
+	if (companyName != null && !companyName.trim().equals("") && id != null && !id.trim().equals("")) {
+		boolean flag = false;
+		try {
+			flag = data.updateProfile(id, companyName, city, state, email, comments);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if (flag) {%>
+<script type="text/javascript">alert("Successfully update profile!");
+window.location.replace("company.jsp?id=<%=id%>")</script>
+<%
+} else { %>
+<script type="text/javascript">alert("Update Failure");</script>
+<% }
+}%>

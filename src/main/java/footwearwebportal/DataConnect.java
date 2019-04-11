@@ -20,12 +20,13 @@ public class DataConnect {
 	// Establish connection to MySQL server
 	Connection newConnection() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 
 			try {
 				// change URL to your database server as needed
 				String dbPath = "jdbc:mysql://localhost:3306";
-				dbconn = DriverManager.getConnection(dbPath, "root", "password");
+				try {dbconn = DriverManager.getConnection(dbPath, "root", "password");}
+				catch(Exception e){ e.printStackTrace();}
 				System.out.println("Connected to database");
 				return dbconn;
 			} catch (Exception s) {
