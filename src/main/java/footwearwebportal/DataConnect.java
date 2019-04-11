@@ -149,7 +149,7 @@ public class DataConnect {
 		return true;
 	}
 
-	CompanyData getCompany(String companyID) throws SQLException {
+	public CompanyData getCompany(String companyID) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.company where companyID = ?");
 		lookup.setString(1, companyID);
 		String id = "";

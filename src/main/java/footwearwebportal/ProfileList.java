@@ -35,11 +35,21 @@ public class ProfileList extends  HttpServlet {
 		StringWriter out = new StringWriter();
 		CompanyData company = data.getCompany(companyID);
 
-		out.append("<p id=\"currentCompanyName\">" + company.getCompanyName() + "</p>");
-		out.append("<p id=\"currentCompanyCity\">" + company.getCity() + "</p>");
-		out.append("<p id=\"currentCompanyState\">" + company.getState() + "</p>");
-		out.append("<p id=\"currentCompanyEmail\">" + company.getEmail() + "</p>");
-		out.append("<p id=\"currentCompanyComments\">" + company.getComments() + "</p>");
+		String companyName = company.getCompanyName();
+		String city = company.getCity();
+		String state = company.getState();
+		String email = company.getEmail();
+		String comments = company.getComments();
+
+		out.append("<p id=\"currentCompanyName\">" + companyName + "</p>");
+		if(city != null)
+			out.append("<p id=\"currentCompanyCity\">" + city + "</p>");
+		if(state != null)
+			out.append("<p id=\"currentCompanyState\">" + state + "</p>");
+		if(email != null)
+			out.append("<p id=\"currentCompanyEmail\">" + email + "</p>");
+		if(comments != null)
+			out.append("<p id=\"currentCompanyComments\">" + comments + "</p>");
 
 		return out.toString();
 	}

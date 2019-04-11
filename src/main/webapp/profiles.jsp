@@ -38,8 +38,12 @@
 		<div class="row">
 			<div class="col-md-12 mb-5">
 				<div class="form-group">
-					<button onclick="window.location.href='companycreate.jsp'" type="button" class="btn btn-lg btn-primary mt-auto">Create new company profile</button>
+					<button onclick="window.location.href='retailmanager.html'" type="button" class="btn btn-lg btn-primary mt-auto"><
+						Back
+					</button>
+					<button onclick="window.location.href='companycreate.jsp'" type="button" class="btn btn-lg btn-success mt-auto">Create new company profile</button>
 				</div>
+
 			</div>
 		</div>
 	</div>
