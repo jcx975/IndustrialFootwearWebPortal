@@ -1,26 +1,24 @@
 package footwearwebportal;
 
 public class CompanyData implements Comparable<CompanyData> {
-	public String companyID, companyName, city, state;
+	private String companyID, companyName, city, state, email, comments;
 
-	public CompanyData(String companyID, String companyName, String city, String state){
+	CompanyData(String companyID, String companyName, String city, String state, String email, String comments){
 		this.companyID = companyID;
 		this.companyName = companyName;
 		this.city = city;
 		this.state = state;
+		this.email = email;
+		this.comments = comments;
 	}
 
 	@Override
 	public String toString() {
-		return companyID + ", " + companyName + ", " + city + ", " + state;
+		return companyID + ", " + companyName + ", " + city + ", " + state + ", " + email + ", " + comments;
 	}
 
 	public String getCompanyID() {
 		return companyID;
-	}
-
-	public void setCompanyID(String companyID) {
-		this.companyID = companyID;
 	}
 
 	public String getCompanyName() {
@@ -45,6 +43,22 @@ public class CompanyData implements Comparable<CompanyData> {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 
 	@Override

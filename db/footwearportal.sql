@@ -23,12 +23,14 @@ DROP TABLE IF EXISTS `company`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `company` (
-  `companyID` varchar(8) NOT NULL,
+  `companyID` int(11) NOT NULL AUTO_INCREMENT,
   `companyName` varchar(45) NOT NULL,
   `city` varchar(45) DEFAULT NULL,
   `state` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `comments` varchar(240) DEFAULT NULL,
   PRIMARY KEY (`companyID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +39,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES ('1','Rochester Steelworks','Rochester','Minnesota'),('2','Winona State University','Winona','Minnesota'),('3','Iowa Papermill','Decorah','Iowa'),('4','La Crosse Brewery','La Crosse','Wisconsin'),('5','The Bread Bakery','La Crosse','Wisconsin');
+INSERT INTO `company` VALUES (1,'Rochester Steelworks','Rochester','Minnesota','steelworks@email.com',NULL),(2,'Fastenal','Winona','MN','contact@fastenal.com',NULL),(3,'Iowa Meat Packing','Cresco','IA','meat@iowameat.com','Meaty!');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -49,9 +51,9 @@ DROP TABLE IF EXISTS `employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `employee` (
-  `UID` varchar(8) NOT NULL,
-  `companyID` varchar(8) NOT NULL,
-  `programID` varchar(8) DEFAULT NULL,
+  `UID` int(11) NOT NULL,
+  `companyID` int(11) NOT NULL,
+  `programID` int(11) DEFAULT NULL,
   PRIMARY KEY (`UID`,`companyID`),
   KEY `fk_employee_company1_idx` (`companyID`),
   KEY `fk_employee_program1_idx` (`programID`),
@@ -78,8 +80,8 @@ DROP TABLE IF EXISTS `program`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `program` (
-  `programID` varchar(8) NOT NULL,
-  `companyID` varchar(8) NOT NULL,
+  `programID` int(11) NOT NULL AUTO_INCREMENT,
+  `companyID` int(11) NOT NULL,
   PRIMARY KEY (`programID`),
   KEY `fk_program_company1_idx` (`companyID`),
   CONSTRAINT `fk_program_company1` FOREIGN KEY (`companyID`) REFERENCES `company` (`companyID`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -103,8 +105,8 @@ DROP TABLE IF EXISTS `programhasshoes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `programhasshoes` (
-  `programID` varchar(8) NOT NULL,
-  `shoeID` varchar(8) NOT NULL,
+  `programID` int(11) NOT NULL,
+  `shoeID` int(11) NOT NULL,
   PRIMARY KEY (`programID`,`shoeID`),
   KEY `fk_programHasShoes_shoe1_idx` (`shoeID`),
   CONSTRAINT `fk_programHasShoes_program1` FOREIGN KEY (`programID`) REFERENCES `program` (`programID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -129,7 +131,7 @@ DROP TABLE IF EXISTS `shoe`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `shoe` (
-  `shoeID` varchar(8) NOT NULL,
+  `shoeID` int(11) NOT NULL AUTO_INCREMENT,
   `shoeName` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`shoeID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -152,8 +154,8 @@ DROP TABLE IF EXISTS `supervisor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `supervisor` (
-  `UID` varchar(8) NOT NULL,
-  `companyID` varchar(8) NOT NULL,
+  `UID` int(11) NOT NULL,
+  `companyID` int(11) NOT NULL,
   PRIMARY KEY (`UID`,`companyID`),
   KEY `fk_supervisor_company_idx` (`companyID`),
   KEY `fk_supervisor_user1_idx` (`UID`),
@@ -179,14 +181,15 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `UID` varchar(8) NOT NULL,
+  `UID` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `group` varchar(45) NOT NULL,
   `firstName` varchar(45) DEFAULT NULL,
   `lastName` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`UID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `email` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`UID`,`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +198,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('5','tim','password','rm','Tim','Jensen');
+INSERT INTO `user` VALUES (1,'tim','password','rm','Tim','Jensen','tim@jensen.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -208,4 +211,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-09 16:47:01
+-- Dump completed on 2019-04-10 19:07:56

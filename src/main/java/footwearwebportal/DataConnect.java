@@ -73,7 +73,7 @@ public class DataConnect {
 		}
 	}
 
-	public boolean closeConnection() throws SQLException {
+	boolean closeConnection() throws SQLException {
 		dbconn.close();
 		return true;
 	}
@@ -110,51 +110,54 @@ public class DataConnect {
 		return result;
 	}
 
-	public boolean userCreate(String UID, String user, String pass, String group, String firstName, String lastName) throws SQLException {
-		PreparedStatement lookup = dbconn.prepareStatement("insert into footwearportal.user values(?, ?, ?, ?, ?, ?)");
-		lookup.setString(1, UID);
-		lookup.setString(2, user);
-		lookup.setString(3, pass);
-		lookup.setString(4, group);
-		lookup.setString(5, firstName);
-		lookup.setString(6, lastName);
+	boolean userCreate(String user, String pass, String group, String firstName, String lastName, String email) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("insert into footwearportal.user(username, password, `group`, firstName, lastName, email) values(?, ?, ?, ?, ?, ?)");
+		lookup.setString(1, user);
+		lookup.setString(2, pass);
+		lookup.setString(3, group);
+		lookup.setString(4, firstName);
+		lookup.setString(5, lastName);
+		lookup.setString(6, email);
 
 		lookup.executeUpdate();
 		return true;
 	}
 
-	public ArrayList<CompanyData> allCompanyProfiles() throws SQLException {
+	ArrayList<CompanyData> allCompanyProfiles() throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.company");
 		ResultSet rs = lookup.executeQuery();
 		ArrayList<CompanyData> companyResult = new ArrayList<>();
 
 		while(rs.next()){
 			companyResult.add(new CompanyData(rs.getString(1), rs.getString(2),
-					rs.getString(3), rs.getString(4)));
+					rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
 		}
 
 		return companyResult;
 	}
 
-	public boolean profileCreate(String companyID, String companyName, String city, String state) throws SQLException {
-		PreparedStatement lookup = dbconn.prepareStatement("insert into footwearportal.company values (?, ?, ?, ?)");
-		lookup.setString(1, companyID);
-		lookup.setString(2, companyName);
-		lookup.setString(3, city);
-		lookup.setString(4, state);
+	public boolean profileCreate(String companyName, String city, String state, String email, String comments) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("insert into footwearportal.company(companyName, city, state, email, comments) values (?, ?, ?, ?, ?)");
+		lookup.setString(1, companyName);
+		lookup.setString(2, city);
+		lookup.setString(3, state);
+		lookup.setString(4, email);
+		lookup.setString(5, comments);
 
 		lookup.executeUpdate();
 		System.out.println("New company profile: " + lookup.toString());
 		return true;
 	}
 
-	public CompanyData getCompany(String companyID) throws SQLException {
+	CompanyData getCompany(String companyID) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.company where companyID = ?");
 		lookup.setString(1, companyID);
 		String id = "";
 		String name = "";
 		String city = "";
 		String state = "";
+		String email = "";
+		String comments = "";
 		ResultSet rs = lookup.executeQuery();
 
 		while(rs.next()){
@@ -162,10 +165,10 @@ public class DataConnect {
 			name = rs.getString(2);
 			city = rs.getString(3);
 			state = rs.getString(4);
+			email = rs.getString(5);
+			comments = rs.getString(6);
 		}
 
-		CompanyData result = new CompanyData(id, name, city, state);
-
-		return result;
+		return new CompanyData(id, name, city, state, email, comments);
 	}
 }

@@ -61,7 +61,7 @@
 			<%
 				ProfileList profileList = new ProfileList();
 				try {
-					out.print(profileList.createList());
+					out.print(profileList.generateListHTML());
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}

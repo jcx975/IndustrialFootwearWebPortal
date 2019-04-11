@@ -124,12 +124,12 @@
 				</div>
 				<div class="mb-3 form-group">
 					<label for="comment">Comment:</label>
-					<textarea class="form-control" rows="5" id="comment"></textarea>
+					<textarea class="form-control" rows="5" id="comment" name="comments"></textarea>
 				</div>
 				<h2>Contact information</h2>
 				<div class="form-group">
 					<label for="email">Email:</label>
-					<input type="email" class="form-control" id="email">
+					<input type="email" class="form-control" id="email" name="email">
 				</div>
 				<button class="btn btn-lg btn-primary btn-block mb-3" type="submit" formmethod="post">Submit</button>
 			</form>
@@ -137,17 +137,18 @@
 	</div>
 </div>
 <%
-	String id = "Htest";
 	String name = request.getParameter("companyName");
 	String city = request.getParameter("city");
 	String state = request.getParameter("state");
+	String email = request.getParameter("email");
+	String comments = request.getParameter("comments");
 
 
 	if (name != null && !name.trim().equals("")) {
 		DataConnect data = serverInit.getConnection();
 		boolean flag = false;
 		try {
-			flag = data.profileCreate(id, name, city, state);
+			flag = data.profileCreate(name, city, state, email, comments);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

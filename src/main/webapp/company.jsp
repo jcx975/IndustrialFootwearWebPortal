@@ -141,7 +141,7 @@
 						String id = request.getParameter("id");
 						ProfileList profileList = new ProfileList();
 						try {
-							out.print(profileList.createProfile(id));
+							out.print(profileList.generateProfileInfoHTML(id));
 						} catch (SQLException e) {
 							e.printStackTrace();
 						}

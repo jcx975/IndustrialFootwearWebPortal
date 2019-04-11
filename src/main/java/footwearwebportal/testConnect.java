@@ -11,9 +11,9 @@ public class testConnect {
 		DataConnect data = new DataConnect();
 		data.newConnection();
 		try {
-			//data.userCreate("5", "tim", "password", "rm", "Tim", "Jensen");
+			data.userCreate("tim", "password", "rm", "Tim", "Jensen", "tim@jensen.com");
 			//System.out.println(data.userlookup("tim", "password"));
-			//createProfile(data);
+			//generateProfileInfoHTML(data);
 			printAllProfile(data.allCompanyProfiles());
 			data.closeConnection();
 
@@ -24,14 +24,10 @@ public class testConnect {
 
 	private static void createProfile(DataConnect data) throws  SQLException {
 		String input = "1";
-		String companyID, companyName, city, state;
+		String companyName, city, state, email, comments;
 		Scanner in = new Scanner(System.in);
 
 		while(!input.equals("0")){
-			System.out.println("CompanyID: ");
-			input = in.nextLine();
-			companyID = input;
-
 			System.out.println("Company name: ");
 			input = in.nextLine();
 			companyName = input;
@@ -44,7 +40,15 @@ public class testConnect {
 			input = in.nextLine();
 			state = input;
 
-			data.profileCreate(companyID, companyName, city, state);
+			System.out.println("Email: ");
+			input = in.nextLine();
+			email = input;
+
+			System.out.println("Comments: ");
+			input = in.nextLine();
+			comments = input;
+			if(!input.equals("0"))
+				data.profileCreate(companyName, city, state, email, comments);
 		}
 	}
 
