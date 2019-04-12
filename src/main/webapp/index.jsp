@@ -15,7 +15,7 @@
 		}
 		if (flag) {
 %>
-<script type="text/javascript">window.location.replace("retailmanager.html");</script>
+<script type="text/javascript">window.location.replace("retailmanager.jsp");</script>
 <%
 } else {
 %>

@@ -35,34 +35,10 @@
 	}
 
 %>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Deleting <%=companyName%>
-	</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" media="screen" href="css/main.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<%--	<script src="js/company.js"></script>--%>
-</head>
-<body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-2">
-	<ul class="navbar-nav">
-		<li class="nav-item active">
-			<a class="nav-link" href="#">Footwear Web Portal</a>
-		</li>
-	</ul>
-	<ul class="navbar-nav ml-auto">
-		<li class="nav-item">
-			<a class="nav-link" href="#">Log out</a>
-		</li>
-	</ul>
-</nav>
+<%@include file="include/meta.jsp"%>
+<title>Deleting <%=companyName%></title>
+<%@include file="include/head.jsp"%>
+<%@include file="include/header.jsp"%>
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 welcome-banner">
@@ -91,8 +67,5 @@
 			</div>
 		</div>
 	</div>
-
 </div>
-
-</body>
-</html>
+<%@include file="include/footer.jsp"%>
