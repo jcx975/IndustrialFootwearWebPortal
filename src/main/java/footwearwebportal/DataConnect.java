@@ -111,18 +111,21 @@ public class DataConnect {
 		return result;
 	}
 
-	boolean userCreate(String user, String pass, String group, String firstName, String lastName, String email) throws SQLException {
-		PreparedStatement lookup = dbconn.prepareStatement("insert into " +
-				"footwearportal.user(username, password, `group`, firstName, lastName, email) values(?, ?, ?, ?, ?, ?)");
-		lookup.setString(1, user);
-		lookup.setString(2, pass);
-		lookup.setString(3, group);
-		lookup.setString(4, firstName);
-		lookup.setString(5, lastName);
-		lookup.setString(6, email);
+	String userCreate(UserInfo user) throws SQLException {
+		String sql = "insert into footwearportal.user(username, password, `group`, firstName, lastName, email) values (?, ?, ?, ?, ?, ?)";
+		PreparedStatement lookup = dbconn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		lookup.setString(1, user.getUsername());
+		lookup.setString(2, user.getPassword());
+		lookup.setString(3, user.getGroup());
+		lookup.setString(4, user.getFirstName());
+		lookup.setString(5, user.getLastName());
+		lookup.setString(6, user.getEmail());
 
 		lookup.executeUpdate();
-		return true;
+
+		ResultSet rs = lookup.getGeneratedKeys();
+		rs.next();
+		return Integer.toString(rs.getInt(1));
 	}
 
 	ArrayList<CompanyData> allCompanyProfiles() throws SQLException {
@@ -131,21 +134,27 @@ public class DataConnect {
 		ArrayList<CompanyData> companyResult = new ArrayList<>();
 
 		while(rs.next()){
-			companyResult.add(new CompanyData(rs.getString(1), rs.getString(2),
-					rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
+			String id = rs.getString(1);
+			String name = rs.getString(2);
+			String city = rs.getString(3);
+			String state = rs.getString(4);
+			String email = rs.getString(5);
+			String comments = rs.getString(6);
+
+			companyResult.add(new CompanyData(id, name, city, state, email, comments));
 		}
 
 		return companyResult;
 	}
 
-	public boolean profileCreate(String companyName, String city, String state, String email, String comments) throws SQLException {
+	public boolean profileCreate(CompanyData company) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("insert into " +
 				"footwearportal.company(companyName, city, state, email, comments) values (?, ?, ?, ?, ?)");
-		lookup.setString(1, companyName);
-		lookup.setString(2, city);
-		lookup.setString(3, state);
-		lookup.setString(4, email);
-		lookup.setString(5, comments);
+		lookup.setString(1, company.getCompanyName());
+		lookup.setString(2, company.getCity());
+		lookup.setString(3, company.getState());
+		lookup.setString(4, company.getEmail());
+		lookup.setString(5, company.getComments());
 
 		lookup.executeUpdate();
 		System.out.println("New company profile: " + lookup.toString());
@@ -184,16 +193,16 @@ public class DataConnect {
 	}
 
 	@SuppressWarnings("Duplicates")
-	public boolean updateProfile(String companyID, String companyName, String city, String state, String email, String comments) throws SQLException {
+	public boolean updateProfile(CompanyData company) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("update footwearportal.company " +
 				"SET companyName = ?, city = ?, state = ?, email = ?, comments = ? " +
 				"WHERE companyID = ?");
-		lookup.setString(1, companyName);
-		lookup.setString(2, city);
-		lookup.setString(3, state);
-		lookup.setString(4, email);
-		lookup.setString(5, comments);
-		lookup.setString(6,companyID);
+		lookup.setString(1, company.getCompanyName());
+		lookup.setString(2, company.getCity());
+		lookup.setString(3, company.getState());
+		lookup.setString(4, company.getEmail());
+		lookup.setString(5, company.getComments());
+		lookup.setString(6, company.getCompanyID());
 
 		lookup.executeUpdate();
 		System.out.println("Update company profile: " + lookup.toString());

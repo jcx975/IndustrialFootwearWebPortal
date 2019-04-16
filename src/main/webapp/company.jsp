@@ -1,4 +1,3 @@
-<%@ page import="footwearwebportal.ProfileList" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="footwearwebportal.*" %>
 <%
@@ -153,7 +152,7 @@
 	if (companyName != null && !companyName.trim().equals("") && id != null && !id.trim().equals("")) {
 		boolean flag = false;
 		try {
-			flag = data.updateProfile(id, companyName, city, state, email, comments);
+			flag = data.updateProfile(new CompanyData(id, companyName, city, state, email, comments));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -124,7 +124,7 @@
 		DataConnect data = serverInit.getConnection();
 		boolean flag = false;
 		try {
-			flag = data.profileCreate(name, city, state, email, comments);
+			flag = data.profileCreate(new CompanyData(name, city, state, email, comments));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -138,5 +138,3 @@ window.location.replace("profiles.jsp")</script>
 }
 
 %>
-</body>
-</html>

@@ -11,7 +11,7 @@ public class testConnect {
 		DataConnect data = new DataConnect();
 		data.newConnection();
 		try {
-			data.userCreate("tim", "password", "rm", "Tim", "Jensen", "tim@jensen.com");
+			data.userCreate(new UserInfo("0", "tim", "password", "rm", "Tim", "Jensen", "tim@jensen.com"));
 			//System.out.println(data.userlookup("tim", "password"));
 			//generateProfileInfoHTML(data);
 			printAllProfile(data.allCompanyProfiles());
@@ -48,7 +48,7 @@ public class testConnect {
 			input = in.nextLine();
 			comments = input;
 			if(!input.equals("0"))
-				data.profileCreate(companyName, city, state, email, comments);
+				data.profileCreate(new CompanyData(companyName, city, state, email, comments));
 		}
 	}
 

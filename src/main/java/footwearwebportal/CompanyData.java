@@ -3,8 +3,17 @@ package footwearwebportal;
 public class CompanyData implements Comparable<CompanyData> {
 	private String companyID, companyName, city, state, email, comments;
 
-	CompanyData(String companyID, String companyName, String city, String state, String email, String comments){
+	public CompanyData(String companyID, String companyName, String city, String state, String email, String comments){
 		this.companyID = companyID;
+		this.companyName = companyName;
+		this.city = city;
+		this.state = state;
+		this.email = email;
+		this.comments = comments;
+	}
+
+	public CompanyData(String companyName, String city, String state, String email, String comments) {
+		this.companyID = "0";
 		this.companyName = companyName;
 		this.city = city;
 		this.state = state;
