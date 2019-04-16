@@ -9,6 +9,7 @@ public class DataConnect {
 	private static Connection dbconn;
 	private static Crypto crypto;
 
+	// instantiate DataConnect object if doesn't exist and return it
 	public static DataConnect getInstance() {
 		if (instance == null) {
 			instance = new DataConnect();
@@ -29,8 +30,11 @@ public class DataConnect {
 			try {
 				// change URL to your database server as needed
 				String dbPath = "jdbc:mysql://localhost:3306";
-				try {dbconn = DriverManager.getConnection(dbPath, "root", "password");}
-				catch(Exception e){ e.printStackTrace();}
+				try {
+					dbconn = DriverManager.getConnection(dbPath, "root", "password");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				System.out.println("Connected to database");
 			} catch (Exception s) {
 				System.out.println(Arrays.toString(s.getStackTrace()));
@@ -40,10 +44,12 @@ public class DataConnect {
 		}
 	}
 
+	// close database connection
 	void closeConnection() throws SQLException {
 		dbconn.close();
 	}
 
+	// takes username and password and returns true if combination exists in database
 	public boolean userlookup(String user, String pass) throws Exception {
 		PreparedStatement lookup = dbconn
 				.prepareStatement("SELECT password from footwearportal.user WHERE username = ?");
@@ -53,9 +59,14 @@ public class DataConnect {
 
 		rs.next();
 		String securePassword = rs.getString(1);
+		System.out.println("Lookup user: " + lookup.toString());
+
+		// passwords in db are encrypted so encrypt new password then compare hashess
 		return securePassword.equals(crypto.encrypt(pass));
 	}
 
+	// creates new user with all parameters except ID (id is autoincremented)
+	// returns the newly created user's auto gen ID
 	String userCreate(UserInfo user) throws SQLException {
 		String sql = "insert into footwearportal.user(username, password, `group`, firstName, lastName, email) values (?, ?, ?, ?, ?, ?)";
 		PreparedStatement lookup = dbconn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -63,11 +74,12 @@ public class DataConnect {
 
 		String securePassword = null;
 		try {
-			securePassword = crypto.encrypt(user.getPassword());
+			securePassword = crypto.encrypt(user.getPassword()); // encrypt password with 3DES before insertion
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+		assert securePassword != null;
 		lookup.setString(2, securePassword);
 		lookup.setString(3, user.getGroup());
 		lookup.setString(4, user.getFirstName());
@@ -78,15 +90,17 @@ public class DataConnect {
 
 		ResultSet rs = lookup.getGeneratedKeys();
 		rs.next();
+		System.out.println("New user: " + lookup.toString());
 		return Integer.toString(rs.getInt(1)); // return newly created user id
 	}
 
+	// return arraylist<companydata> containing all company profiles in database
 	ArrayList<CompanyData> allCompanyProfiles() throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.company");
 		ResultSet rs = lookup.executeQuery();
 		ArrayList<CompanyData> companyResult = new ArrayList<>();
 
-		while(rs.next()){
+		while (rs.next()) {
 			String id = rs.getString(1);
 			String name = rs.getString(2);
 			String city = rs.getString(3);
@@ -96,10 +110,12 @@ public class DataConnect {
 
 			companyResult.add(new CompanyData(id, name, city, state, email, comments));
 		}
-
+		System.out.println("Get all company profiles");
 		return companyResult;
 	}
 
+	// creates new user with all parameters except ID (id is autoincremented)
+	// returns the newly created user's auto gen ID
 	public String profileCreate(CompanyData company) throws SQLException {
 		String sql = "insert into footwearportal.company(companyName, city, state, email, comments) values (?, ?, ?, ?, ?)";
 		PreparedStatement lookup = dbconn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -116,6 +132,7 @@ public class DataConnect {
 		return Integer.toString(rs.getInt(1)); // returns newly created profile id
 	}
 
+	// finds companydata from database that matches the ID
 	public CompanyData getCompany(String companyID) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.company where companyID = ?");
 		lookup.setString(1, companyID);
@@ -127,7 +144,7 @@ public class DataConnect {
 		String comments = "";
 		ResultSet rs = lookup.executeQuery();
 
-		while(rs.next()){
+		while (rs.next()) {
 			id = rs.getString(1);
 			name = rs.getString(2);
 			city = rs.getString(3);
@@ -136,6 +153,7 @@ public class DataConnect {
 			comments = rs.getString(6);
 		}
 
+		System.out.println("Get company profile: " + lookup.toString());
 		return new CompanyData(id, name, city, state, email, comments);
 	}
 
@@ -144,6 +162,7 @@ public class DataConnect {
 		lookup.setString(1, companyID);
 
 		lookup.executeUpdate();
+		System.out.println("Delete company profile: " + lookup.toString());
 		return true;
 	}
 
@@ -162,4 +181,22 @@ public class DataConnect {
 		System.out.println("Update company profile: " + lookup.toString());
 		return true;
 	}
+
+	//TODO: Create account for supervisor
+
+	//TODO: Get list of supervisor accounts under company
+
+	//TODO: Update supervisor account
+
+	//TODO: Delete supervisor account
+
+	//TODO: Create program
+
+	//TODO: Change program
+
+	//TODO: Get list of programs under company
+
+	//TODO: Get program details
+
+	//TODO: Delete program
 }

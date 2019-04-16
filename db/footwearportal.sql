@@ -82,6 +82,9 @@ DROP TABLE IF EXISTS `program`;
 CREATE TABLE `program` (
   `programID` int(11) NOT NULL AUTO_INCREMENT,
   `companyID` int(11) NOT NULL,
+  `programName` varchar(45) DEFAULT NULL,
+  `programDesc` varchar(240) DEFAULT NULL,
+  `discount` int(11) DEFAULT NULL,
   PRIMARY KEY (`programID`),
   KEY `fk_program_company1_idx` (`companyID`),
   CONSTRAINT `fk_program_company1` FOREIGN KEY (`companyID`) REFERENCES `company` (`companyID`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -133,6 +136,7 @@ DROP TABLE IF EXISTS `shoe`;
 CREATE TABLE `shoe` (
   `shoeID` int(11) NOT NULL AUTO_INCREMENT,
   `shoeName` varchar(45) DEFAULT NULL,
+  `shoePrice` int(11) NOT NULL,
   PRIMARY KEY (`shoeID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -189,7 +193,7 @@ CREATE TABLE `user` (
   `lastName` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`UID`,`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,7 +202,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'tim','password','rm','Tim','Jensen','tim@jensen.com');
+INSERT INTO `user` VALUES (3,'tim','lFxbVa4JzA2LWyJYnd8/Eg==','rm','Tim','Jensen','tim@jensen.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -211,4 +215,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-10 19:07:56
+-- Dump completed on 2019-04-16  9:07:49

@@ -18,7 +18,7 @@ class Crypto {
 	private static Cipher c = null;
 
 	private Crypto() throws Exception {
-		String key = "b70a 25fb c9d8 6a86 050c e0d7 11ea d4d9";
+		String key = "b70a 25fb c9d8 6a86 050c e0d7 11ea d4d9"; // hard coded key gg
 		byte[] enc = key.getBytes(StandardCharsets.UTF_8);
 		KeySpec ks = new DESedeKeySpec(enc);
 		SecretKeyFactory kf = SecretKeyFactory.getInstance(cipher);
@@ -26,8 +26,9 @@ class Crypto {
 		c = Cipher.getInstance(cipher);
 	}
 
+	// instantiate crypto if doesn't exist and return it
 	static Crypto getInstance() {
-		if(instance == null){
+		if (instance == null) {
 			try {
 				instance = new Crypto();
 			} catch (Exception e) {
@@ -37,14 +38,16 @@ class Crypto {
 		return instance;
 	}
 
+	// takes unencoded string and returns encoded string
 	String encrypt(String str) throws Exception {
 		c.init(Cipher.ENCRYPT_MODE, ky);
 		byte[] utf8 = str.getBytes(StandardCharsets.UTF_8);
-		byte [] enc1 = c.doFinal(utf8);
+		byte[] enc1 = c.doFinal(utf8);
 		BASE64Encoder encoder = new BASE64Encoder();
 		return encoder.encode(enc1);
 	}
 
+	// takes encoded string and returns decoded string
 	String decrypt(String str) throws Exception {
 		BASE64Decoder decoder = new BASE64Decoder();
 		byte[] enc3 = decoder.decodeBuffer(str);
