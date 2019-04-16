@@ -9,7 +9,8 @@
 	String email = "";
 	String comments = "";
 
-	DataConnect data = serverInit.getConnection();
+	DataConnect data = DataConnect.getInstance();
+
 	try {
 		CompanyData company = data.getCompany(id);
 		companyName = company.getCompanyName();

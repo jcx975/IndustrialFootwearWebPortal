@@ -121,7 +121,7 @@
 
 
 	if (name != null && !name.trim().equals("")) {
-		DataConnect data = serverInit.getConnection();
+		DataConnect data = DataConnect.getInstance();
 		boolean flag = false;
 		try {
 			flag = data.profileCreate(new CompanyData(name, city, state, email, comments));
@@ -129,7 +129,7 @@
 			e.printStackTrace();
 		}
 		if (flag) {%>
-<script type="text/javascript">alert("Succesfully created profile!");
+<script type="text/javascript">alert("Successfully created profile!");
 window.location.replace("profiles.jsp")</script>
 <%
 } else { %>

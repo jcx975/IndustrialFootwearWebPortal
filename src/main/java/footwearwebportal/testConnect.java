@@ -3,21 +3,21 @@ package footwearwebportal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class testConnect {
 	public static void main(String[] args){
-		DataConnect data = new DataConnect();
+		DataConnect data = DataConnect.getInstance();
 		data.newConnection();
 		try {
-			data.userCreate(new UserInfo("0", "tim", "password", "rm", "Tim", "Jensen", "tim@jensen.com"));
+			//Crypto.generateKeys();
+			System.out.println(data.userCreate(new UserInfo("tim", "password", "rm", "Tim", "Jensen", "tim@jensen.com")));
 			//System.out.println(data.userlookup("tim", "password"));
 			//generateProfileInfoHTML(data);
 			printAllProfile(data.allCompanyProfiles());
-			data.closeConnection();
 
-		} catch (SQLException e) {
+			data.closeConnection();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

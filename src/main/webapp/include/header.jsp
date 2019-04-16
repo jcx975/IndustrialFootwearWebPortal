@@ -8,7 +8,7 @@
     </ul>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a class="nav-link" href="#">Log out</a>
+            <a class="nav-link" href="index.jsp">Log out</a>
         </li>
     </ul>
 </nav>

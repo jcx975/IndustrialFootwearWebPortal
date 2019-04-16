@@ -8,7 +8,7 @@
 	String delete = request.getParameter("delete");
 	String companyName = "";
 
-	DataConnect data = serverInit.getConnection();
+	DataConnect data = DataConnect.getInstance();
 
 	if (delete != null && !delete.trim().equals("")) {
 		boolean flag = false;

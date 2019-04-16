@@ -6,10 +6,9 @@ import java.io.StringWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 
 public class ProfileList extends  HttpServlet {
-	DataConnect data = serverInit.getConnection();
+	private DataConnect data = DataConnect.getInstance();
 
 	public String generateListHTML() throws IOException, SQLException {
 		StringWriter out = new StringWriter();
