@@ -12,7 +12,7 @@
 	DataConnect data = DataConnect.getInstance();
 
 	try {
-		CompanyData company = data.getCompany(id);
+		Company company = data.getCompany(id);
 		companyName = company.getCompanyName();
 		city = company.getCity();
 		state = company.getState();
@@ -153,7 +153,7 @@
 	if (companyName != null && !companyName.trim().equals("") && id != null && !id.trim().equals("")) {
 		boolean flag = false;
 		try {
-			flag = data.updateProfile(new CompanyData(id, companyName, city, state, email, comments));
+			flag = data.updateProfile(new Company(id, companyName, city, state, email, comments));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

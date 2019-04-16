@@ -10,12 +10,12 @@ import java.util.Collections;
 public class ProfileList extends  HttpServlet {
 	private DataConnect data = DataConnect.getInstance();
 
-	public String generateListHTML() throws IOException, SQLException {
+	public String generateListHTML() throws SQLException {
 		StringWriter out = new StringWriter();
-		ArrayList<CompanyData> companyData = data.allCompanyProfiles();
+		ArrayList<Company> companyData = data.allCompanyProfiles();
 		Collections.sort(companyData);
 
-		for (CompanyData company : companyData) {
+		for (Company company : companyData) {
 			out.append("<div class=\"col-md-6 mb-5 profile-container\">");
 			out.append("<div class=\"company-profile\">");
 			out.append("<p class=\"profile-name\">" + company.getCompanyName() + "</p>");
@@ -30,9 +30,9 @@ public class ProfileList extends  HttpServlet {
 		return out.toString();
 	}
 
-	public String generateProfileInfoHTML(String companyID) throws IOException, SQLException {
+	public String generateProfileInfoHTML(String companyID) throws  SQLException {
 		StringWriter out = new StringWriter();
-		CompanyData company = data.getCompany(companyID);
+		Company company = data.getCompany(companyID);
 
 		String companyName = company.getCompanyName();
 		String city = company.getCity();

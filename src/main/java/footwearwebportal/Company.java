@@ -1,9 +1,9 @@
 package footwearwebportal;
 
-public class CompanyData implements Comparable<CompanyData> {
+public class Company implements Comparable<Company> {
 	private String companyID, companyName, city, state, email, comments;
 
-	public CompanyData(String companyID, String companyName, String city, String state, String email, String comments){
+	public Company(String companyID, String companyName, String city, String state, String email, String comments){
 		this.companyID = companyID;
 		this.companyName = companyName;
 		this.city = city;
@@ -12,7 +12,7 @@ public class CompanyData implements Comparable<CompanyData> {
 		this.comments = comments;
 	}
 
-	public CompanyData(String companyName, String city, String state, String email, String comments) {
+	public Company(String companyName, String city, String state, String email, String comments) {
 		this.companyID = "0";
 		this.companyName = companyName;
 		this.city = city;
@@ -71,7 +71,7 @@ public class CompanyData implements Comparable<CompanyData> {
 	}
 
 	@Override
-	public int compareTo(CompanyData s){
+	public int compareTo(Company s){
 		return this.getCompanyName().toUpperCase().compareTo(s.getCompanyName().toUpperCase());
 	}
 }

@@ -1,20 +1,22 @@
 package footwearwebportal;
 
-public class UserInfo {
+public class User {
 	private String UID, username, password, group, firstName, lastName, email;
 
-	public UserInfo(String UID, String username, String password, String group, String firstName, String lastName, String email) {
+	public User(String UID, String username, String password,
+				String group, String firstName, String lastName, String email) {
+		this.UID = UID;
 		this.username = username;
 		this.password = password;
 		this.group = group;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.UID = UID;
 	}
 
 	// overloaded constructor
-	public UserInfo(String username, String password, String group, String firstName, String lastName, String email) {
+	public User(String username, String password, String group,
+				String firstName, String lastName, String email) {
 		this.UID = "0"; // set UID to 0 since we still need to create it
 		this.username = username;
 		this.password = password;
@@ -22,6 +24,20 @@ public class UserInfo {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+	}
+
+	public User(){
+
+	}
+
+	public User(User user){
+		this.UID = user.UID;
+		this.username = user.username;
+		this.password = user.password;
+		this.group = user.group;
+		this.firstName = user.firstName;
+		this.lastName = user.lastName;
+		this.email = user.email;
 	}
 
 	public String getUsername() {

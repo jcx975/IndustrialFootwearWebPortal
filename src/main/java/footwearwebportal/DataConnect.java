@@ -67,7 +67,7 @@ public class DataConnect {
 
 	// creates new user with all parameters except ID (id is autoincremented)
 	// returns the newly created user's auto gen ID
-	String userCreate(UserInfo user) throws SQLException {
+	String userCreate(User user) throws SQLException {
 		String sql = "insert into footwearportal.user(username, password, `group`, firstName, lastName, email) values (?, ?, ?, ?, ?, ?)";
 		PreparedStatement lookup = dbconn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		lookup.setString(1, user.getUsername());
@@ -95,10 +95,10 @@ public class DataConnect {
 	}
 
 	// return arraylist<companydata> containing all company profiles in database
-	ArrayList<CompanyData> allCompanyProfiles() throws SQLException {
+	ArrayList<Company> allCompanyProfiles() throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.company");
 		ResultSet rs = lookup.executeQuery();
-		ArrayList<CompanyData> companyResult = new ArrayList<>();
+		ArrayList<Company> companyResult = new ArrayList<>();
 
 		while (rs.next()) {
 			String id = rs.getString(1);
@@ -108,7 +108,7 @@ public class DataConnect {
 			String email = rs.getString(5);
 			String comments = rs.getString(6);
 
-			companyResult.add(new CompanyData(id, name, city, state, email, comments));
+			companyResult.add(new Company(id, name, city, state, email, comments));
 		}
 		System.out.println("Get all company profiles");
 		return companyResult;
@@ -116,7 +116,7 @@ public class DataConnect {
 
 	// creates new user with all parameters except ID (id is autoincremented)
 	// returns the newly created user's auto gen ID
-	public String profileCreate(CompanyData company) throws SQLException {
+	public String profileCreate(Company company) throws SQLException {
 		String sql = "insert into footwearportal.company(companyName, city, state, email, comments) values (?, ?, ?, ?, ?)";
 		PreparedStatement lookup = dbconn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		lookup.setString(1, company.getCompanyName());
@@ -133,7 +133,7 @@ public class DataConnect {
 	}
 
 	// finds companydata from database that matches the ID
-	public CompanyData getCompany(String companyID) throws SQLException {
+	public Company getCompany(String companyID) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.company where companyID = ?");
 		lookup.setString(1, companyID);
 		String id = "";
@@ -154,7 +154,7 @@ public class DataConnect {
 		}
 
 		System.out.println("Get company profile: " + lookup.toString());
-		return new CompanyData(id, name, city, state, email, comments);
+		return new Company(id, name, city, state, email, comments);
 	}
 
 	public boolean deleteProfile(String companyID) throws SQLException {
@@ -166,7 +166,7 @@ public class DataConnect {
 		return true;
 	}
 
-	public boolean updateProfile(CompanyData company) throws SQLException {
+	public boolean updateProfile(Company company) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("update footwearportal.company " +
 				"SET companyName = ?, city = ?, state = ?, email = ?, comments = ? " +
 				"WHERE companyID = ?");

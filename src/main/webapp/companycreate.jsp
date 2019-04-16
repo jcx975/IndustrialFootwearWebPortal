@@ -124,7 +124,7 @@
 		DataConnect data = DataConnect.getInstance();
 		boolean flag = false;
 		try {
-			flag = data.profileCreate(new CompanyData(name, city, state, email, comments));
+			flag = data.profileCreate(new Company(name, city, state, email, comments));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

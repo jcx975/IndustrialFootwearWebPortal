@@ -28,7 +28,7 @@
 		}
 
 	try {
-		CompanyData company = data.getCompany(id);
+		Company company = data.getCompany(id);
 		companyName = company.getCompanyName();
 	} catch (SQLException e) {
 		e.printStackTrace();

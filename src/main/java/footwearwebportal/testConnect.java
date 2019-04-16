@@ -11,7 +11,7 @@ public class testConnect {
 		data.newConnection();
 		try {
 			//Crypto.generateKeys();
-			System.out.println(data.userCreate(new UserInfo("tim", "password", "rm", "Tim", "Jensen", "tim@jensen.com")));
+			System.out.println(data.userCreate(new User("tim", "password", "rm", "Tim", "Jensen", "tim@jensen.com")));
 			//System.out.println(data.userlookup("tim", "password"));
 			//generateProfileInfoHTML(data);
 			printAllProfile(data.allCompanyProfiles());
@@ -48,11 +48,11 @@ public class testConnect {
 			input = in.nextLine();
 			comments = input;
 			if(!input.equals("0"))
-				data.profileCreate(new CompanyData(companyName, city, state, email, comments));
+				data.profileCreate(new Company(companyName, city, state, email, comments));
 		}
 	}
 
-	private static void printAllProfile(ArrayList<CompanyData> list) throws SQLException {
+	private static void printAllProfile(ArrayList<Company> list) throws SQLException {
 		System.out.println(Arrays.toString(list.toArray()));
 	}
 }
