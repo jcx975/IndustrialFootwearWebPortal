@@ -8,10 +8,19 @@
         <url-pattern>/webportal/*</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>footwearwebportal</servlet-name>
         <servlet-class>footwearwebportal.serverInit</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>footwearwebportal.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/auth/*</url-pattern>
+    </filter-mapping>
+
 </web-app>

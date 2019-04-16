@@ -1,5 +1,6 @@
 package footwearwebportal;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,19 +51,23 @@ public class DataConnect {
 	}
 
 	// takes username and password and returns true if combination exists in database
-	public boolean userlookup(String user, String pass) throws Exception {
+	public String userLogin(String user, String pass) throws Exception {
 		PreparedStatement lookup = dbconn
-				.prepareStatement("SELECT password from footwearportal.user WHERE username = ?");
+				.prepareStatement("SELECT password, UID from footwearportal.user WHERE username = ?");
 		lookup.setString(1, user);
 
 		ResultSet rs = lookup.executeQuery();
+		int id = -1;
 
 		rs.next();
 		String securePassword = rs.getString(1);
 		System.out.println("Lookup user: " + lookup.toString());
+		if(securePassword.equals(crypto.encrypt(pass))) {
+			 id = rs.getInt(2);
+		}
 
 		// passwords in db are encrypted so encrypt new password then compare hashess
-		return securePassword.equals(crypto.encrypt(pass));
+		return Integer.toString(id);
 	}
 
 	// creates new user with all parameters except ID (id is autoincremented)
@@ -92,6 +97,34 @@ public class DataConnect {
 		rs.next();
 		System.out.println("New user: " + lookup.toString());
 		return Integer.toString(rs.getInt(1)); // return newly created user id
+	}
+
+	@SuppressWarnings("Duplicates")
+	public User getUserInfo(String UID) throws SQLException{
+		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.user where UID = ?");
+		lookup.setString(1, UID);
+
+		String username = "";
+		String password = "";
+		String group = "";
+		String firstName = "";
+		String lastName = "";
+		String email = "";
+		ResultSet rs = lookup.executeQuery();
+
+		while (rs.next()) {
+			UID = rs.getString(1);
+			username = rs.getString(2);
+			password = rs.getString(3);
+			group = rs.getString(4);
+			firstName = rs.getString(5);
+			lastName = rs.getString(6);
+			email = rs.getString(7);
+		}
+
+		System.out.println("Get user profile: " + lookup.toString());
+
+		return new User(UID, username, password, group, firstName, lastName, email);
 	}
 
 	// return arraylist<companydata> containing all company profiles in database
@@ -133,6 +166,7 @@ public class DataConnect {
 	}
 
 	// finds companydata from database that matches the ID
+	@SuppressWarnings("Duplicates")
 	public Company getCompany(String companyID) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.company where companyID = ?");
 		lookup.setString(1, companyID);

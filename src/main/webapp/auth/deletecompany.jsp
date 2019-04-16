@@ -35,10 +35,10 @@
 	}
 
 %>
-<%@include file="include/meta.jsp"%>
+<%@include file="../include/meta.jsp"%>
 <title>Deleting <%=companyName%></title>
-<%@include file="include/head.jsp"%>
-<%@include file="include/header.jsp"%>
+<%@include file="../include/head.jsp"%>
+<%@include file="../include/header.jsp"%>
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 welcome-banner">
@@ -68,4 +68,4 @@
 		</div>
 	</div>
 </div>
-<%@include file="include/footer.jsp"%>
+<%@include file="../include/footer.jsp"%>

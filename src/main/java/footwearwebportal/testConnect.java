@@ -12,7 +12,7 @@ public class testConnect {
 		try {
 			//Crypto.generateKeys();
 			System.out.println(data.userCreate(new User("tim", "password", "rm", "Tim", "Jensen", "tim@jensen.com")));
-			//System.out.println(data.userlookup("tim", "password"));
+			//System.out.println(data.userLogin("tim", "password"));
 			//generateProfileInfoHTML(data);
 			printAllProfile(data.allCompanyProfiles());
 
