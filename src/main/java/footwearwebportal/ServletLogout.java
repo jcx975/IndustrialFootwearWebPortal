@@ -9,25 +9,17 @@ import javax.servlet.http.*;
 /**
  * Servlet implementation class LogoutServlet
  */
-@WebServlet("/auth/logout")
+@WebServlet("/logout")
 public class ServletLogout extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html");
 
 		//invalidate the session if exists
 		HttpSession session = request.getSession(false);
-		if(request.isRequestedSessionIdValid() && session != null){
+		if(session != null){
+			session.removeAttribute("user");
 			session.invalidate();
-		}
-
-		Cookie[] cookies = request.getCookies();
-
-		if(cookies != null){
-			for(Cookie cookie : cookies){
-				cookie.setMaxAge(0);
-				System.out.println("deleted cookie: " + cookie.getName());
-				response.addCookie(cookie);
-			}
 		}
 
 		System.out.println("logged out");

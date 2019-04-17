@@ -16,22 +16,20 @@ import javax.servlet.http.HttpSession;
 
 public class AuthenticationFilter implements Filter {
 
-	private ServletContext context;
-
-	public void init(FilterConfig fConfig) throws ServletException {
-		this.context = fConfig.getServletContext();
+	public void init(FilterConfig fConfig)  {
+		ServletContext context = fConfig.getServletContext();
 		System.out.println("AuthenticationFilter initialized");
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-		HttpServletRequest req = (HttpServletRequest) request;
+			HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 
 		HttpSession session = req.getSession(false);
 
 		//TODO: also authenticate based on user group
-		if (session == null) {   //checking whether the session exists
+		if (session == null || session.getAttribute("user") == null) {   //checking whether the session exists
 			System.out.println("Unauthorized access request");
 			res.sendRedirect(req.getContextPath() + "/index.jsp");
 		} else {

@@ -1,32 +1,20 @@
 <%
-    String userID = null;
-    String sessionID = null;
+    User user = (User) request.getSession(false).getAttribute("user");
 
-    Cookie[] cookies = request.getCookies();
+    String firstName = "";
+    String lastName = "";
 
-    if(cookies != null){
-        for(Cookie cookie : cookies){
-            if(cookie.getName().equals("userID"))
-                userID = cookie.getValue();
-            if(cookie.getName().equals("JSESSIONID"))
-                sessionID = cookie.getValue();
-        }
-    }
-
-    User user = new User();
-    DataConnect userData = DataConnect.getInstance();
-    try {
-        user = userData.getUserInfo(userID);
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-
-    String firstName = user.getFirstName();
-    String lastName = user.getLastName();
+    if(user != null) {
+		firstName = user.getFirstName();
+		lastName = user.getLastName();
+	}
 %>
 
 
 </head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-2">
     <ul class="navbar-nav">
@@ -36,7 +24,7 @@
     </ul>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <form action="logout" method="post">
+            <form action="${pageContext.request.contextPath}/logout" method="post">
                 <input class="nav-link" type="submit" value="Logout">
             </form>
         </li>

@@ -1,6 +1,7 @@
 package footwearwebportal;
 
 import java.io.*;
+import java.sql.SQLException;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -37,8 +38,12 @@ public class ServletLogin extends HttpServlet
 
 			newSession.setMaxInactiveInterval(5*60);
 
-			Cookie idCookie = new Cookie("userID", flag);
-			response.addCookie(idCookie);
+			try {
+				newSession.setAttribute("user", data.getUserInfo(flag));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 			response.sendRedirect("auth/retailmanager.jsp");
 		} else {
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
