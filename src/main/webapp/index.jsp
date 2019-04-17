@@ -14,8 +14,6 @@
 	<script src="js/main.js"></script>
 </head>
 <body class="bg-light">
-
-
 <div class="container">
 	<form class="form-signin text-center">
 		<div class="row">
@@ -43,7 +41,7 @@
 				</div>
 			</div>
 		</div>
-</form>
+	</form>
 </div>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 welcome-banner">
-			<h1 class="display-1">Company Profiles</h1>
+			<h1 class="display-2">Company Profiles</h1>
 		</div>
 	</div>
 </div>

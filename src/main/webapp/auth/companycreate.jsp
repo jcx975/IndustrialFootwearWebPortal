@@ -16,7 +16,7 @@
 <div class="container mb-5">
 	<div class="row">
 		<div class="col-md-12 company-buttons-container">
-			<button onclick="window.location.href='profiles.jsp'" type="button" class="btn btn-lg btn-primary mt-auto"><
+			<button onclick="window.location.href='profiles.jsp'" type="button" class="btn btn-lg btn-primary mt-auto">
 				Back
 			</button>
 			<hr>
@@ -112,6 +112,7 @@
 		</form>
 	</div>
 </div>
+<%@include file="../include/footer.jsp"%>
 <%
 	String name = request.getParameter("companyName");
 	String city = request.getParameter("city");
