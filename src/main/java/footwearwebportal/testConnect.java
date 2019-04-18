@@ -12,11 +12,12 @@ public class testConnect {
 		try {
 			//Crypto.generateKeys();
 			System.out.println(data.userCreate(new User("tim", "password", "manager", "Tim", "Jensen", "tim@jensen.com")));
-			System.out.println(data.userCreate(new User("bob", "password", "supervisor", "Bob", "Jackson", "tim@jensen.com")));
-			System.out.println(data.userCreate(new User("tom", "password", "employee", "Tom", "Hanson", "tim@jensen.com")));
+			System.out.println(data.supervisorCreate(new Supervisor("bob", "password", "supervisor", "Bob", "Jackson", "tim@jensen.com", "1")));
+			//System.out.println(data.userCreate(new User("tom", "password", "employee", "Tom", "Hanson", "tim@jensen.com")));
 			//System.out.println(data.userLogin("tim", "password"));
 			//generateProfileInfoHTML(data);
 			printAllProfile(data.allCompanyProfiles());
+			System.out.println(Arrays.toString(data.supervisorProfiles("1").toArray()));
 
 			data.closeConnection();
 		} catch (Exception e) {

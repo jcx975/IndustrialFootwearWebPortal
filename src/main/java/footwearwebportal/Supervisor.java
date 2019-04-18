@@ -16,7 +16,7 @@ public class Supervisor extends User {
 
 	Supervisor(String username, String password, String group,
 			   String firstName, String lastName, String email, String companyID){
-		super(username, password, group, firstName, lastName, email, companyID);
+		super(username, password, group, firstName, lastName, email);
 		this.companyID = companyID;
 	}
 
@@ -36,5 +36,10 @@ public class Supervisor extends User {
 	public User getUser(){
 		return new User(super.getUsername(), super.getPassword(),
 				super.getGroup(), super.getFirstName(), super.getLastName(), super.getEmail());
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() + ", " + companyID;
 	}
 }
