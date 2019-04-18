@@ -2,7 +2,6 @@
 <%@ page import="footwearwebportal.*" %>
 
 <%
-
 	String id = request.getParameter("id");
 	String companyID = request.getParameter("companyID");
 
@@ -16,7 +15,7 @@
 	DataConnect data = DataConnect.getInstance();
 
 	try {
-		Company company = data.getCompany(id);
+		Company company = data.getCompany(companyID);
 		User supervisor = data.getUserInfo(id);
 		companyName = company.getCompanyName();
 		username = supervisor.getUsername();
@@ -44,6 +43,7 @@
 </div>
 <div class="container">
 	<div class="col-md-12" id="top-buttons">
+		<a href="company.jsp?id=<%=companyID%>" class="btn btn-primary">Back</a>
 		<button type="button" id="edit-button" class="btn btn-success">Edit Supervisor</button>
 	</div>
 	<hr>
@@ -51,7 +51,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-8" id="edit-form">
-			<form class="needs-validation" novalidate action="supervisor.jsp?id=<%=id%>" id="profile-form" method="POST">
+			<form class="needs-validation" novalidate action="supervisor.jsp?id=<%=id%>&companyID=<%=companyID%>" id="profile-form" method="POST">
 				<h2 class="mb-3">User Information</h2>
 				<div class="row">
 					<div class="col-md-6">
