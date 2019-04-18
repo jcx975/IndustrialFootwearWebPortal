@@ -314,6 +314,27 @@ public class DataConnect {
 	//TODO: Get list of programs under company
 
 	//TODO: Get program details
+	public Program getProgram(String programID) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.program where programID = ?");
+		lookup.setString(1, programID);
+		String id = "";
+		String name = "";
+		String desc = "";
+		String discount = "";
+
+		ResultSet rs = lookup.executeQuery();
+
+		while (rs.next()) {
+			id = rs.getString(1);
+			name = rs.getString(2);
+			desc = rs.getString(3);
+			discount = rs.getString(4);
+		}
+
+		System.out.println("Get program: " + lookup.toString());
+		return new Program(id, name, desc,discount);
+	}
+
 
 	//TODO: Delete program
 }
