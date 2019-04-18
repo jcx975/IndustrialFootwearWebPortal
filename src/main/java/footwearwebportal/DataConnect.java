@@ -226,8 +226,7 @@ public class DataConnect {
 		lookup.setString(2, program.getProgramName());
 		lookup.setString(3, program.getProgramDesc());
 		lookup.setString(4, program.getDiscount());
-		//not sure where to put programid as that should be auto incremented right?
-		//talk to tim to look at for getting company and program ID's to create a program
+	
 
 		lookup.executeUpdate();
 		System.out.println("New program: " + lookup.toString());
@@ -235,7 +234,21 @@ public class DataConnect {
 		rs.next();
 		return Integer.toString(rs.getInt(1)); // returns newly created progam id
 	}
+	
 	//TODO: Change program
+	public boolean updateProgram(Program program) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("update footwearportal.program " +
+				"SET programName = ?, programDesc = ?, discount = ?," +
+				"WHERE programID = ?");
+		lookup.setString(1, program.getProgramName());
+		lookup.setString(2, program.getProgramDesc());
+		lookup.setString(3, program.getDiscount());
+		lookup.setString(4, program.getProgramID());
+
+		lookup.executeUpdate();
+		System.out.println("Update program: " + lookup.toString());
+		return true;
+	}
 
 	//TODO: Get list of programs under company
 

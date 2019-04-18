@@ -1,36 +1,32 @@
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Edit Program</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" media="screen" href="main.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script src="company.js"></script>
-</head>
-<body>
-<%@ page import="java.io.*" %> 
+<%@ page contentType="text/html; charset=ISO-8859-1"
+		 pageEncoding="ISO-8859-1" %>
 <%@ page import="footwearwebportal.*" %>
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-2">
-		<ul class="navbar-nav">
-			<li class="nav-item active">
-				<a class="nav-link" href="#">Create A Program</a>
-			</li>
-		</ul>
-		<ul class="navbar-nav ml-auto">
-			<li class="nav-item">
-				<a class="nav-link" href="#">Log out</a>
-			</li>
-		</ul>
-	</nav>
+<%@ page import="java.sql.SQLException" %>
+<%@include file="../include/meta.jsp" %>
+<title>Edit Program</title>
+<%@include file="../include/head.jsp" %>
+<%@include file="../include/header.jsp" %>
+<%
+   	String id = request.getParameter("id");
+%>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 welcome-banner">
+			<h1 class="display-1" id="company-name-header"></h1>
+		</div>
+	</div>
+</div>
+<div class="container mb-5">
+	<div class="row">
+		<div class="col-md-12 company-buttons-container">
+			<button onclick="window.location.href='profiles.jsp'" type="button" class="btn btn-lg btn-primary mt-auto">
+				Back
+			</button>
+			<hr>
+		</div>
+	</div>
+</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 welcome-banner">
@@ -59,7 +55,7 @@
 						<div class="row">
 						</div>
 						<div class="mb-3 form-group">
-							<label for="programDesc">Program Desc:</label>
+							<label for="programDesc">Program Description:</label>
 							<textarea class="form-control" rows="5" id="programDesc"></textarea>
 						</div>
 						<div class="form-group">
@@ -80,16 +76,11 @@
 </div>
 <%@include file="../include/footer.jsp" %>
 <%
-		String id = "Htest";
-//talk to Tim to see how ID's are incremented. also how to get program and company ID's
 
 		String name = request.getParameter("programName");
 		String desc = request.getParameter("programDesc");
 		String discount = request.getParameter("discount");
 
-		
-		DataConnect DBentry=new DataConnect();
-		boolean flag=DBentry.programCreate(prog);
 		
 		if (name != null && !name.trim().equals("")) {
 			DataConnect data = DataConnect.getInstance();
@@ -100,7 +91,12 @@
 				e.printStackTrace();
 			}
 			if (!flag.equals("-1")) {
+%>script type="text/javascript">alert("Successfully created profile!");
+window.location.replace("program.jsp?id=<%=flag%>")</script>
+<%
+} else { %>
+<script type="text/javascript">alert("Entry Failure");</script>
+<% }
+}
 
-%>				
-</body>
-</html>
+%>
