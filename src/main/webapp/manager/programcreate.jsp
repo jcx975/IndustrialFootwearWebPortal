@@ -10,39 +10,23 @@
 <%
    	String id = request.getParameter("id");
 %>
-<div class="container">
-	<div class="row">
-		<div class="col-md-12 welcome-banner">
-			<h1 class="display-1" id="company-name-header"></h1>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 welcome-banner">
+				<h1 class="display-1" id="program-name-header"></h1>
+			</div>
 		</div>
 	</div>
-</div>
-<div class="container mb-5">
+	<div class="container mb-5">
 	<div class="row">
 		<div class="col-md-12 company-buttons-container">
-			<button onclick="window.location.href='profiles.jsp'" type="button" class="btn btn-lg btn-primary mt-auto">
+			<button onclick="window.location.href='company.jsp'" type="button" class="btn btn-lg btn-primary mt-auto">
 				Back
 			</button>
 			<hr>
 		</div>
 	</div>
-</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12 welcome-banner">
-				<h1 class="display-1" id="company-name-header"></h1>
-			</div>
-		</div>
-	</div>
-	<div class="container mb-5">
-		<div class="row">
-			<div class="col-md-12 company-buttons-container">
-				<button type="button" class="mr-4 btn btn-primary">< Back</button>
-				<hr>
-			</div>
-		</div>
-	</div>
-	<div class="container">
+<div class="container">
 		<div class="row">
 				<div class="col-md-8">
 					<form action="programcreate.jsp" method="get">
@@ -52,13 +36,11 @@
 							<label for="programName">Program Name</label>
 							<input type="text" class="form-control" id="programName">
 						</div>
-						<div class="row">
-						</div>
 						<div class="mb-3 form-group">
 							<label for="programDesc">Program Description:</label>
 							<textarea class="form-control" rows="5" id="programDesc"></textarea>
 						</div>
-						<div class="form-group">
+						<div class="mb-3 form-group">
 							<label for="discount">Discount:</label>
 							<input type="text" class="form-control" id="discount">
 						</div>
