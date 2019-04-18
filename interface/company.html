@@ -145,47 +145,7 @@
 					<button type="button" class="btn btn-primary ml-auto">Create account</button>
 				</div>
 				<input type="text" class="form-control" id="supervisorSearch" placeholder="Search supervisors">
-				<div class="row">
-					<div class="col-md-6 supervisor-container">
-						<form action="supervisor.jsp" method="GET">
-							<div class="program-profile border d-flex flex-column">
-								<p class="profile-name">Some Guy</p>
-								<p>someguy@example.com</p>
-								<input type="hidden" name="id" value="1">
-								<input type="submit" class="btn btn-primary" value="View">
-							</div>
-						</form>
-					</div>
-					<div class="col-md-6 supervisor-container">
-						<form action="supervisor.jsp" method="GET">
-							<div class="program-profile border d-flex flex-column">
-								<p class="profile-name">Some Guy</p>
-								<p>someguy@example.com</p>
-								<input type="hidden" name="id" value="1">
-								<input type="submit" class="btn btn-primary" value="View">
-							</div>
-						</form>
-					</div>
-					<div class="col-md-6 supervisor-container">
-						<form action="supervisor.jsp" method="GET">
-							<div class="program-profile border d-flex flex-column">
-								<p class="profile-name">Some Guy</p>
-								<p>someguy@example.com</p>
-								<input type="hidden" name="id" value="1">
-								<input type="submit" class="btn btn-primary" value="View">
-							</div>
-						</form>
-					</div>
-					<div class="col-md-6 supervisor-container">
-						<form action="supervisor.jsp" method="GET">
-							<div class="program-profile border d-flex flex-column">
-								<p class="profile-name">Bill</p>
-								<p>bill@example.com</p>
-								<input type="hidden" name="id" value="1">
-								<input type="submit" class="btn btn-primary" value="View">
-							</div>
-						</form>
-					</div>
+				<div class="row" id="supervisors-list">
 					<div class="col-md-6 supervisor-container">
 						<form action="supervisor.jsp" method="GET">
 							<div class="program-profile border d-flex flex-column">
@@ -204,19 +164,23 @@
 					<button type="button" class="btn btn-primary ml-auto">Create program</button>
 				</div>
 				<input type="text" class="form-control" id="programSearch" placeholder="Search programs">
-				<div class="program-profile border program-container">
-					<form action="program.jsp" method="GET">
-						<div class="row">
-							<div class="col-md-6">
-								<h3 class="profile-name">Office</h3>
-								<p class="profile-desc">For office workers.</p>
-							</div>
-							<div class="col-md-6 d-flex">
-								<input type="hidden" name="id" value="1">
-								<input type="submit" class="btn ml-auto btn-primary" value="View">
-							</div>
+				<div class="row" id="programs-list">
+					<div class="col-md-12 program-container">
+						<div class="program-profile border">
+							<form action="program.jsp" method="GET">
+								<div class="row">
+									<div class="col-md-6">
+										<h3 class="profile-name">Office</h3>
+										<p class="profile-desc">For office workers.</p>
+									</div>
+									<div class="col-md-6 d-flex">
+										<input type="hidden" name="id" value="1">
+										<input type="submit" class="btn ml-auto btn-primary" value="View">
+									</div>
+								</div>
+							</form>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
