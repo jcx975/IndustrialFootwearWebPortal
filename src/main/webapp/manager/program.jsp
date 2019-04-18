@@ -78,7 +78,7 @@
 	if (programName != null && !programName.trim().equals("") && id != null && !id.trim().equals("")) {
 		boolean flag = false;
 		try {
-			flag = data.updateProgram(new Program(companyID, programName, programDesc, discount));
+			flag = data.updateProgram(new Program(id,companyID, programName, programDesc, discount));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
