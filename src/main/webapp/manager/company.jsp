@@ -139,6 +139,30 @@
 		</div>
 	</div>
 </div>
+<div class="container mt-5 mb-5 bg-light">
+	<div class="row">
+		<div class="col-md-6 border programs-container">
+			<div class="mb-2">
+				<h2 class="text-center">Supervisor Accounts</h2>
+				<button type="button" class="btn btn-primary ml-auto">Create account</button>
+			</div>
+			<input type="text" class="form-control" id="supervisorSearch" placeholder="Search supervisors">
+			<div class="row" id="supervisors-list">
+				
+			</div>
+		</div>
+		<div class="col-md-6 border programs-container">
+			<div class="mb-2">
+				<h2 class="text-center">Programs</h2>
+				<button type="button" class="btn btn-primary ml-auto">Create program</button>
+			</div>
+			<input type="text" class="form-control" id="programSearch" placeholder="Search programs">
+			<div class="row" id="programs-list">
+				
+			</div>
+		</div>
+	</div>
+</div>
 <%@include file="../include/footer.jsp"%>
 
 <%
