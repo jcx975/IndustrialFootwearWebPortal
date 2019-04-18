@@ -69,6 +69,7 @@
 <%@include file="../include/footer.jsp"%>
 
 <%
+	id =  request.getParameter("id");
 	programName = request.getParameter("programName");
 	programDesc = request.getParameter("programDesc");
 	discount = request.getParameter("discount");
