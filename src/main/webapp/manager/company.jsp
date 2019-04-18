@@ -148,7 +148,18 @@
 			</div>
 			<input type="text" class="form-control" id="supervisorSearch" placeholder="Search supervisors">
 			<div class="row" id="supervisors-list">
-				
+				// put supervisors here
+				<div class="col-md-6 supervisor-container">
+					<form action="supervisor.jsp" method="GET">
+						<div class="program-profile border d-flex flex-column">
+							<p class="profile-name">Some Guy</p>
+							<p>someguy@example.com</p>
+							<input type="hidden" name="id" value="1">
+							<input type="submit" class="btn btn-primary" value="View">
+						</div>
+					</form>
+				</div>
+				//end supervisors here
 			</div>
 		</div>
 		<div class="col-md-6 border programs-container">
