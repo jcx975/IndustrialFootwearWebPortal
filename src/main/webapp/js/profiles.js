@@ -17,7 +17,7 @@ function profileSearch()
 			let parent = $( this ).parent();
 
 			if ( name.indexOf( searchString ) === -1 )
-				$( parent ).hide()
+				$( parent ).hide();
 			else
 				$( parent ).show();
 		} );
