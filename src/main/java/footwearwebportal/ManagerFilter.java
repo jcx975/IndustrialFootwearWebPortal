@@ -14,27 +14,32 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class AuthenticationFilter implements Filter {
+public class ManagerFilter implements Filter {
 
-	public void init(FilterConfig fConfig)  {
+	public void init(FilterConfig fConfig) {
 		ServletContext context = fConfig.getServletContext();
-		System.out.println("AuthenticationFilter initialized");
+		System.out.println("ManagerFilter initialized");
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-			HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 
 		HttpSession session = req.getSession(false);
 
 		//TODO: also authenticate based on user group
-		if (session == null || session.getAttribute("user") == null) {   //checking whether the session exists
+		if (session != null && session.getAttribute("user") != null) {   //checking whether the session exists
+			User user = (User) session.getAttribute("user");
+			if (user.getGroup().equals("manager"))
+				chain.doFilter(request, response); // pass the request along the filter chain
+			else {
+				System.out.println("Unauthorized access request");
+				res.sendRedirect(req.getContextPath() + "/index.jsp");
+			}
+		} else {
 			System.out.println("Unauthorized access request");
 			res.sendRedirect(req.getContextPath() + "/index.jsp");
-		} else {
-			// pass the request along the filter chain
-			chain.doFilter(request, response);
 		}
 	}
 

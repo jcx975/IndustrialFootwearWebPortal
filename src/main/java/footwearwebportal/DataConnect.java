@@ -8,17 +8,11 @@ import java.util.Arrays;
 public class DataConnect {
 	private static DataConnect instance;
 	private static Connection dbconn;
-	private static Crypto crypto;
 
 	// instantiate DataConnect object if doesn't exist and return it
 	public static DataConnect getInstance() {
 		if (instance == null) {
 			instance = new DataConnect();
-			try {
-				crypto = Crypto.getInstance();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 		return instance;
 	}
@@ -62,7 +56,7 @@ public class DataConnect {
 		rs.next();
 		String securePassword = rs.getString(1);
 		System.out.println("Lookup user: " + lookup.toString());
-		if(securePassword.equals(crypto.encrypt(pass))) {
+		if(securePassword.equals(Crypto.hashSHA256(pass))) {
 			 id = rs.getInt(2);
 		}
 
@@ -79,7 +73,7 @@ public class DataConnect {
 
 		String securePassword = null;
 		try {
-			securePassword = crypto.encrypt(user.getPassword()); // encrypt password with 3DES before insertion
+			securePassword = Crypto.hashSHA256(user.getPassword()); // hash password with SHA256
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

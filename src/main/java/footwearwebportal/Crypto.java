@@ -1,13 +1,17 @@
 package footwearwebportal;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
+import sun.plugin2.message.Message;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESedeKeySpec;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.spec.KeySpec;
 
 class Crypto {
@@ -24,6 +28,28 @@ class Crypto {
 		SecretKeyFactory kf = SecretKeyFactory.getInstance(cipher);
 		ky = kf.generateSecret(ks);
 		c = Cipher.getInstance(cipher);
+	}
+
+	// SHA-256 hashing
+	static String hashSHA256(String string) {
+		MessageDigest digest;
+		byte[] encodedHash = new byte[0];
+		try {
+			digest = MessageDigest.getInstance("SHA-256");
+			encodedHash = digest.digest(string.getBytes(StandardCharsets.UTF_8));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+
+		StringBuilder hexString = new StringBuilder();
+		for (byte hash : encodedHash) {
+			String hex = Integer.toHexString(0xff & hash);
+			if (hex.length() == 1)
+				hexString.append('0');
+			hexString.append(hex);
+		}
+
+		return hexString.toString();
 	}
 
 	// instantiate crypto if doesn't exist and return it

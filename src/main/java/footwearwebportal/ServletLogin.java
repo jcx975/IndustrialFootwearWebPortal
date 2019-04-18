@@ -12,7 +12,6 @@ public class ServletLogin extends HttpServlet
 	public void doPost(HttpServletRequest request,
 					  HttpServletResponse response) throws IOException, ServletException {
 		response.setContentType("text/html");
-		PrintWriter pwriter = response.getWriter();
 		DataConnect data = DataConnect.getInstance();
 		String flag = "-1";
 
@@ -38,18 +37,37 @@ public class ServletLogin extends HttpServlet
 
 			newSession.setMaxInactiveInterval(5*60);
 
+			User user = new User();
 			try {
-				newSession.setAttribute("user", data.getUserInfo(flag));
+				user = data.getUserInfo(flag);
+				newSession.setAttribute("user", user);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 
-			response.sendRedirect("auth/retailmanager.jsp");
+			switch(user.getGroup()){
+				case "manager":
+					response.sendRedirect("manager/retailmanager.jsp");
+					break;
+				case "supervisor":
+					response.sendRedirect("supervisor/supervisor.jsp");
+					break;
+				case "employee":
+					response.sendRedirect("employee/employee.jsp");
+					break;
+				default:
+					authFail(request, response);
+			}
 		} else {
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
-			PrintWriter out = response.getWriter();
-			out.println("<font color=red>Incorrect login</font>");
-			rd.include(request, response);
+			authFail(request, response);
 		}
+	}
+
+	private void authFail(HttpServletRequest request,
+						  HttpServletResponse response) throws IOException, ServletException {
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+		PrintWriter out = response.getWriter();
+		out.println("<font color=red>Incorrect login</font>");
+		rd.include(request, response);
 	}
 }

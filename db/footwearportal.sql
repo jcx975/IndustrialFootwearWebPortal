@@ -39,7 +39,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (1,'Rochester Steelworks','Rochester','Minnesota','steelworks@email.com',NULL),(2,'Fastenal','Winona','MN','contact@fastenal.com',NULL),(3,'Iowa Meat Packing','Cresco','IA','meat@iowameat.com','Meaty!');
+INSERT INTO `company` VALUES (1,'Rochester Steelworks','Rochester','Minnesota','steelworks@email.com',NULL),(2,'Fastenal Winona','Winona','MN','contact@fastenal.com','null'),(3,'Iowa Meat Packing','Cresco','IA','meat@iowameat.com','Meaty!');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,13 +187,13 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `UID` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(64) DEFAULT NULL,
   `group` varchar(45) NOT NULL,
   `firstName` varchar(45) DEFAULT NULL,
   `lastName` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`UID`,`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,7 +202,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (3,'tim','lFxbVa4JzA2LWyJYnd8/Eg==','rm','Tim','Jensen','tim@jensen.com');
+INSERT INTO `user` VALUES (16,'tim','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','manager','Tim','Jensen','tim@jensen.com'),(17,'bob','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','supervisor','Bob','Jackson','tim@jensen.com'),(18,'tom','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','employee','Tom','Hanson','tim@jensen.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -215,4 +215,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-16  9:07:49
+-- Dump completed on 2019-04-17 21:01:50

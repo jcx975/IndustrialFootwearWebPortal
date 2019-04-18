@@ -11,7 +11,9 @@ public class testConnect {
 		data.newConnection();
 		try {
 			//Crypto.generateKeys();
-			System.out.println(data.userCreate(new User("tim", "password", "rm", "Tim", "Jensen", "tim@jensen.com")));
+			System.out.println(data.userCreate(new User("tim", "password", "manager", "Tim", "Jensen", "tim@jensen.com")));
+			System.out.println(data.userCreate(new User("bob", "password", "supervisor", "Bob", "Jackson", "tim@jensen.com")));
+			System.out.println(data.userCreate(new User("tom", "password", "employee", "Tom", "Hanson", "tim@jensen.com")));
 			//System.out.println(data.userLogin("tim", "password"));
 			//generateProfileInfoHTML(data);
 			printAllProfile(data.allCompanyProfiles());
