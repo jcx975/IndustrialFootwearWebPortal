@@ -32,8 +32,8 @@
 <%@include file="../include/meta.jsp"%>
 <title><%=companyName%> supervisor <%=firstNameNew%> <%=lastNameNew%></title>
 <%@include file="../include/head.jsp"%>
-<link rel="stylesheet" type="text/css" media="screen" href="../css/supervisor.css">
-<script src="../js/userprofile.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="../css/userprofile.css">
+<script src="../js/supervisor.js"></script>
 <%@include file="../include/header.jsp"%>
 <div class="container">
 	<div class="row">
@@ -51,20 +51,19 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-8" id="edit-form">
-			<form class="needs-validation" novalidate action="supervisor.jsp" id="profile-form" method="POST">
-				<input type="hidden" value="<%=id%>" name="id">
+			<form class="needs-validation" novalidate action="supervisor.jsp?id=<%=id%>" id="profile-form" method="POST">
 				<h2 class="mb-3">User Information</h2>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="firstName">First Name</label>
-							<input type="text" class="form-control" id="firstName" name="firstName" value="<%=firstNameNew%>">
+							<label for="firstNameNew">First Name</label>
+							<input type="text" class="form-control" id="firstNameNew" name="firstNameNew" value="<%=firstNameNew%>">
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="lastName">Last Name</label>
-							<input type="text" class="form-control" id="lastName" name="lastName" value="<%=lastNameNew%>">
+							<label for="lastNameNew">Last Name</label>
+							<input type="text" class="form-control" id="lastNameNew" name="lastNameNew" value="<%=lastNameNew%>">
 						</div>
 					</div>
 					<div class="col-md-12">
@@ -85,12 +84,11 @@
 </div>
 
 <%
-	id = request.getParameter("id");
 	firstNameNew = request.getParameter("firstNameNew");
 	lastNameNew = request.getParameter("lastNameNew");
 	email = request.getParameter("email");
 
-	if (companyName != null && !companyName.trim().equals("") && id != null && !id.trim().equals("")) {
+	if (id != null && !id.trim().equals("") && firstNameNew != null && !firstNameNew.trim().equals("")) {
 		boolean flag = false;
 		try {
 			flag = data.updateUserBasic(firstNameNew, lastNameNew, email, id);

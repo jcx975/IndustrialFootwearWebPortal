@@ -1,4 +1,3 @@
-
 $( document ).ready( function()
 {
 	$( "#edit-button" ).on( "click", editProfile );

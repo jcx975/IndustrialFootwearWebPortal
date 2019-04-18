@@ -299,7 +299,7 @@ public class DataConnect {
 	//TODO: Change program
 	public boolean updateProgram(Program program) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("update footwearportal.program " +
-				"SET programName = ?, programDesc = ?, discount = ?" +
+				"SET programName = ?, programDesc = ?, discount = ? " +
 				"WHERE programID = ?");
 		lookup.setString(1, program.getProgramName());
 		lookup.setString(2, program.getProgramDesc());
