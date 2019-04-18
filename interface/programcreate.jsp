@@ -76,19 +76,30 @@
 					<p id="currentDiscount"></p>
 				</div>
 				</form>
-				</div>
-	</div>
+		</div>
+</div>
+<%@include file="../include/footer.jsp" %>
 <%
 		String id = "Htest";
 //talk to Tim to see how ID's are incremented. also how to get program and company ID's
 
-		String programName = request.getParameter("programName");
-		String programDesc = request.getParameter("programDesc");
+		String name = request.getParameter("programName");
+		String desc = request.getParameter("programDesc");
 		String discount = request.getParameter("discount");
-					Program prog = new Program(id,programName,programDesc,discount);
+
 		
 		DataConnect DBentry=new DataConnect();
 		boolean flag=DBentry.programCreate(prog);
+		
+		if (name != null && !name.trim().equals("")) {
+			DataConnect data = DataConnect.getInstance();
+			String flag = "-1";
+			try {
+				flag = data.programCreate(new Program(id, name, desc, discount));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			if (!flag.equals("-1")) {
 
 %>				
 </body>
