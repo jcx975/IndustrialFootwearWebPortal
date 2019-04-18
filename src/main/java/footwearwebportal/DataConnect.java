@@ -219,7 +219,22 @@ public class DataConnect {
 	//TODO: Delete supervisor account
 
 	//TODO: Create program
+	public String programCreate(Program program) throws SQLException {
+		String sql = "insert into footwearportal.program(companyID, programName, programDesc, discount) values (?, ?, ?, ?)";
+		PreparedStatement lookup = dbconn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		lookup.setString(1, program.getCompanyID());
+		lookup.setString(2, program.getProgramName());
+		lookup.setString(3, program.getProgramDesc());
+		lookup.setString(4, program.getDiscount());
+		//not sure where to put programid as that should be auto incremented right?
+		//talk to tim to look at for getting company and program ID's to create a program
 
+		lookup.executeUpdate();
+		System.out.println("New program: " + lookup.toString());
+		ResultSet rs = lookup.getGeneratedKeys();
+		rs.next();
+		return Integer.toString(rs.getInt(1)); // returns newly created progam id
+	}
 	//TODO: Change program
 
 	//TODO: Get list of programs under company

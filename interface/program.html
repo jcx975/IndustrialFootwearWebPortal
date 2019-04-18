@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Test Program</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="css/main.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="css/program.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="js/program.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-2">
+		<ul class="navbar-nav">
+			<li class="nav-item active">
+				<a class="nav-link" href="#">Footwear Web Portal</a>
+			</li>
+		</ul>
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item">
+				<a class="nav-link" href="#">Log out</a>
+			</li>
+		</ul>
+	</nav>
+	<div class="container mt-2 mb-5">
+		<div class="row">
+			<div class="col-md-12" id="top-buttons">
+				<a href="profiles.jsp" class="btn btn-primary">Back</a>
+				<button onclick="window.location.href='deleteprogram.jsp?id=<%=id%>'" type="button" id="delete-button" class="btn btn-danger">Delete Program</button>
+				<button type="button" id="edit-button" class="btn btn-success">Edit Program</button>
+			</div>
+			<hr>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8" id="edit-form">
+				<form class="needs-validation" novalidate action="program.jsp?id=<%=id%>" id="program-form" method="POST">
+					<input type="hidden" value="<%=id%>" name="id">
+					<h2 class="mb-3">Program information</h2>
+					<div class="mb-3 form-group">
+						<label for="programName">Program Name</label>
+						<input type="text" class="form-control" id="programName" name="programName" value="Test Program">
+					</div>
+					<div class="mb-3 form-group">
+						<label for="programDesc">Program Desc:</label>
+						<textarea class="form-control" rows="5" id="programDesc" name="programDesc">??</textarea>
+					</div>
+					<div class="form-group">
+						<label for="discount">Discount:</label>
+						<input type="text" class="form-control" id="discount" name="discount" value="5">
+					</div>
+					<input type="hidden" value="<%=id%>" name="id" />
+					<button type="submit" class="btn btn-success" formmethod="post">Submit</button>
+				</form>
+			</div>
+			<div class="col-md-4">
+					<h4>Current information:</h4>
+					<p id="currentProgramName"> Shoe prog 1</p>
+					<p id="currentProgramDesc"> ??</p>
+					<p id="currentDiscount">  5%</p>
+				</div>
+		</div>
+	</div>
+</body>
+</html>
