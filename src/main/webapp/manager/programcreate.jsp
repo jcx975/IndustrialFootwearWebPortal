@@ -51,7 +51,7 @@
 </div>
 <%@include file="../include/footer.jsp" %>
 <%
-
+		id = request.getParameter("id");
 		String name = request.getParameter("programName");
 		String desc = request.getParameter("programDesc");
 		String discount = request.getParameter("discount");
