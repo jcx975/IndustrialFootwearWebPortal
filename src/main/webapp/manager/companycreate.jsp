@@ -2,10 +2,10 @@
 		 pageEncoding="ISO-8859-1" %>
 <%@ page import="footwearwebportal.*" %>
 <%@ page import="java.sql.SQLException" %>
-<%@include file="../include/meta.jsp"%>
+<%@include file="../include/meta.jsp" %>
 <title>Edit company</title>
-<%@include file="../include/head.jsp"%>
-<%@include file="../include/header.jsp"%>
+<%@include file="../include/head.jsp" %>
+<%@include file="../include/header.jsp" %>
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 welcome-banner">
@@ -112,7 +112,7 @@
 		</form>
 	</div>
 </div>
-<%@include file="../include/footer.jsp"%>
+<%@include file="../include/footer.jsp" %>
 <%
 	String name = request.getParameter("companyName");
 	String city = request.getParameter("city");
@@ -123,15 +123,16 @@
 
 	if (name != null && !name.trim().equals("")) {
 		DataConnect data = DataConnect.getInstance();
-		boolean flag = false;
+		String flag = "-1";
 		try {
 			flag = data.profileCreate(new Company(name, city, state, email, comments));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if (flag) {%>
+		if (!flag.equals("-1")) {
+%>
 <script type="text/javascript">alert("Successfully created profile!");
-window.location.replace("profiles.jsp")</script>
+window.location.replace("company.jsp?id=<%=flag%>")</script>
 <%
 } else { %>
 <script type="text/javascript">alert("Entry Failure");</script>
