@@ -42,6 +42,7 @@ public class ProfileList extends  HttpServlet {
 			out.append("<p class=\"profile-name\">" + supervisor.getLastName() + ", " + supervisor.getFirstName() + "</p>");
 			out.append("<p>" + supervisor.getEmail() + "</p>");
 			out.append("<input type=\"hidden\" name=\"id\" value=\"" + supervisor.getUID() + "\">");
+			out.append("<input type=\"hidden\" name=\"companyID\" value=\"" + supervisor.getCompanyID() + "\">");
 			out.append("<input type=\"submit\" class=\"btn btn-primary\" value=\"View\">");
 			out.append("</div>");
 			out.append("</form>");

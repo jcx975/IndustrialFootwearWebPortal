@@ -242,14 +242,14 @@ public class DataConnect {
 	}
 
 	//Update user account basic (no password/username/group)
-	public boolean updateUserBasic(User user) throws SQLException {
+	public boolean updateUserBasic(String firstName, String lastName, String email, String UID) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("update footwearportal.user " +
 				"SET firstName = ?, lastName = ?, email = ? " +
 				"WHERE UID = ?");
-		lookup.setString(1, user.getFirstName());
-		lookup.setString(2, user.getLastName());
-		lookup.setString(3, user.getEmail());
-		lookup.setString(4, user.getUID());
+		lookup.setString(1, firstName);
+		lookup.setString(2, lastName);
+		lookup.setString(3, email);
+		lookup.setString(4, UID);
 
 		lookup.executeUpdate();
 		System.out.println("Update user basic: " + lookup.toString());
@@ -299,7 +299,7 @@ public class DataConnect {
 	//TODO: Change program
 	public boolean updateProgram(Program program) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("update footwearportal.program " +
-				"SET programName = ?, programDesc = ?, discount = ?," +
+				"SET programName = ?, programDesc = ?, discount = ?" +
 				"WHERE programID = ?");
 		lookup.setString(1, program.getProgramName());
 		lookup.setString(2, program.getProgramDesc());
