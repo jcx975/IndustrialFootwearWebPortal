@@ -44,12 +44,6 @@
 							<input type="text" class="form-control" id="discount" name ="discount">
 						</div>
 						<input type="submit" Value="Submit" ></input>
-				<div class="col-md-4">
-					<h4>Current information:</h4>
-					<p id="currentProgramName"></p>
-					<p id="currentProgramDesc"></p>
-					<p id="currentDiscount"></p>
-				</div>
 				</form>
 			</form>
 		</div>
@@ -72,7 +66,8 @@
 				e.printStackTrace();
 			}
 			if (!flag.equals("-1")) {
-%>script type="text/javascript">alert("Successfully created profile!");
+%>
+<script type="text/javascript">alert("Successfully created profile!");
 window.location.replace("program.jsp?id=<%=flag%>")</script>
 <%
 } else { %>
