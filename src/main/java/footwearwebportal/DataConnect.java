@@ -210,13 +210,74 @@ public class DataConnect {
 		return true;
 	}
 
-	//TODO: Create account for supervisor
+	//Create account for supervisor
+	public boolean supervisorCreate(Supervisor supervisor) throws SQLException {
+		String UID = userCreate(supervisor.getUser());
+		PreparedStatement lookup = dbconn.prepareStatement("insert into footwearportal.supervisor values (?, ?)");
+		lookup.setString(1, UID);
+		lookup.setString(2, supervisor.getCompanyID());
 
-	//TODO: Get list of supervisor accounts under company
+		lookup.executeUpdate();
+		System.out.println("New supervisor: " + lookup.toString());
+		return true;
+	}
 
-	//TODO: Update supervisor account
+	//Get list of supervisor accounts under company
+	ArrayList<Supervisor> supervisorProfiles(String companyID) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.supervisor where companyID = ?");
+		lookup.setString(1, companyID);
+		ResultSet rs = lookup.executeQuery();
+		ArrayList<Supervisor> supervisorResult = new ArrayList<>();
 
-	//TODO: Delete supervisor account
+		while (rs.next()) {
+			String id = rs.getString(1);
+
+			User user = getUserInfo(id);
+
+			supervisorResult.add(new Supervisor(user, companyID));
+		}
+
+		System.out.println("Get all supervisors from: " + lookup.toString());
+		return supervisorResult;
+	}
+
+	//Update user account basic (no password/username/group)
+	public boolean updateUserBasic(User user) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("update footwearportal.user " +
+				"SET firstName = ?, lastName = ?, email = ? " +
+				"WHERE UID = ?");
+		lookup.setString(1, user.getFirstName());
+		lookup.setString(2, user.getLastName());
+		lookup.setString(3, user.getEmail());
+		lookup.setString(4, user.getUID());
+
+		lookup.executeUpdate();
+		System.out.println("Update user basic: " + lookup.toString());
+		return true;
+	}
+
+	//Update user password
+	public boolean updateUserPassword(User user) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("update footwearportal.user " +
+				"SET password = ? " +
+				"WHERE UID = ?");
+
+		lookup.setString(1, Crypto.hashSHA256(user.getPassword()));
+		lookup.setString(2, user.getUID());
+
+		lookup.executeUpdate();
+		System.out.println("Update user password: " + lookup.toString());
+		return true;
+	}
+
+	public boolean deleteUser(String id) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("delete from footwearportal.user where UID = ?");
+		lookup.setString(1, id);
+
+		lookup.executeUpdate();
+		System.out.println("Delete user: " + lookup.toString());
+		return true;
+	}
 
 	//TODO: Create program
 	public String programCreate(Program program) throws SQLException {

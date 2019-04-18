@@ -32,4 +32,9 @@ public class Supervisor extends User {
 	public void setCompanyID(String companyID) {
 		this.companyID = companyID;
 	}
+
+	public User getUser(){
+		return new User(super.getUsername(), super.getPassword(),
+				super.getGroup(), super.getFirstName(), super.getLastName(), super.getEmail());
+	}
 }
