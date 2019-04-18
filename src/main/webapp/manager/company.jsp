@@ -165,7 +165,10 @@
 		<div class="col-md-6 border programs-container">
 			<div class="mb-2">
 				<h2 class="text-center">Programs</h2>
-				<button type="button" class="btn btn-primary ml-auto">Create program</button>
+				<form action="programcreate.jsp" method="GET">
+					<input type="hidden" name="id" value="<%=id%>">
+					<input type="submit" class="btn btn-primary ml-auto" value="Create program">
+				</form>
 			</div>
 			<input type="text" class="form-control" id="programSearch" placeholder="Search programs">
 			<div class="row" id="programs-list">

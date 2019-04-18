@@ -39,7 +39,7 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="lastName">Last Name</label>
-							<input type="text" class="form-control" id="lastLane" name="lastName" value="<%=lastName%>">
+							<input type="text" class="form-control" id="lastName" name="lastName" value="<%=lastName%>">
 						</div>
 					</div>
 					<div class="col-md-12">
@@ -53,8 +53,8 @@
 		</div>
 		<div class="col-md-4">
 			<h4 id="fullName"><%=firstName%> <%=lastName%></h4>
-			<p id="username"><%=username%></p>
-			<p id="email"><%=email%></p>
+			<p id="currentUsername"><%=username%></p>
+			<p id="currentEmail"><%=email%></p>
 		</div>
 	</div>
 </div>
