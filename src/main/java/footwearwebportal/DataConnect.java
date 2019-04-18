@@ -321,18 +321,21 @@ public class DataConnect {
 		String name = "";
 		String desc = "";
 		String discount = "";
+		String progID = "";
 
 		ResultSet rs = lookup.executeQuery();
 
 		while (rs.next()) {
-			id = rs.getString(1);
-			name = rs.getString(2);
-			desc = rs.getString(3);
-			discount = rs.getString(4);
+			
+			progID = rs.getString(1);
+			id = rs.getString(2);
+			name = rs.getString(3);
+			desc = rs.getString(4);
+			discount = rs.getString(5);
 		}
 
 		System.out.println("Get program: " + lookup.toString());
-		return new Program(id, name, desc,discount);
+		return new Program(progID,id, name, desc,discount);
 	}
 
 
