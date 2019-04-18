@@ -28,7 +28,7 @@
 	</div>
 <div class="container">
 		<div>
-			<form action="programcreate.jsp" method="post">
+			<form action="programcreate.jsp?id=<%=id%>" method="post">
 				<form class="needs-validation" novalidate>
 						<h2 class="mb-3">Program Information</h2>
 						<div class="mb-3 form-group">
