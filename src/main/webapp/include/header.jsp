@@ -19,7 +19,7 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-2">
     <ul class="navbar-nav">
         <li class="nav-item active">
-            <a class="nav-link" href="#">Welcome, <%=firstName%> <%=lastName%>!</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/userprofile.jsp">Welcome, <%=firstName%> <%=lastName%>!</a>
         </li>
     </ul>
     <ul class="navbar-nav ml-auto">

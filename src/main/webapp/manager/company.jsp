@@ -144,28 +144,30 @@
 		<div class="col-md-6 border programs-container">
 			<div class="mb-2">
 				<h2 class="text-center">Supervisor Accounts</h2>
-				<button type="button" class="btn btn-primary ml-auto">Create account</button>
+				<form action="supervisorcreate.jsp" method="GET">
+				<input type="hidden" name="id" value="<%=id%>">
+				<input class="btn btn-primary" type="submit" value="Create Account"></form>
 			</div>
 			<input type="text" class="form-control" id="supervisorSearch" placeholder="Search supervisors">
 			<div class="row" id="supervisors-list">
-				// put supervisors here
-				<div class="col-md-6 supervisor-container">
-					<form action="supervisor.jsp" method="GET">
-						<div class="program-profile border d-flex flex-column">
-							<p class="profile-name">Some Guy</p>
-							<p>someguy@example.com</p>
-							<input type="hidden" name="id" value="1">
-							<input type="submit" class="btn btn-primary" value="View">
-						</div>
-					</form>
-				</div>
-				//end supervisors here
+				<jsp:useBean id="company" class="footwearwebportal.ProfileList"/>
+				<%
+					ProfileList profileList = new ProfileList();
+					try {
+						out.print(profileList.generateSupervisorListHTML(id));
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				%>
 			</div>
 		</div>
 		<div class="col-md-6 border programs-container">
 			<div class="mb-2">
 				<h2 class="text-center">Programs</h2>
-				<button type="button" class="btn btn-primary ml-auto">Create program</button>
+				<form action="programcreate.jsp" method="GET">
+					<input type="hidden" name="id" value="<%=id%>">
+					<input type="submit" class="btn btn-primary ml-auto" value="Create program">
+				</form>
 			</div>
 			<input type="text" class="form-control" id="programSearch" placeholder="Search programs">
 			<div class="row" id="programs-list">
