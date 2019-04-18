@@ -1,6 +1,6 @@
 package footwearwebportal;
 
-public class User {
+public class User implements Comparable<User> {
 	private String UID, username, password, group, firstName, lastName, email;
 
 	public User(String UID, String username, String password,
@@ -99,5 +99,10 @@ public class User {
 	@Override
 	public String toString() {
 		return UID + ", " + username + ", " + password + ", " + group + ", " + firstName + ", " + lastName + ", " + email;
+	}
+
+	@Override
+	public int compareTo(User u){
+		return this.getLastName().toUpperCase().compareTo(u.getLastName().toUpperCase());
 	}
 }

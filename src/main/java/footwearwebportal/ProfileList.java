@@ -30,25 +30,23 @@ public class ProfileList extends  HttpServlet {
 		return out.toString();
 	}
 
-	public String generateProfileInfoHTML(String companyID) throws  SQLException {
+	public String generateSupervisorListHTML(String companyID) throws  SQLException {
 		StringWriter out = new StringWriter();
-		Company company = data.getCompany(companyID);
+		ArrayList<Supervisor> supervisors = data.supervisorProfiles(companyID);
+		Collections.sort(supervisors);
 
-		String companyName = company.getCompanyName();
-		String city = company.getCity();
-		String state = company.getState();
-		String email = company.getEmail();
-		String comments = company.getComments();
-
-		out.append("<p id=\"currentCompanyName\">" + companyName + "</p>");
-		if(city != null)
-			out.append("<p id=\"currentCompanyCity\">" + city + "</p>");
-		if(state != null)
-			out.append("<p id=\"currentCompanyState\">" + state + "</p>");
-		if(email != null)
-			out.append("<p id=\"currentCompanyEmail\">" + email + "</p>");
-		if(comments != null)
-			out.append("<p id=\"currentCompanyComments\">" + comments + "</p>");
+		for (Supervisor supervisor : supervisors) {
+			out.append("<div class=\"col-md-6 supervisor-container\">");
+			out.append("<form action=\"supervisor.jsp\" method=\"GET\">");
+			out.append("<div class=\"program-profile border d-flex flex-column\">");
+			out.append("<p class=\"profile-name\">" + supervisor.getLastName() + ", " + supervisor.getFirstName() + "</p>");
+			out.append("<p>" + supervisor.getEmail() + "</p>");
+			out.append("<input type=\"hidden\" name=\"id\" value=\"" + supervisor.getUID() + "\">");
+			out.append("<input type=\"submit\" class=\"btn btn-primary\" value=\"View\">");
+			out.append("</div>");
+			out.append("</form>");
+			out.append("</div>");
+		}
 
 		return out.toString();
 	}
