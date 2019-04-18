@@ -20,7 +20,7 @@
 	<div class="container mb-5">
 	<div class="row">
 		<div class="col-md-12 program-buttons-container">
-			<button onclick="window.location.href='companyjsp'" type="button" class="btn btn-lg btn-primary mt-auto">
+			<button onclick="window.location.href='company.jsp'" type="button" class="btn btn-lg btn-primary mt-auto">
 				Back
 			</button>
 			<hr>
