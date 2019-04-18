@@ -42,7 +42,7 @@
 		<div class="col-md-8" id="edit-form">
 			<form class="needs-validation" novalidate action="program.jsp?id=<%=id%>" id="company-form" method="POST">
 				<input type="hidden" value="<%=id%>" name="id">
-				<h2 class="mb-3">Program information</h2>
+				<h2 class="mb-3">Program Information</h2>
 				<div class="mb-3 form-group">
 					<label for="programName">Program Name</label>
 					<input type="text" class="form-control" id="programName" name="programName" value="<%=programName%>">
