@@ -1,26 +1,26 @@
 package footwearwebportal;
 
-public class Supervisor extends User {
+public class Supervisor extends User implements Comparable<User> {
 	private String companyID;
 
-	Supervisor(String companyID){
+	public Supervisor(String companyID){
 		super();
 		this.companyID = companyID;
 	}
 
-	Supervisor(String UID, String username, String password, String group,
+	public Supervisor(String UID, String username, String password, String group,
 			   String firstName, String lastName, String email, String companyID){
 		super(UID, username, password, group, firstName, lastName, email);
 		this.companyID = companyID;
 	}
 
-	Supervisor(String username, String password, String group,
+	public Supervisor(String username, String password, String group,
 			   String firstName, String lastName, String email, String companyID){
 		super(username, password, group, firstName, lastName, email);
 		this.companyID = companyID;
 	}
 
-	Supervisor(User user, String companyID){
+	public Supervisor(User user, String companyID){
 		super(user);
 		this.companyID = companyID;
 	}

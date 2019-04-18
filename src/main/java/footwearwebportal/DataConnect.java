@@ -211,7 +211,7 @@ public class DataConnect {
 	}
 
 	//Create account for supervisor
-	public boolean supervisorCreate(Supervisor supervisor) throws SQLException {
+	public String supervisorCreate(Supervisor supervisor) throws SQLException {
 		String UID = userCreate(supervisor.getUser());
 		PreparedStatement lookup = dbconn.prepareStatement("insert into footwearportal.supervisor values (?, ?)");
 		lookup.setString(1, UID);
@@ -219,7 +219,7 @@ public class DataConnect {
 
 		lookup.executeUpdate();
 		System.out.println("New supervisor: " + lookup.toString());
-		return true;
+		return UID;
 	}
 
 	//Get list of supervisor accounts under company
