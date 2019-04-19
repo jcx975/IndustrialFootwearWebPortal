@@ -1,6 +1,6 @@
 package footwearwebportal;
 
-public class Program {
+public class Program implements Comparable<Program> {
 	private String programID, companyID, programName, programDesc, discount;
 
 	public Program(String programID, String companyID, String programName, String programDesc, String discount) {
@@ -56,5 +56,10 @@ public class Program {
 
 	public void setDiscount(String discount) {
 		this.discount = discount;
+	}
+
+	@Override
+	public int compareTo(Program p){
+		return this.getProgramName().toUpperCase().compareTo(p.getProgramName().toUpperCase());
 	}
 }

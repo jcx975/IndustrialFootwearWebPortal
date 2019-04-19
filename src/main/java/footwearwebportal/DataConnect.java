@@ -1,6 +1,5 @@
 package footwearwebportal;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,7 +44,7 @@ public class DataConnect {
 	}
 
 	// takes username and password and returns true if combination exists in database
-	public String userLogin(String user, String pass) throws Exception {
+	String userLogin(String user, String pass) throws Exception {
 		PreparedStatement lookup = dbconn
 				.prepareStatement("SELECT password, UID from footwearportal.user WHERE username = ?");
 		lookup.setString(1, user);
@@ -279,7 +278,7 @@ public class DataConnect {
 		return true;
 	}
 
-	//TODO: Create program
+	//Create program
 	public String programCreate(Program program) throws SQLException {
 		String sql = "insert into footwearportal.program(companyID, programName, programDesc, discount) values (?, ?, ?, ?)";
 		PreparedStatement lookup = dbconn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -296,7 +295,7 @@ public class DataConnect {
 		return Integer.toString(rs.getInt(1)); // returns newly created progam id
 	}
 	
-	//TODO: Change program
+	//Change program
 	public boolean updateProgram(Program program) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("update footwearportal.program " +
 				"SET programName = ?, programDesc = ?, discount = ? " +
@@ -311,9 +310,27 @@ public class DataConnect {
 		return true;
 	}
 
-	//TODO: Get list of programs under company
+	//Get list of programs under company
+	ArrayList<Program> programList(String companyID) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.program where companyID = ?");
+		lookup.setString(1, companyID);
+		ResultSet rs = lookup.executeQuery();
+		ArrayList<Program> programResult = new ArrayList<>();
 
-	//TODO: Get program details
+		while (rs.next()) {
+			String programID = rs.getString(1);
+			String programName = rs.getString(3);
+			String programDesc = rs.getString(4);
+			String discount = rs.getString(5);
+
+			programResult.add(new Program(programID, companyID, programName, programDesc, discount));
+		}
+
+		System.out.println("Get all programs from: " + lookup.toString());
+		return programResult;
+	}
+
+	//Get program details
 	public Program getProgram(String programID) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.program where programID = ?");
 		lookup.setString(1, programID);
@@ -326,7 +343,6 @@ public class DataConnect {
 		ResultSet rs = lookup.executeQuery();
 
 		while (rs.next()) {
-			
 			progID = rs.getString(1);
 			id = rs.getString(2);
 			name = rs.getString(3);
@@ -335,7 +351,7 @@ public class DataConnect {
 		}
 
 		System.out.println("Get program: " + lookup.toString());
-		return new Program(progID,id, name, desc,discount);
+		return new Program(progID, id, name, desc, discount);
 	}
 
 

@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ProfileList extends  HttpServlet {
-	private DataConnect data = DataConnect.getInstance();
 
-	public String generateListHTML() throws SQLException {
+	public static String generateListHTML() throws SQLException {
+		DataConnect data = DataConnect.getInstance();
+
 		StringWriter out = new StringWriter();
 		ArrayList<Company> companyData = data.allCompanyProfiles();
 		Collections.sort(companyData);
@@ -30,7 +31,9 @@ public class ProfileList extends  HttpServlet {
 		return out.toString();
 	}
 
-	public String generateSupervisorListHTML(String companyID) throws  SQLException {
+	public static String generateSupervisorListHTML(String companyID) throws  SQLException {
+		DataConnect data = DataConnect.getInstance();
+
 		StringWriter out = new StringWriter();
 		ArrayList<Supervisor> supervisors = data.supervisorProfiles(companyID);
 		Collections.sort(supervisors);
@@ -43,6 +46,29 @@ public class ProfileList extends  HttpServlet {
 			out.append("<p>" + supervisor.getEmail() + "</p>");
 			out.append("<input type=\"hidden\" name=\"id\" value=\"" + supervisor.getUID() + "\">");
 			out.append("<input type=\"hidden\" name=\"companyID\" value=\"" + supervisor.getCompanyID() + "\">");
+			out.append("<input type=\"submit\" class=\"btn btn-primary\" value=\"View\">");
+			out.append("</div>");
+			out.append("</form>");
+			out.append("</div>");
+		}
+
+		return out.toString();
+	}
+
+	public static String generateProgramListHTML(String companyID) throws  SQLException {
+		DataConnect data = DataConnect.getInstance();
+
+		StringWriter out = new StringWriter();
+		ArrayList<Program> programs = data.programList(companyID);
+		Collections.sort(programs);
+
+		for (Program program : programs) {
+			out.append("<div class=\"col-md-6 supervisor-container\">");
+			out.append("<form action=\"program.jsp\" method=\"GET\">");
+			out.append("<div class=\"program-profile border d-flex flex-column\">");
+			out.append("<p class=\"profile-name\">" + program.getProgramName() + "</p>");
+			out.append("<p>" + program.getProgramDesc() + "</p>");
+			out.append("<input type=\"hidden\" name=\"id\" value=\"" + program.getProgramID() + "\">");
 			out.append("<input type=\"submit\" class=\"btn btn-primary\" value=\"View\">");
 			out.append("</div>");
 			out.append("</form>");

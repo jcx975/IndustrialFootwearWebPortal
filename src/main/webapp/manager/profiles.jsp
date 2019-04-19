@@ -39,9 +39,8 @@
 	<div class="row" id="profiles-list">
 		<jsp:useBean id="profiles" class="footwearwebportal.ProfileList"/>
 		<%
-			ProfileList profileList = new ProfileList();
 			try {
-				out.print(profileList.generateListHTML());
+				out.print(ProfileList.generateListHTML());
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

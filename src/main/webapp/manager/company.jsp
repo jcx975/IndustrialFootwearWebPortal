@@ -1,5 +1,6 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="footwearwebportal.*" %>
+<%@ page import="sun.java2d.cmm.Profile" %>
 <%
 
 	String id = request.getParameter("id");
@@ -152,9 +153,8 @@
 			<div class="row" id="supervisors-list">
 				<jsp:useBean id="company" class="footwearwebportal.ProfileList"/>
 				<%
-					ProfileList profileList = new ProfileList();
 					try {
-						out.print(profileList.generateSupervisorListHTML(id));
+						out.print(ProfileList.generateSupervisorListHTML(id));
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
@@ -171,7 +171,13 @@
 			</div>
 			<input type="text" class="form-control" id="programSearch" placeholder="Search programs">
 			<div class="row" id="programs-list">
-				
+				<%
+					try {
+						out.print(ProfileList.generateProgramListHTML(id));
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				%>
 			</div>
 		</div>
 	</div>

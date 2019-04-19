@@ -31,7 +31,7 @@
 	<div class="row">
 		<div class="col-md-12" id="top-buttons">
 			<a href="company.jsp?id=<%=companyID%>" class="btn btn-primary">Back</a>
-			<button onclick="window.location.href='deleteprogram.jsp?id=<%=id%>'" type="button" id="delete-button" class="btn btn-danger">Delete Profile</button>
+			<button onclick="window.location.href='deleteprogram.jsp?id=<%=id%>'" type="button" id="delete-button" class="btn btn-danger">Delete Program</button>
 			<button type="button" id="edit-button" class="btn btn-success">Edit Program</button>
 		</div>
 		<hr>
@@ -82,8 +82,8 @@
 			e.printStackTrace();
 		}
 		if (flag) {%>
-<script type="text/javascript">alert("Successfully update profile!");
-window.location.replace("program.jsp?id=<%=id%>&companyID=<%=companyID%>")</script>
+<script type="text/javascript">alert("Successfully update program!");
+window.location.replace("program.jsp?id=<%=id%>")</script>
 <%
 } else { %>
 <script type="text/javascript">alert("Update Failure");</script>
