@@ -17,9 +17,9 @@
 <div class="container mb-5">
 	<div class="row">
 		<div class="col-md-12 company-buttons-container">
-			<button onclick="window.location.href='company.jsp?id=<%=id%>'" type="button" id="delete-button" class="btn btn-danger">Back</button>
-			<hr>
+			<button onclick="window.location.href='company.jsp?id=<%=id%>'" type="button" class="btn btn-primary">Back</button>
 		</div>
+		<hr>
 	</div>
 </div>
 <div class="container">
@@ -33,7 +33,7 @@
 				</div>
 				<div class="mb-3 form-group">
 					<label for="companyName">Password</label>
-					<input type="text" class="form-control" id="password" name="password">
+					<input type="password" class="form-control" id="password" name="password">
 				</div>
 				<div class="mb-3 form-group">
 					<label for="firstName">First name</label>

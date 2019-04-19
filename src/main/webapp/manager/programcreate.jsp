@@ -20,15 +20,16 @@
 	<div class="container mb-5">
 	<div class="row">
 		<div class="col-md-12 program-buttons-container">
-			<button onclick="window.location.href='company.jsp'" type="button" class="btn btn-lg btn-primary mt-auto">
+			<button onclick="window.location.href='company.jsp?id=<%=id%>'" type="button" class="btn btn-primary">
 				Back
 			</button>
-			<hr>
 		</div>
+		<hr>
+	</div>
 	</div>
 <div class="container">
 		<div>
-			<form action="programcreate.jsp?id=<%=id%>" method="post">
+			<form action="programcreate.jsp" method="post">
 				<form class="needs-validation" novalidate>
 						<h2 class="mb-3">Program Information</h2>
 						<div class="mb-3 form-group">
@@ -41,13 +42,13 @@
 						</div>
 						<div class="mb-3 form-group">
 							<label for="discount">Discount:</label>
-							<input type="text" class="form-control" id="discount" name ="discount">
+							<input type="number" class="form-control" id="discount" name ="discount">
 						</div>
-						<input type="submit" Value="Submit" ></input>
+						<input type="hidden" value="<%=id%>" name="id">
+						<input type="submit" class="btn btn-lg btn-primary btn-block mb-3" value="Submit">
 				</form>
 			</form>
 		</div>
-	</div>
 </div>
 <%@include file="../include/footer.jsp" %>
 <%

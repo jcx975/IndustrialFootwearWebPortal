@@ -30,7 +30,7 @@
 <div class="container mt-2 mb-5">
 	<div class="row">
 		<div class="col-md-12" id="top-buttons">
-			<a href="program.jsp" class="btn btn-primary">Back</a>
+			<a href="company.jsp?id=<%=companyID%>" class="btn btn-primary">Back</a>
 			<button onclick="window.location.href='deleteprogram.jsp?id=<%=id%>'" type="button" id="delete-button" class="btn btn-danger">Delete Profile</button>
 			<button type="button" id="edit-button" class="btn btn-success">Edit Program</button>
 		</div>
@@ -40,8 +40,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-8" id="edit-form">
-			<form class="needs-validation" novalidate action="program.jsp?id=<%=id%>" id="company-form" method="POST">
-				<input type="hidden" value="<%=id%>" name="id">
+			<form class="needs-validation" novalidate action="program.jsp?id=<%=id%>&companyID=<%=companyID%>" id="company-form" method="POST">
 				<h2 class="mb-3">Program Information</h2>
 				<div class="mb-3 form-group">
 					<label for="programName">Program Name</label>
@@ -55,7 +54,6 @@
 					<label for="discount">Discount:</label>
 					<input type="text" class="form-control" id="discount" name="discount" value="<%=discount%>">
 				</div>
-				<input type="hidden" value="<%=id%>" name="id" />
 				<button type="submit" class="btn btn-success" formmethod="post">Submit</button>
 			</form>
 		</div>
@@ -85,7 +83,7 @@
 		}
 		if (flag) {%>
 <script type="text/javascript">alert("Successfully update profile!");
-window.location.replace("program.jsp?id=<%=id%>")</script>
+window.location.replace("program.jsp?id=<%=id%>&companyID=<%=companyID%>")</script>
 <%
 } else { %>
 <script type="text/javascript">alert("Update Failure");</script>

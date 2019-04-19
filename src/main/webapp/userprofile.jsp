@@ -17,11 +17,13 @@
 		</div>
 	</div>
 </div>
-<div class="container">
-	<div class="col-md-12" id="top-buttons">
-		<button type="button" id="edit-button" class="btn btn-success">Edit Profile</button>
+<div class="container mt-2 mb-5">
+	<div class="row">
+		<div class="col-md-12" id="top-buttons">
+			<button type="button" id="edit-button" class="btn btn-success">Edit Profile</button>
+		</div>
+		<hr>
 	</div>
-	<hr>
 </div>
 <div class="container">
 	<div class="row">
@@ -58,3 +60,4 @@
 		</div>
 	</div>
 </div>
+<%@include file="include/footer.jsp"%>

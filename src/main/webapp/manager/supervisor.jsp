@@ -31,22 +31,18 @@
 <%@include file="../include/meta.jsp"%>
 <title><%=companyName%> supervisor <%=firstNameNew%> <%=lastNameNew%></title>
 <%@include file="../include/head.jsp"%>
-<link rel="stylesheet" type="text/css" media="screen" href="../css/userprofile.css">
+<link rel="stylesheet" type="text/css" media="screen" href="../css/supervisor.css">
 <script src="../js/supervisor.js"></script>
 <%@include file="../include/header.jsp"%>
-<div class="container">
+<div class="container mt-2 mb-5">
 	<div class="row">
-		<div class="col-md-12 welcome-banner">
-			<h1 class="display-2">Profile</h1>
+		<div class="col-md-12" id="top-buttons">
+			<a href="company.jsp?id=<%=companyID%>" class="btn btn-primary">Back</a>
+			<button onclick="window.location.href='deletesupervisor.jsp?id=<%=id%>'" type="button" id="delete-button" class="btn btn-danger">Delete Supervisor</button>
+			<button type="button" id="edit-button" class="btn btn-success">Edit Supervisor</button>
 		</div>
+		<hr>
 	</div>
-</div>
-<div class="container">
-	<div class="col-md-12" id="top-buttons">
-		<a href="company.jsp?id=<%=companyID%>" class="btn btn-primary">Back</a>
-		<button type="button" id="edit-button" class="btn btn-success">Edit Supervisor</button>
-	</div>
-	<hr>
 </div>
 <div class="container">
 	<div class="row">
@@ -72,6 +68,7 @@
 							<input type="email" class="form-control" id="email" name="email" value="<%=email%>">
 						</div>
 					</div>
+					<input type="submit" class="btn btn-success" value="Submit">
 				</div>
 			</form>
 		</div>
@@ -82,7 +79,7 @@
 		</div>
 	</div>
 </div>
-
+<%@include file="../include/footer.jsp"%>
 <%
 	firstNameNew = request.getParameter("firstNameNew");
 	lastNameNew = request.getParameter("lastNameNew");
@@ -97,7 +94,7 @@
 		}
 		if (flag) {%>
 <script type="text/javascript">alert("Successfully updated supervisor!");
-window.location.replace("supervisor.jsp?id=<%=id%>")</script>
+window.location.replace("supervisor.jsp?id=<%=id%>&companyID=<%=companyID%>")</script>
 <%
 } else { %>
 <script type="text/javascript">alert("Update Failure");</script>
