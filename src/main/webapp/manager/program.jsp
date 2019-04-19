@@ -2,7 +2,7 @@
 <%@ page import="footwearwebportal.*" %>
 <%
 
-	String id = request.getParameter("id");
+	String programID = request.getParameter("programID");
 	String companyID = "";
 	String programName = "";
 	String programDesc = "";
@@ -11,7 +11,7 @@
 	DataConnect data = DataConnect.getInstance();
 
 	try {
-		Program prog = data.getProgram(id);
+		Program prog = data.getProgram(programID);
 		companyID = prog.getCompanyID();
 		programName = prog.getProgramName();
 		programDesc = prog.getProgramDesc();
@@ -31,7 +31,11 @@
 	<div class="row">
 		<div class="col-md-12" id="top-buttons">
 			<a href="company.jsp?id=<%=companyID%>" class="btn btn-primary">Back</a>
-			<button onclick="window.location.href='deleteprogram.jsp?id=<%=id%>'" type="button" id="delete-button" class="btn btn-danger">Delete Program</button>
+			<form class="needs-validation" novalidate action="deleteprogram.jsp" id="delete-form" method="POST">
+				<input type="hidden" name="companyID" value="<%=companyID%>">
+				<input type="hidden" name="programID" value="<%=programID%>">
+				<button type="submit" class="btn btn-primary mt-auto" formmethod="post">Delete Program</button>
+			</form>
 			<button type="button" id="edit-button" class="btn btn-success">Edit Program</button>
 		</div>
 		<hr>
@@ -40,7 +44,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-8" id="edit-form">
-			<form class="needs-validation" novalidate action="program.jsp?id=<%=id%>&companyID=<%=companyID%>" id="company-form" method="POST">
+			<form class="needs-validation" novalidate action="program.jsp?id=<%=programID%>&companyID=<%=companyID%>" id="company-form" method="POST">
 				<h2 class="mb-3">Program Information</h2>
 				<div class="mb-3 form-group">
 					<label for="programName">Program Name</label>
@@ -67,23 +71,23 @@
 <%@include file="../include/footer.jsp"%>
 
 <%
-	id =  request.getParameter("id");
+	programID =  request.getParameter("programID");
 	programName = request.getParameter("programName");
 	programDesc = request.getParameter("programDesc");
 	discount = request.getParameter("discount");
 
 
 
-	if (programName != null && !programName.trim().equals("") && id != null && !id.trim().equals("")) {
+	if (programName != null && !programName.trim().equals("") && programID != null && !programID.trim().equals("")) {
 		boolean flag = false;
 		try {
-			flag = data.updateProgram(new Program(id,companyID, programName, programDesc, discount));
+			flag = data.updateProgram(new Program(programID,companyID, programName, programDesc, discount));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		if (flag) {%>
 <script type="text/javascript">alert("Successfully update program!");
-window.location.replace("program.jsp?id=<%=id%>")</script>
+window.location.replace("program.jsp?programID=<%=programID%>")</script>
 <%
 } else { %>
 <script type="text/javascript">alert("Update Failure");</script>

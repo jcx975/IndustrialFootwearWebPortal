@@ -2,12 +2,11 @@
 <%@ page import="footwearwebportal.*" %>
 
 <%
-	String id = request.getParameter("id");
+	String supervisorID = request.getParameter("supervisorID");
 	String companyID = request.getParameter("companyID");
 
 	String companyName = "";
 	String username = "";
-	String password = "";
 	String firstNameNew = "";
 	String lastNameNew = "";
 	String email = "";
@@ -16,10 +15,9 @@
 
 	try {
 		Company company = data.getCompany(companyID);
-		User supervisor = data.getUserInfo(id);
+		User supervisor = data.getUserInfo(supervisorID);
 		companyName = company.getCompanyName();
 		username = supervisor.getUsername();
-		password = supervisor.getPassword();
 		firstNameNew = supervisor.getFirstName();
 		lastNameNew = supervisor.getLastName();
 		email = supervisor.getEmail();
@@ -38,7 +36,11 @@
 	<div class="row">
 		<div class="col-md-12" id="top-buttons">
 			<a href="company.jsp?id=<%=companyID%>" class="btn btn-primary">Back</a>
-			<button onclick="window.location.href='deletesupervisor.jsp?id=<%=id%>'" type="button" id="delete-button" class="btn btn-danger">Delete Supervisor</button>
+			<form class="needs-validation" novalidate action="deletesupervisor.jsp" id="delete-form" method="POST">
+				<input type="hidden" name="companyID" value="<%=companyID%>">
+				<input type="hidden" name="supervisorID" value="<%=supervisorID%>">
+				<button type="submit" class="btn btn-primary mt-auto" formmethod="post">Delete Supervisor</button>
+			</form>
 			<button type="button" id="edit-button" class="btn btn-success">Edit Supervisor</button>
 		</div>
 		<hr>
@@ -47,7 +49,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-8" id="edit-form">
-			<form class="needs-validation" novalidate action="supervisor.jsp?id=<%=id%>&companyID=<%=companyID%>" id="profile-form" method="POST">
+			<form class="needs-validation" novalidate action="supervisor.jsp?id=<%=supervisorID%>&companyID=<%=companyID%>" id="profile-form" method="POST">
 				<h2 class="mb-3">User Information</h2>
 				<div class="row">
 					<div class="col-md-6">
@@ -85,16 +87,16 @@
 	lastNameNew = request.getParameter("lastNameNew");
 	email = request.getParameter("email");
 
-	if (id != null && !id.trim().equals("") && firstNameNew != null && !firstNameNew.trim().equals("")) {
+	if (supervisorID != null && !supervisorID.trim().equals("") && firstNameNew != null && !firstNameNew.trim().equals("")) {
 		boolean flag = false;
 		try {
-			flag = data.updateUserBasic(firstNameNew, lastNameNew, email, id);
+			flag = data.updateUserBasic(firstNameNew, lastNameNew, email, supervisorID);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		if (flag) {%>
 <script type="text/javascript">alert("Successfully updated supervisor!");
-window.location.replace("supervisor.jsp?id=<%=id%>&companyID=<%=companyID%>")</script>
+window.location.replace("supervisor.jsp?supervisorID=<%=supervisorID%>&companyID=<%=companyID%>")</script>
 <%
 } else { %>
 <script type="text/javascript">alert("Update Failure");</script>

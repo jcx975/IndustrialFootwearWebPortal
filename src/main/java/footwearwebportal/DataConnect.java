@@ -240,6 +240,17 @@ public class DataConnect {
 		return supervisorResult;
 	}
 
+	public boolean deleteSupervisor(String UID, String companyID) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("delete from footwearportal.supervisor where UID = ? and companyID = ?");
+		lookup.setString(1, UID);
+		lookup.setString(2, companyID);
+
+		lookup.executeUpdate();
+		System.out.println("Delete supervisor: " + lookup.toString());
+		deleteUser(UID);
+		return true;
+	}
+
 	//Update user account basic (no password/username/group)
 	public boolean updateUserBasic(String firstName, String lastName, String email, String UID) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("update footwearportal.user " +
@@ -355,5 +366,13 @@ public class DataConnect {
 	}
 
 
-	//TODO: Delete program
+	//Delete program
+	public boolean deleteProgram(String id) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("delete from footwearportal.program where programID = ?");
+		lookup.setString(1, id);
+
+		lookup.executeUpdate();
+		System.out.println("Delete program: " + lookup.toString());
+		return true;
+	}
 }

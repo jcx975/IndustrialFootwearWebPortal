@@ -44,7 +44,7 @@ public class ProfileList extends  HttpServlet {
 			out.append("<div class=\"program-profile border d-flex flex-column\">");
 			out.append("<p class=\"profile-name\">" + supervisor.getLastName() + ", " + supervisor.getFirstName() + "</p>");
 			out.append("<p>" + supervisor.getEmail() + "</p>");
-			out.append("<input type=\"hidden\" name=\"id\" value=\"" + supervisor.getUID() + "\">");
+			out.append("<input type=\"hidden\" name=\"supervisorID\" value=\"" + supervisor.getUID() + "\">");
 			out.append("<input type=\"hidden\" name=\"companyID\" value=\"" + supervisor.getCompanyID() + "\">");
 			out.append("<input type=\"submit\" class=\"btn btn-primary\" value=\"View\">");
 			out.append("</div>");
@@ -68,7 +68,7 @@ public class ProfileList extends  HttpServlet {
 			out.append("<div class=\"program-profile border d-flex flex-column\">");
 			out.append("<p class=\"profile-name\">" + program.getProgramName() + "</p>");
 			out.append("<p>" + program.getProgramDesc() + "</p>");
-			out.append("<input type=\"hidden\" name=\"id\" value=\"" + program.getProgramID() + "\">");
+			out.append("<input type=\"hidden\" name=\"programID\" value=\"" + program.getProgramID() + "\">");
 			out.append("<input type=\"submit\" class=\"btn btn-primary\" value=\"View\">");
 			out.append("</div>");
 			out.append("</form>");
