@@ -1,4 +1,7 @@
-package footwearwebportal;
+package footwearwebportal.servlet;
+
+import footwearwebportal.DataConnect;
+import footwearwebportal.User;
 
 import java.io.*;
 import java.sql.SQLException;
@@ -7,7 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 @WebServlet("/login")
-public class ServletLogin extends HttpServlet
+public class Login extends HttpServlet
 {
 	public void doPost(HttpServletRequest request,
 					  HttpServletResponse response) throws IOException, ServletException {

@@ -1,4 +1,4 @@
-<%@ page import="footwearwebportal.ProfileList" %>
+<%@ page import="footwearwebportal.servlet.ListGen" %>
 <%@ page import="java.sql.SQLException" %>
 <%@include file="../include/meta.jsp"%>
 <title>Company Profiles</title>
@@ -37,10 +37,10 @@
 		</div>
 	</div>
 	<div class="row" id="profiles-list">
-		<jsp:useBean id="profiles" class="footwearwebportal.ProfileList"/>
+		<jsp:useBean id="profiles" class="footwearwebportal.servlet.ListGen"/>
 		<%
 			try {
-				out.print(ProfileList.generateListHTML());
+				out.print(ListGen.generateListHTML());
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

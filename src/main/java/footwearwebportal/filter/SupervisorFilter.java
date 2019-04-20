@@ -1,4 +1,7 @@
-package footwearwebportal;
+package footwearwebportal.filter;
+
+import footwearwebportal.DataConnect;
+import footwearwebportal.User;
 
 import java.io.IOException;
 import java.sql.SQLException;

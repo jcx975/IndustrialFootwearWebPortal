@@ -1,13 +1,16 @@
-package footwearwebportal;
+package footwearwebportal.servlet;
 
-import javax.servlet.http.*;
-import java.io.IOException;
+import footwearwebportal.Company;
+import footwearwebportal.DataConnect;
+import footwearwebportal.Program;
+import footwearwebportal.Supervisor;
+
 import java.io.StringWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ProfileList extends  HttpServlet {
+public class ListGen {
 
 	public static String generateListHTML() throws SQLException {
 		DataConnect data = DataConnect.getInstance();

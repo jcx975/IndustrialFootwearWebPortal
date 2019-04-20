@@ -1,4 +1,7 @@
-package footwearwebportal;
+package footwearwebportal.filter;
+
+import footwearwebportal.DataConnect;
+import footwearwebportal.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,11 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class ManagerFilter implements Filter {
+public class EmployeeFilter implements Filter {
 
 	public void init(FilterConfig fConfig) {
 		ServletContext context = fConfig.getServletContext();
-		System.out.println("ManagerFilter initialized");
+		System.out.println("EmplyoeeFilter initialized");
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -38,7 +41,7 @@ public class ManagerFilter implements Filter {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			if (user.getGroup().equals("manager"))
+			if (user.getGroup().equals("employee"))
 				chain.doFilter(request, response); // pass the request along the filter chain
 			else {
 				System.out.println("Unauthorized access request");

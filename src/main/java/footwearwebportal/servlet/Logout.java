@@ -1,4 +1,4 @@
-package footwearwebportal;
+package footwearwebportal.servlet;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import javax.servlet.http.*;
  * Servlet implementation class LogoutServlet
  */
 @WebServlet("/logout")
-public class ServletLogout extends HttpServlet {
+public class Logout extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html");

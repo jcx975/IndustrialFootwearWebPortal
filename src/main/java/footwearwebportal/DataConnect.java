@@ -17,7 +17,7 @@ public class DataConnect {
 	}
 
 	// Establish connection to MySQL server
-	void newConnection() {
+	public boolean newConnection() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 
@@ -36,6 +36,7 @@ public class DataConnect {
 		} catch (Exception err) {
 			System.out.println(Arrays.toString(err.getStackTrace()));
 		}
+		return true;
 	}
 
 	// close database connection
@@ -44,7 +45,7 @@ public class DataConnect {
 	}
 
 	// takes username and password and returns true if combination exists in database
-	String userLogin(String user, String pass) throws Exception {
+	public String userLogin(String user, String pass) throws Exception {
 		PreparedStatement lookup = dbconn
 				.prepareStatement("SELECT password, UID from footwearportal.user WHERE username = ?");
 		lookup.setString(1, user);
@@ -121,7 +122,7 @@ public class DataConnect {
 	}
 
 	// return arraylist<companydata> containing all company profiles in database
-	ArrayList<Company> allCompanyProfiles() throws SQLException {
+	public ArrayList<Company> allCompanyProfiles() throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.company");
 		ResultSet rs = lookup.executeQuery();
 		ArrayList<Company> companyResult = new ArrayList<>();
@@ -222,7 +223,7 @@ public class DataConnect {
 	}
 
 	//Get list of supervisor accounts under company
-	ArrayList<Supervisor> supervisorProfiles(String companyID) throws SQLException {
+	public ArrayList<Supervisor> supervisorProfiles(String companyID) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.supervisor where companyID = ?");
 		lookup.setString(1, companyID);
 		ResultSet rs = lookup.executeQuery();
@@ -321,7 +322,7 @@ public class DataConnect {
 	}
 
 	//Get list of programs under company
-	ArrayList<Program> programList(String companyID) throws SQLException {
+	public ArrayList<Program> programList(String companyID) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.program where companyID = ?");
 		lookup.setString(1, companyID);
 		ResultSet rs = lookup.executeQuery();
