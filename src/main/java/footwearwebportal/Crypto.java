@@ -1,9 +1,7 @@
 package footwearwebportal;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
-import sun.plugin2.message.Message;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;

@@ -1,6 +1,7 @@
 
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="footwearwebportal.*" %>
+<%@ page import="footwearwebportal.servlet.*" %>
 
 <%
 	String UID = (String) request.getSession(false).getAttribute("UID");
@@ -75,6 +76,21 @@
 					</div>
 				</div>
 			</form>
+
+			<form class="needs-validation" novalidate action="userprofile.jsp" id="password-form" method="post">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="oldPassword">Old password</label>
+						<input type="password" class="form-control" id="oldPassword" name="oldPassword" value="">
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="newPassword">New password</label>
+						<input type="password" class="form-control" id="newPassword" name="newPassword" value="">
+					</div>
+				</div>
+			</form>
 		</div>
 		<div class="col-md-4">
 			<h4 id="fullName"><%=firstNameNew%> <%=lastNameNew%></h4>
@@ -90,7 +106,8 @@
 	lastNameNew = request.getParameter("lastNameNew");
 	email = request.getParameter("email");
 
-	if (UID != null && !UID.trim().equals("") && firstNameNew != null && !firstNameNew.trim().equals("")) {
+	if (ListGen.checkRequest(UID) && ListGen.checkRequest(firstNameNew)
+			&& ListGen.checkRequest(lastNameNew) && ListGen.checkRequest(email)) {
 		boolean flag = false;
 		try {
 			flag = data.updateUserBasic(firstNameNew, lastNameNew, email, UID);
@@ -104,4 +121,28 @@ window.location.replace("userprofile.jsp")</script>
 } else { %>
 <script type="text/javascript">alert("Update Failure");</script>
 <% }
-}%>
+}
+
+	String oldPassword = request.getParameter("oldPassword");
+	String newPassword = request.getParameter("newPassword");
+	if (ListGen.checkRequest(UID) && ListGen.checkRequest(oldPassword) && ListGen.checkRequest(newPassword)) {
+		String rightPassword;
+		boolean flag = false;
+		try {
+			rightPassword = data.userLogin(username, oldPassword);
+			if(rightPassword.equals(UID)){
+				flag = data.updateUserPassword(UID, newPassword);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (flag) {%>
+<script type="text/javascript">alert("Successfully updated user password!");
+window.location.replace("userprofile.jsp")</script>
+<%
+} else { %>
+<script type="text/javascript">alert("Update Failure");</script>
+<% }
+}
+
+%>

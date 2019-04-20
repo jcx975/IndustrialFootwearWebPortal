@@ -80,4 +80,8 @@ public class ListGen {
 
 		return out.toString();
 	}
+
+	public static boolean checkRequest(String input){
+		return (input != null && !input.trim().equals(""));
+	}
 }

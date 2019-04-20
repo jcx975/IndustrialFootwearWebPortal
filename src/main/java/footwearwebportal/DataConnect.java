@@ -44,7 +44,7 @@ public class DataConnect {
 		dbconn.close();
 	}
 
-	// takes username and password and returns true if combination exists in database
+	// takes username and password and returns UID if combination exists in database, else returns -1
 	public String userLogin(String user, String pass) throws Exception {
 		PreparedStatement lookup = dbconn
 				.prepareStatement("SELECT password, UID from footwearportal.user WHERE username = ?");
@@ -267,13 +267,13 @@ public class DataConnect {
 	}
 
 	//Update user password
-	public boolean updateUserPassword(User user) throws SQLException {
+	public boolean updateUserPassword(String UID, String password) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("update footwearportal.user " +
 				"SET password = ? " +
 				"WHERE UID = ?");
 
-		lookup.setString(1, Crypto.hashSHA256(user.getPassword()));
-		lookup.setString(2, user.getUID());
+		lookup.setString(1, Crypto.hashSHA256(password));
+		lookup.setString(2, UID);
 
 		lookup.executeUpdate();
 		System.out.println("Update user password: " + lookup.toString());
