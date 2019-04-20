@@ -40,20 +40,20 @@ public class ServletLogin extends HttpServlet
 			User user = new User();
 			try {
 				user = data.getUserInfo(flag);
-				newSession.setAttribute("user", user);
+				newSession.setAttribute("UID", user.getUID());
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 
 			switch(user.getGroup()){
 				case "manager":
-					response.sendRedirect("manager/retailmanager.jsp");
+					response.sendRedirect("manager");
 					break;
 				case "supervisor":
-					response.sendRedirect("supervisor/supervisor.jsp");
+					response.sendRedirect("supervisor");
 					break;
 				case "employee":
-					response.sendRedirect("employee/employee.jsp");
+					response.sendRedirect("employee");
 					break;
 				default:
 					authFail(request, response);

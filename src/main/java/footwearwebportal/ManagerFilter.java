@@ -1,6 +1,7 @@
 package footwearwebportal;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -28,9 +29,15 @@ public class ManagerFilter implements Filter {
 
 		HttpSession session = req.getSession(false);
 
-		//TODO: also authenticate based on user group
-		if (session != null && session.getAttribute("user") != null) {   //checking whether the session exists
-			User user = (User) session.getAttribute("user");
+		//also authenticate based on user group
+		if (session != null && session.getAttribute("UID") != null) {   //checking whether the session exists
+			DataConnect data = DataConnect.getInstance();
+			User user = new User();
+			try {
+				user = data.getUserInfo((String) session.getAttribute("UID"));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 			if (user.getGroup().equals("manager"))
 				chain.doFilter(request, response); // pass the request along the filter chain
 			else {

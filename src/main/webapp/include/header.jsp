@@ -1,13 +1,20 @@
 <%
-    User user = (User) request.getSession(false).getAttribute("user");
+    String headerID = (String) request.getSession(false).getAttribute("UID");
 
     String firstName = "";
     String lastName = "";
 
-    if(user != null) {
-		firstName = user.getFirstName();
-		lastName = user.getLastName();
-	}
+    DataConnect userData = DataConnect.getInstance();
+
+    if(headerID != null && !headerID.trim().equals("")) {
+        try {
+            User user = userData.getUserInfo(headerID);
+            firstName = user.getFirstName();
+            lastName = user.getLastName();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 %>
 
 

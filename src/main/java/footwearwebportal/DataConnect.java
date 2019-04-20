@@ -247,8 +247,7 @@ public class DataConnect {
 
 		lookup.executeUpdate();
 		System.out.println("Delete supervisor: " + lookup.toString());
-		deleteUser(UID);
-		return true;
+		return deleteUser(UID);
 	}
 
 	//Update user account basic (no password/username/group)
@@ -280,7 +279,7 @@ public class DataConnect {
 		return true;
 	}
 
-	public boolean deleteUser(String id) throws SQLException {
+	boolean deleteUser(String id) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("delete from footwearportal.user where UID = ?");
 		lookup.setString(1, id);
 
