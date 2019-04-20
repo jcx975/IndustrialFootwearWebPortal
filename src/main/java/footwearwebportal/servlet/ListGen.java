@@ -1,9 +1,6 @@
 package footwearwebportal.servlet;
 
-import footwearwebportal.Company;
-import footwearwebportal.DataConnect;
-import footwearwebportal.Program;
-import footwearwebportal.Supervisor;
+import footwearwebportal.*;
 
 import java.io.StringWriter;
 import java.sql.SQLException;
@@ -83,5 +80,27 @@ public class ListGen {
 
 	public static boolean checkRequest(String input){
 		return (input != null && !input.trim().equals(""));
+	}
+
+	@SuppressWarnings("Duplicates")
+	public static String generateShoeListHTML() throws SQLException {
+		DataConnect data = DataConnect.getInstance();
+
+		StringWriter out = new StringWriter();
+		ArrayList<Shoe> shoes = data.allShoes();
+		Collections.sort(shoes);
+
+		for (Shoe shoe : shoes) {
+			out.append("<div class=\"col-md-6 mb-5 profile-container\">");
+			out.append("<div class=\"company-profile\">");
+			out.append("<p class=\"profile-name\">" + shoe.getShoeName() + "</p>");
+			out.append("<form action=\"shoe.jsp\" method=\"GET\">");
+			out.append("<input type=\"hidden\" name=\"shoeID\" value=\"" + shoe.getShoeID() + "\">");
+			out.append("<input class=\"btn btn-primary\" type=\"submit\" value=\"View Details\"></form>");
+			out.append("</div>");
+			out.append("</div>");
+		}
+
+		return out.toString();
 	}
 }

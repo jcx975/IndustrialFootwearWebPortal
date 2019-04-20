@@ -1,6 +1,6 @@
 package footwearwebportal;
 
-public class Shoe {
+public class Shoe implements Comparable<Shoe> {
 	private String shoeID, shoeName, shoePrice;
 
 	public Shoe(String shoeID, String shoeName, String shoePrice) {
@@ -36,5 +36,10 @@ public class Shoe {
 
 	public void setShoePrice(String shoePrice) {
 		this.shoePrice = shoePrice;
+	}
+
+	@Override
+	public int compareTo(Shoe s){
+		return this.getShoeName().toUpperCase().compareTo(s.getShoeName().toUpperCase());
 	}
 }

@@ -28,8 +28,10 @@
 				<div class="fw-box-header">Inventory</div>
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-light">View inventory.</li>
+					<li class="list-group-item list-group-item-light">Add shoes.</li>
+					<li class="list-group-item list-group-item-light">Edit shoes.</li>
 				</ul>
-				<button type="button" class="btn btn-lg btn-primary mt-auto">View</button>
+				<button onclick="window.location.href='inventory.jsp'" type="button" class="btn btn-lg btn-primary mt-auto">View</button>
 			</div>
 		</div>
 		<div class="col-md-4">

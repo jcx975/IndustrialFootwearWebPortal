@@ -280,7 +280,7 @@ public class DataConnect {
 		return true;
 	}
 
-	boolean deleteUser(String id) throws SQLException {
+	private boolean deleteUser(String id) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("delete from footwearportal.user where UID = ?");
 		lookup.setString(1, id);
 
@@ -303,7 +303,7 @@ public class DataConnect {
 		System.out.println("New program: " + lookup.toString());
 		ResultSet rs = lookup.getGeneratedKeys();
 		rs.next();
-		return Integer.toString(rs.getInt(1)); // returns newly created progam id
+		return Integer.toString(rs.getInt(1)); // returns newly created program id
 	}
 	
 	//Change program
@@ -373,6 +373,117 @@ public class DataConnect {
 
 		lookup.executeUpdate();
 		System.out.println("Delete program: " + lookup.toString());
+		return true;
+	}
+
+	//Get list of all shoes in inventory
+	@SuppressWarnings("Duplicates")
+	public ArrayList<Shoe> allShoes() throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.shoe");
+		ResultSet rs = lookup.executeQuery();
+		ArrayList<Shoe> shoeResult = new ArrayList<>();
+
+		while (rs.next()) {
+			String shoeID = rs.getString(1);
+			String shoeName = rs.getString(2);
+			String shoePrice = rs.getString(3);
+
+			shoeResult.add(new Shoe(shoeID, shoeName, shoePrice));
+		}
+		System.out.println("Get all shoes");
+		return shoeResult;
+	}
+
+	//Get list of all shoes in a program
+	@SuppressWarnings("Duplicates")
+	public ArrayList<Shoe> programShoeList(String programID) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("select * from shoe NATURAL JOIN programhasshoes where programID = ?;");
+		lookup.setString(1, programID);
+		ResultSet rs = lookup.executeQuery();
+		ArrayList<Shoe> shoeResult = new ArrayList<>();
+
+		while (rs.next()) {
+			String shoeID = rs.getString(1);
+			String shoeName = rs.getString(2);
+			String shoePrice = rs.getString(3);
+
+			shoeResult.add(new Shoe(shoeID, shoeName, shoePrice));
+		}
+
+		System.out.println("Get all shoes from: " + lookup.toString());
+		return shoeResult;
+	}
+
+	//Get shoe details
+	public Shoe getShoe(String shoeID) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.shoe where shoeID = ?");
+		lookup.setString(1, shoeID);
+		String name = "";
+		String price = "";
+
+		ResultSet rs = lookup.executeQuery();
+
+		while (rs.next()) {
+			shoeID = rs.getString(1);
+			name = rs.getString(2);
+			price = rs.getString(3);
+		}
+
+		System.out.println("Get program: " + lookup.toString());
+		return new Shoe(shoeID, name, price);
+	}
+
+	//Update shoe details
+	public boolean updateShoe(Shoe shoe) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("update footwearportal.shoe " +
+				"SET shoeName = ?, shoePrice = ?" +
+				"WHERE shoeID = ?");
+		lookup.setString(1, shoe.getShoeName());
+		lookup.setString(2, shoe.getShoePrice());
+		lookup.setString(3, shoe.getShoeID());
+
+		lookup.executeUpdate();
+		System.out.println("Update shoe: " + lookup.toString());
+		return true;
+	}
+
+	//Create new shoe
+	public String shoeCreate(Shoe shoe) throws SQLException {
+		String sql = "insert into footwearportal.shoe(shoeName, shoePrice) values (?, ?)";
+		PreparedStatement lookup = dbconn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		lookup.setString(1, shoe.getShoeName());
+		lookup.setString(2, shoe.getShoePrice());
+
+
+		lookup.executeUpdate();
+		System.out.println("New shoe: " + lookup.toString());
+		ResultSet rs = lookup.getGeneratedKeys();
+		rs.next();
+		return Integer.toString(rs.getInt(1)); // returns newly created shoe id
+	}
+
+	//Delete shoe
+	public boolean deleteShoe(String shoeID) throws SQLException {
+		PreparedStatement lookup1 = dbconn.prepareStatement("delete from footwearportal.programhasshoes where shoeID = ?");
+		lookup1.setString(1, shoeID);
+
+		PreparedStatement lookup2 = dbconn.prepareStatement("delete from footwearportal.shoe where shoeID = ?");
+		lookup2.setString(1, shoeID);
+
+		lookup1.executeUpdate();
+		lookup2.executeUpdate();
+		System.out.println("Delete shoe: " + lookup1.toString());
+		return true;
+	}
+
+	//add shoe to program
+	public boolean addShoeProgram(String programID, String shoeID) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("insert into footwearportal.programhasshoes values (?, ?)");
+		lookup.setString(1, programID);
+		lookup.setString(2, shoeID);
+
+		lookup.executeUpdate();
+		System.out.println("Add shoe to program: " + lookup.toString());
 		return true;
 	}
 }

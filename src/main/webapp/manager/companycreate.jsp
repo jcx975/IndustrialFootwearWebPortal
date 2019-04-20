@@ -3,7 +3,7 @@
 <%@ page import="footwearwebportal.*" %>
 <%@ page import="java.sql.SQLException" %>
 <%@include file="../include/meta.jsp" %>
-<title>Edit company</title>
+<title>Create company</title>
 <%@include file="../include/head.jsp" %>
 <%@include file="../include/header.jsp" %>
 <div class="container">
