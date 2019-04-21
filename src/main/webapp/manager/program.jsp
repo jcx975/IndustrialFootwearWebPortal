@@ -1,5 +1,6 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="footwearwebportal.*" %>
+<%@ page import="footwearwebportal.servlet.ListGen" %>
 <%
 
 	String programID = request.getParameter("programID");
@@ -44,7 +45,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-8" id="edit-form">
-			<form class="needs-validation" novalidate action="program.jsp?id=<%=programID%>&companyID=<%=companyID%>" id="company-form" method="POST">
+			<form class="needs-validation" novalidate action="program.jsp?programID=<%=programID%>&companyID=<%=companyID%>" id="company-form" method="POST">
 				<h2 class="mb-3">Program Information</h2>
 				<div class="mb-3 form-group">
 					<label for="programName">Program Name</label>
@@ -68,6 +69,36 @@
 		</div>
 	</div>
 </div>
+<div class="container mt-5 mb-5 bg-light">
+	<div class="row">
+		<div class="col-md-6 border shoes-container">
+			<div class="mb-2">
+				<h2 class="text-center">Shoes</h2>
+				<form action="program.jsp?programID=<%=programID%>" method="POST">
+					<label for="shoeID">Shoe: </label><select class="form-control" id="shoeID" name="shoeID">
+						<% try {
+							out.print(ListGen.generateShoeSelectHTML());
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}%>
+					</select>
+
+					<input class="btn btn-primary" type="submit" value="Add shoe"></form>
+			</div>
+			<div class="row" id="shoe-list">
+				<jsp:useBean id="shoe" class="footwearwebportal.servlet.ListGen"/>
+				<%
+					try {
+						out.print(ListGen.generateProgramShoeListHTML(programID));
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				%>
+			</div>
+		</div>
+	</div>
+</div>
+
 <%@include file="../include/footer.jsp"%>
 
 <%
@@ -75,10 +106,32 @@
 	programName = request.getParameter("programName");
 	programDesc = request.getParameter("programDesc");
 	discount = request.getParameter("discount");
+	String removeShoe = request.getParameter("removeShoe");
+	String shoeID = request.getParameter("shoeID");
 
+	if(ListGen.checkRequest(programID) && ListGen.checkRequest(removeShoe)){
+			try {
+				data.removeShoeProgram(programID, removeShoe);
+				%><script type="text/javascript">
 
+window.location.replace("program.jsp?programID=<%=programID%>")</script><%
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
 
-	if (programName != null && !programName.trim().equals("") && programID != null && !programID.trim().equals("")) {
+	if(ListGen.checkRequest(programID) && ListGen.checkRequest(shoeID)){
+		try {
+			data.addShoeProgram(programID, shoeID);
+%><script type="text/javascript">
+
+    window.location.replace("program.jsp?programID=<%=programID%>")</script><%
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	if (ListGen.checkRequest(programName) && ListGen.checkRequest(programID)) {
 		boolean flag = false;
 		try {
 			flag = data.updateProgram(new Program(programID,companyID, programName, programDesc, discount));

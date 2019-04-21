@@ -397,7 +397,7 @@ public class DataConnect {
 	//Get list of all shoes in a program
 	@SuppressWarnings("Duplicates")
 	public ArrayList<Shoe> programShoeList(String programID) throws SQLException {
-		PreparedStatement lookup = dbconn.prepareStatement("select * from shoe NATURAL JOIN programhasshoes where programID = ?;");
+		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.shoe NATURAL JOIN footwearportal.programhasshoes where programID = ?;");
 		lookup.setString(1, programID);
 		ResultSet rs = lookup.executeQuery();
 		ArrayList<Shoe> shoeResult = new ArrayList<>();
@@ -478,12 +478,22 @@ public class DataConnect {
 
 	//add shoe to program
 	public boolean addShoeProgram(String programID, String shoeID) throws SQLException {
-		PreparedStatement lookup = dbconn.prepareStatement("insert into footwearportal.programhasshoes values (?, ?)");
+		PreparedStatement lookup = dbconn.prepareStatement("insert into footwearportal.programhasshoes values (?, ?) on duplicate key update shoeID = shoeID");
 		lookup.setString(1, programID);
 		lookup.setString(2, shoeID);
 
 		lookup.executeUpdate();
 		System.out.println("Add shoe to program: " + lookup.toString());
+		return true;
+	}
+
+	public boolean removeShoeProgram(String programID, String shoeID) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("delete from footwearportal.programhasshoes where programID = ? and shoeID = ?");
+		lookup.setString(1, programID);
+		lookup.setString(2, shoeID);
+
+		lookup.executeUpdate();
+		System.out.println("Remove shoe from program: " + lookup.toString());
 		return true;
 	}
 }

@@ -103,4 +103,44 @@ public class ListGen {
 
 		return out.toString();
 	}
+
+	public static String generateShoeSelectHTML() throws  SQLException {
+		DataConnect data = DataConnect.getInstance();
+
+		StringWriter out = new StringWriter();
+		ArrayList<Shoe> shoes = data.allShoes();
+		Collections.sort(shoes);
+
+		for (Shoe shoe : shoes) {
+			out.append("<option value=\"" + shoe.getShoeID() + "\">" + shoe.getShoeName() + "</option>");
+		}
+
+		return out.toString();
+	}
+
+	public static String generateProgramShoeListHTML(String programID) throws  SQLException {
+		DataConnect data = DataConnect.getInstance();
+
+		StringWriter out = new StringWriter();
+		ArrayList<Shoe> shoes = data.programShoeList(programID);
+		int shoeDiscount = Integer.parseInt(data.getProgram(programID).getDiscount());
+		Collections.sort(shoes);
+
+		for (Shoe shoe : shoes) {
+			double discountPrice = Double.parseDouble(shoe.getShoePrice()) * (1.00 - (shoeDiscount / 100.00));
+			out.append("<div class=\"col-md-6 supervisor-container\">");
+			out.append("<form action=\"program.jsp?programID=" + programID +"\" method=\"POST\">");
+			out.append("<div class=\"program-profile border d-flex flex-column\">");
+			out.append("<p class=\"shoe-name\">" + shoe.getShoeName() + "</p>");
+			out.append("<p>$" + shoe.getShoePrice() + "</p>");
+			out.append("<p>$" + discountPrice + "</p>");
+			out.append("<input type=\"hidden\" name=\"removeShoe\" value=\"" + shoe.getShoeID() + "\">");
+			out.append("<input type=\"submit\" class=\"btn btn-primary\" value=\"Remove\">");
+			out.append("</div>");
+			out.append("</form>");
+			out.append("</div>");
+		}
+
+		return out.toString();
+	}
 }
