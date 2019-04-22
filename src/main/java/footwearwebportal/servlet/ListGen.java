@@ -123,6 +123,9 @@ public class ListGen {
 
 		StringWriter out = new StringWriter();
 		ArrayList<Shoe> shoes = data.programShoeList(programID);
+		if(shoes.isEmpty())
+			return "";
+
 		int shoeDiscount = Integer.parseInt(data.getProgram(programID).getDiscount());
 		Collections.sort(shoes);
 

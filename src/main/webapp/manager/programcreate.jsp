@@ -69,7 +69,7 @@
 			if (!flag.equals("-1")) {
 %>
 <script type="text/javascript">alert("Successfully created profile!");
-window.location.replace("program.jsp?id=<%=flag%>")</script>
+window.location.replace("program.jsp?programID=<%=flag%>")</script>
 <%
 } else { %>
 <script type="text/javascript">alert("Entry Failure");</script>
