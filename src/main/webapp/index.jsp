@@ -24,8 +24,7 @@
 				<div class="form-group mb-5 ml-5 mr-5">
 					<form action="login" method="post">
 						<h4 class="mb-3 font-weight-normal">Sign in to your account</h4>
-						<label for="username"></label><input type="text" class="form-control" id="username" placeholder="Username" name="username" required
-															 autofocus>
+						<label for="username"></label><input type="text" class="form-control" id="username" placeholder="Username" name="username" required autofocus>
 						<label for="password"></label><input type="password" class="form-control mb-3" id="password" placeholder="Password" name="password" required>
 						<div class="checkbox mb-3">
 							<label>

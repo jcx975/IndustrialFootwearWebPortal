@@ -19,21 +19,26 @@
 
 
 </head>
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark mb-2">
-    <ul class="navbar-nav">
-        <li class="nav-item active">
-            <a class="nav-link" href="${pageContext.request.contextPath}/userprofile.jsp">Welcome, <%=firstName%> <%=lastName%>!</a>
-        </li>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <form action="${pageContext.request.contextPath}/logout" method="post">
-                <input class="nav-link" type="submit" value="Logout">
-            </form>
-        </li>
-    </ul>
+<nav class="navbar shadow navbar-expand-sm bg-light navbar-light mb-5">
+    <h1 class="display-1 navbar-brand">Industrial Footwear Web Portal</h1>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav ml-auto">
+            <li class="navbar-text pr-2 border-right">
+                Welcome, <%=firstName%> <%=lastName%>!
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-primary" href="${pageContext.request.contextPath}/userprofile.jsp">My Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-primary" href="${pageContext.request.contextPath}/logout">Log out</a>
+            </li>
+        </ul>
+    </div>
 </nav>
