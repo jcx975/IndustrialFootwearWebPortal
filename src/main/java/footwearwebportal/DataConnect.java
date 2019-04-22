@@ -53,11 +53,12 @@ public class DataConnect {
 		ResultSet rs = lookup.executeQuery();
 		int id = -1;
 
-		rs.next();
-		String securePassword = rs.getString(1);
-		System.out.println("Lookup user: " + lookup.toString());
-		if(securePassword.equals(Crypto.hashSHA256(pass))) {
-			 id = rs.getInt(2);
+		if(rs.next()) {
+			String securePassword = rs.getString(1);
+			System.out.println("Lookup user: " + lookup.toString());
+			if (securePassword.equals(Crypto.hashSHA256(pass))) {
+				id = rs.getInt(2);
+			}
 		}
 
 		// passwords in db are encrypted so encrypt new password then compare hashess
