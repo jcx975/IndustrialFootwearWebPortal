@@ -11,7 +11,7 @@ import javax.servlet.http.*;
 @WebServlet("/logout")
 public class Logout extends HttpServlet {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("text/html");
 
 		//invalidate the session if exists
