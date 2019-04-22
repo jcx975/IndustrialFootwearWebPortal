@@ -63,7 +63,7 @@ window.location.replace("shoe.jsp?shoeID=<%=shoeID%>")</script>
 					<input type="hidden" name="delete" value="delete">
 					<button type="submit" class="btn btn-primary mt-auto" formmethod="post">Delete</button>
 				</form>
-				<button onclick="window.location.href='shoe.jsp?id=<%=shoeID%>'" type="button" class="btn btn-success">
+				<button onclick="window.location.href='shoe.jsp?shoeID=<%=shoeID%>'" type="button" class="btn btn-success">
 					No, go back
 				</button>
 				<hr>
