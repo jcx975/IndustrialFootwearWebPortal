@@ -223,22 +223,28 @@ public class DataConnect {
 	}
 
 	//Get list of supervisor accounts under company
+	@SuppressWarnings("Duplicates")
 	public ArrayList<Supervisor> supervisorProfiles(String companyID) throws SQLException {
-		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.supervisor where companyID = ?");
+		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.supervisor natural join footwearportal.user where companyID = ?");
 		lookup.setString(1, companyID);
 		ResultSet rs = lookup.executeQuery();
-		ArrayList<Supervisor> supervisorResult = new ArrayList<>();
+		ArrayList<Supervisor> supervisors = new ArrayList<>();
 
 		while (rs.next()) {
-			String id = rs.getString(1);
+			String UID = rs.getString(1);
+			companyID = rs.getString(2);
+			String username = rs.getString(3);
+			String password = rs.getString(4);
+			String group = rs.getString(5);
+			String firstName = rs.getString(6);
+			String lastName = rs.getString(7);
+			String email = rs.getString(8);
 
-			User user = getUserInfo(id);
-
-			supervisorResult.add(new Supervisor(user, companyID));
+			supervisors.add(new Supervisor(new User(UID, username, password, group, firstName, lastName, email), companyID));
 		}
 
 		System.out.println("Get all supervisors from: " + lookup.toString());
-		return supervisorResult;
+		return supervisors;
 	}
 
 	public boolean deleteSupervisor(String UID, String companyID) throws SQLException {
@@ -495,5 +501,34 @@ public class DataConnect {
 		lookup.executeUpdate();
 		System.out.println("Remove shoe from program: " + lookup.toString());
 		return true;
+	}
+
+	// get supervisor - supervisor ID + company ID + user info
+	@SuppressWarnings("Duplicates")
+	public Supervisor getSupervisor(String UID, String companyID) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.supervisor natural join footwearportal.user where UID = ? and companyID = ?");
+		lookup.setString(1, UID);
+		lookup.setString(2, companyID);
+		ResultSet rs = lookup.executeQuery();
+		String username = "";
+		String password = "";
+		String group = "";
+		String firstName = "";
+		String lastName = "";
+		String email = "";
+
+		while (rs.next()) {
+			UID = rs.getString(1);
+			companyID = rs.getString(2);
+			username = rs.getString(3);
+			password = rs.getString(4);
+			group = rs.getString(5);
+			firstName = rs.getString(6);
+			lastName = rs.getString(7);
+			email = rs.getString(8);
+		}
+
+		System.out.println("Get supervisors: " + lookup.toString());
+		return new Supervisor(new User(UID, username, password, group, firstName, lastName, email), companyID);
 	}
 }

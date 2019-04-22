@@ -1,5 +1,6 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="footwearwebportal.*" %>
+<%@ page import="footwearwebportal.servlet.ListGen" %>
 
 <%
 	String supervisorID = request.getParameter("supervisorID");
@@ -14,8 +15,8 @@
 	DataConnect data = DataConnect.getInstance();
 
 	try {
+		Supervisor supervisor = data.getSupervisor(supervisorID, companyID);
 		Company company = data.getCompany(companyID);
-		User supervisor = data.getUserInfo(supervisorID);
 		companyName = company.getCompanyName();
 		username = supervisor.getUsername();
 		firstNameNew = supervisor.getFirstName();
@@ -87,7 +88,7 @@
 	lastNameNew = request.getParameter("lastNameNew");
 	email = request.getParameter("email");
 
-	if (supervisorID != null && !supervisorID.trim().equals("") && firstNameNew != null && !firstNameNew.trim().equals("")) {
+	if (ListGen.checkRequest(supervisorID) && ListGen.checkRequest(firstNameNew)) {
 		boolean flag = false;
 		try {
 			flag = data.updateUserBasic(firstNameNew, lastNameNew, email, supervisorID);

@@ -193,7 +193,7 @@
 	comments = request.getParameter("comments");
 
 
-	if (companyName != null && !companyName.trim().equals("") && id != null && !id.trim().equals("")) {
+	if (ListGen.checkRequest(companyName) && ListGen.checkRequest(id)) {
 		boolean flag = false;
 		try {
 			flag = data.updateProfile(new Company(id, companyName, city, state, email, comments));

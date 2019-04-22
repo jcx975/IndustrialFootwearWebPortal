@@ -14,7 +14,7 @@
 
 	DataConnect data = DataConnect.getInstance();
 
-	if(UID != null && !UID.trim().equals("")) {
+	if(ListGen.checkRequest(UID)) {
 		try {
 			User user = data.getUserInfo(UID);
 			username = user.getUsername();
@@ -137,8 +137,12 @@ window.location.replace("userprofile.jsp")</script>
 			e.printStackTrace();
 		}
 		if (flag) {%>
+<form name="logout" action="${pageContext.request.contextPath}/logout" method="post">
+	<input type="hidden" value="Logout">
+</form>
+
 <script type="text/javascript">alert("Successfully updated user password!");
-window.location.replace("userprofile.jsp")</script>
+document.logout.submit();</script>
 <%
 } else { %>
 <script type="text/javascript">alert("Update Failure");</script>

@@ -3,6 +3,7 @@
 		 pageEncoding="ISO-8859-1" %>
 <%@ page import="footwearwebportal.*" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="footwearwebportal.servlet.ListGen" %>
 <%@include file="../include/meta.jsp" %>
 <title>Edit Program</title>
 <%@include file="../include/head.jsp" %>
@@ -58,7 +59,7 @@
 		String discount = request.getParameter("discount");
 
 		
-		if (name != null && !name.trim().equals("")) {
+		if (ListGen.checkRequest(name)) {
 			DataConnect data = DataConnect.getInstance();
 			String flag = "-1";
 			try {

@@ -2,6 +2,7 @@
 		 pageEncoding="ISO-8859-1" %>
 <%@ page import="footwearwebportal.*" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="footwearwebportal.servlet.ListGen" %>
 <%@include file="../include/meta.jsp" %>
 <title>Create company</title>
 <%@include file="../include/head.jsp" %>
@@ -121,7 +122,7 @@
 	String comments = request.getParameter("comments");
 
 
-	if (name != null && !name.trim().equals("")) {
+	if (ListGen.checkRequest(name)) {
 		DataConnect data = DataConnect.getInstance();
 		String flag = "-1";
 		try {

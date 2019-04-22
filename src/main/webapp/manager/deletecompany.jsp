@@ -1,5 +1,6 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="footwearwebportal.*" %>
+<%@ page import="footwearwebportal.servlet.ListGen" %>
 <%@ page contentType="text/html; charset=ISO-8859-1"
 		 pageEncoding="ISO-8859-1" %>
 
@@ -10,7 +11,7 @@
 
 	DataConnect data = DataConnect.getInstance();
 
-	if (delete != null && !delete.trim().equals("")) {
+	if (ListGen.checkRequest(delete)) {
 		boolean flag = false;
 		try {
 			flag = data.deleteProfile(delete);
