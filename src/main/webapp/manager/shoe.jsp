@@ -24,16 +24,19 @@
 <%@include file="../include/header.jsp"%>
 <div class="container mt-2 mb-5">
 	<div class="row">
-		<div class="col-md-12" id="top-buttons">
-			<a href="inventory.jsp" class="btn btn-primary">Back</a>
+		<div class="col-md-12">
 			<form class="needs-validation" novalidate action="deleteshoe.jsp" id="delete-form" method="POST">
-				<input type="hidden" name="shoeID" value="<%=shoeID%>">
-				<button type="submit" class="btn btn-primary mt-auto" formmethod="post">Delete Shoe</button>
+				<div class="btn-group" id="top-buttons">
+					<a href="inventory.jsp" class="btn btn-primary mr-2">Back</a>
+					<input type="hidden" name="shoeID" value="<%=shoeID%>">
+					<button type="submit" class="btn btn-danger mr-2" id="delete-button" formmethod="post">Delete Shoe</button>
+					<button type="button" id="edit-button" class="btn btn-success mr-2">Edit Shoe</button>
+				</div>
 			</form>
-			<button type="button" id="edit-button" class="btn btn-success">Edit Shoe</button>
 		</div>
 		<hr>
 	</div>
+	<hr>
 </div>
 <div class="container">
 	<div class="row">
@@ -46,14 +49,19 @@
 				</div>
 				<div class="mb-3 form-group">
 					<label for="shoePrice">Shoe Price:</label>
-					<textarea class="form-control" rows="5" id="shoePrice" name="shoePrice"><%=shoePrice%></textarea>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">$</span>
+						</div>
+						<input type="number" class="form-control" id="shoePrice" name="shoePrice" value="<%=shoePrice%>" min="0">
+					</div>
 				</div>
 				<button type="submit" class="btn btn-success" formmethod="post">Submit</button>
 			</form>
 		</div>
 		<div class="col-md-4">
-			<h4><p id="currentShoeName"><%=shoeName%></p></h4>
-			<p id="currentShoePrice"><%=shoePrice%></p>
+			<h4><%=shoeName%></h4>
+			<p>Price: $<%=shoePrice%></p>
 		</div>
 	</div>
 </div>

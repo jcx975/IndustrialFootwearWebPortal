@@ -7,22 +7,15 @@
 <title>Shoe create</title>
 <%@include file="../include/head.jsp" %>
 <%@include file="../include/header.jsp" %>
-<div class="container">
+<div class="container mt-2 mb-5">
 	<div class="row">
-		<div class="col-md-12 welcome-banner">
-			<h1 class="display-1" id="company-name-header"></h1>
+		<div class="col-md-12">
+			<div class="btn-group" id="top-buttons">
+				<a href="inventory.jsp" class="btn btn-primary mr-2">Back</a>
+			</div>
 		</div>
 	</div>
-</div>
-<div class="container mb-5">
-	<div class="row">
-		<div class="col-md-12 company-buttons-container">
-			<button onclick="window.location.href='inventory.jsp'" type="button" class="btn btn-lg btn-primary mt-auto">
-				Back
-			</button>
-			<hr>
-		</div>
-	</div>
+	<hr>
 </div>
 <div class="container">
 	<div>
@@ -30,12 +23,17 @@
 			<form class="needs-validation" novalidate>
 				<h2 class="mb-3">Shoe Information</h2>
 				<div class="mb-3 form-group">
-					<label for="shoeName">Shoe Name</label>
+					<label for="shoeName">Shoe Name:</label>
 					<input type="text" class="form-control" id="shoeName" name="shoeName">
 				</div>
 				<div class="mb-3 form-group">
-					<label for="shoePrice">Price:</label>
-					<textarea class="form-control" rows="5" id="shoePrice" name="shoePrice"></textarea>
+					<label for="shoePrice">Shoe Price:</label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text">$</span>
+						</div>
+						<input type="number" class="form-control" id="shoePrice" name="shoePrice" min="0">
+					</div>
 				</div>
 				<button class="btn btn-lg btn-primary btn-block mb-3" type="submit" formmethod="post">Submit</button>
 			</form>

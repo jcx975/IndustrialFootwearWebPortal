@@ -12,17 +12,16 @@
 		</div>
 	</div>
 </div>
-<div class="container">
+<div class="container mt-2 mb-5">
 	<div class="row">
-		<div class="col-md-12 mb-5">
-			<div class="form-group">
-				<button onclick="window.location.href='index.jsp'" type="button" class="btn btn-lg btn-primary mt-auto"><
-					Back
-				</button>
-				<button onclick="window.location.href='shoecreate.jsp'" type="button" class="btn btn-lg btn-success mt-auto">Add new shoe</button>
+		<div class="col-md-12">
+			<div class="btn-group" id="top-buttons">
+				<a href="index.jsp" class="btn btn-primary mr-2">Back</a>
+				<a href="shoecreate.jsp" class="btn btn-success mr-2">Add new shoe</a>
 			</div>
 		</div>
 	</div>
+	<hr>
 </div>
 <div class="container">
 	<div class="row">
