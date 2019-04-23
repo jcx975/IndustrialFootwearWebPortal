@@ -11,22 +11,15 @@
 <%
    	String id = request.getParameter("id");
 %>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12 welcome-banner">
-				<h1 class="display-1" id="program-name-header"></h1>
+	<div class="container mt-2 mb-5">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="btn-group" id="top-buttons">
+				<a href="company.jsp?id=<%=id%>" class="btn btn-primary">Back</a>
 			</div>
 		</div>
 	</div>
-	<div class="container mb-5">
-	<div class="row">
-		<div class="col-md-12 program-buttons-container">
-			<button onclick="window.location.href='company.jsp?id=<%=id%>'" type="button" class="btn btn-primary">
-				Back
-			</button>
-		</div>
-		<hr>
-	</div>
+	<hr>
 	</div>
 <div class="container">
 		<div>

@@ -7,22 +7,15 @@
 <title>Create company</title>
 <%@include file="../include/head.jsp" %>
 <%@include file="../include/header.jsp" %>
-<div class="container">
+<div class="container mt-2 mb-5">
 	<div class="row">
-		<div class="col-md-12 welcome-banner">
-			<h1 class="display-1" id="company-name-header"></h1>
+		<div class="col-md-12">
+			<div class="btn-group" id="top-buttons">
+				<a href="profiles.jsp" class="btn btn-primary mr-2">Back</a>
+			</div>
 		</div>
 	</div>
-</div>
-<div class="container mb-5">
-	<div class="row">
-		<div class="col-md-12 company-buttons-container">
-			<button onclick="window.location.href='profiles.jsp'" type="button" class="btn btn-lg btn-primary mt-auto">
-				Back
-			</button>
-			<hr>
-		</div>
-	</div>
+	<hr>
 </div>
 <div class="container">
 	<div>

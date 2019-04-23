@@ -8,20 +8,15 @@
 <%@include file="../include/head.jsp" %>
 <%@include file="../include/header.jsp" %>
 <% String id = request.getParameter("id"); %>
-<div class="container">
+<div class="container mt-2 mb-5">
 	<div class="row">
-		<div class="col-md-12 welcome-banner">
-			<h1 class="display-1" id="company-name-header"></h1>
+		<div class="col-md-12">
+			<div class="btn-group" id="top-buttons">
+				<a href="company.jsp?id=<%=id%>" class="btn btn-primary">Back</a>
+			</div>
 		</div>
 	</div>
-</div>
-<div class="container mb-5">
-	<div class="row">
-		<div class="col-md-12 company-buttons-container">
-			<button onclick="window.location.href='company.jsp?id=<%=id%>'" type="button" class="btn btn-primary">Back</button>
-		</div>
-		<hr>
-	</div>
+	<hr>
 </div>
 <div class="container">
 	<div>
@@ -46,7 +41,7 @@
 				</div>
 				<div class="mb-3 form-group">
 					<label for="companyName">Email</label>
-					<input type="text" class="form-control" id="email" name="email">
+					<input type="email" class="form-control" id="email" name="email">
 				</div>
 				<input type="hidden" value="<%=id%>" name="id" />
 				<button class="btn btn-lg btn-primary btn-block mb-3" type="submit" formmethod="post">Submit</button>
