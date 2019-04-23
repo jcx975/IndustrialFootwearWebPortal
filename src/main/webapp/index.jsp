@@ -17,7 +17,7 @@
 <div class="container">
 	<form class="form-signin text-center">
 		<div class="row">
-			<div class="col-md-6 border border-top-0 border-left-0 border-bottom-0 d-flex align-items-center">
+			<div class="col-md-6 border-right d-flex align-items-center">
 				<h1 class="display-4">Industrial Footwear Web Portal</h1>
 			</div>
 			<div class="col-md-6">

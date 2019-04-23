@@ -17,8 +17,8 @@ public class ListGen {
 		Collections.sort(companyData);
 
 		for (Company company : companyData) {
-			out.append("<div class=\"col-md-6 mb-5 profile-container\">");
-			out.append("<div class=\"company-profile\">");
+			out.append("<div class=\"col-md-4 mb-3 profile-container\">");
+			out.append("<div class=\"company-profile border\">");
 			out.append("<p class=\"profile-name\">" + company.getCompanyName() + "</p>");
 			out.append("<p>" + company.getCity() + ", " + company.getState() + "</p>");
 			out.append("<form action=\"company.jsp\" method=\"GET\">");
@@ -63,15 +63,21 @@ public class ListGen {
 		Collections.sort(programs);
 
 		for (Program program : programs) {
-			out.append("<div class=\"col-md-6 supervisor-container\">");
+			out.append("<div class=\"col-md-12 program-container\">");
+			out.append("<div class=\"program-profile border\">");
 			out.append("<form action=\"program.jsp\" method=\"GET\">");
-			out.append("<div class=\"program-profile border d-flex flex-column\">");
-			out.append("<p class=\"profile-name\">" + program.getProgramName() + "</p>");
-			out.append("<p>" + program.getProgramDesc() + "</p>");
-			out.append("<input type=\"hidden\" name=\"programID\" value=\"" + program.getProgramID() + "\">");
-			out.append("<input type=\"submit\" class=\"btn btn-primary\" value=\"View\">");
+			out.append("<div class=\"row\">");
+			out.append("<div class=\"col-6\">");
+			out.append("<h3 class=\"profile-name\">" + program.getProgramName() + "</h3>");
+			out.append("<p class=\"profile-desc\">" + program.getProgramDesc() + "</p>");
+			out.append("</div>");
+			out.append("<div class=\"col-6 d-flex\">");
+			out.append("<input type=\"hidden\" name=\"id\" value=\"" + program.getProgramID() + "\">");
+			out.append("<input type=\"submit\" class=\"btn ml-auto btn-primary\" value=\"View\">");
+			out.append("</div>");
 			out.append("</div>");
 			out.append("</form>");
+			out.append("</div>");
 			out.append("</div>");
 		}
 

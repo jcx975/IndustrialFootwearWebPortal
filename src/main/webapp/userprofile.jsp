@@ -47,8 +47,8 @@
 			<a href="${pageContext.request.contextPath}/<%=group%>/" class="btn btn-primary">Back</a>
 			<button type="button" id="edit-button" class="btn btn-success">Edit Profile</button>
 		</div>
-		<hr>
 	</div>
+	<hr>
 </div>
 <div class="container">
 	<div class="row">
