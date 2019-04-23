@@ -72,7 +72,7 @@ public class ListGen {
 			out.append("<p class=\"profile-desc\">" + program.getProgramDesc() + "</p>");
 			out.append("</div>");
 			out.append("<div class=\"col-6 d-flex\">");
-			out.append("<input type=\"hidden\" name=\"id\" value=\"" + program.getProgramID() + "\">");
+			out.append("<input type=\"hidden\" name=\"programID\" value=\"" + program.getProgramID() + "\">");
 			out.append("<input type=\"submit\" class=\"btn ml-auto btn-primary\" value=\"View\">");
 			out.append("</div>");
 			out.append("</div>");
