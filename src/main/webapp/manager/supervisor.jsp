@@ -35,17 +35,19 @@
 <%@include file="../include/header.jsp"%>
 <div class="container mt-2 mb-5">
 	<div class="row">
-		<div class="col-md-12" id="top-buttons">
-			<a href="company.jsp?id=<%=companyID%>" class="btn btn-primary">Back</a>
+		<div class="col-md-12">
 			<form class="needs-validation" novalidate action="deletesupervisor.jsp" id="delete-form" method="POST">
-				<input type="hidden" name="companyID" value="<%=companyID%>">
-				<input type="hidden" name="supervisorID" value="<%=supervisorID%>">
-				<button type="submit" class="btn btn-primary mt-auto" formmethod="post">Delete Supervisor</button>
+				<div class="btn-group" id="top-buttons">
+					<a href="company.jsp?id=<%=companyID%>" class="btn btn-primary mr-2">Back</a>
+					<input type="hidden" name="companyID" value="<%=companyID%>">
+					<input type="hidden" name="supervisorID" value="<%=supervisorID%>">
+					<button type="submit" class="btn btn-danger mr-2" id="delete-button" formmethod="post">Delete Supervisor</button>
+					<button type="button" id="edit-button" class="btn btn-success">Edit Supervisor</button>
+				</div>
 			</form>
-			<button type="button" id="edit-button" class="btn btn-success">Edit Supervisor</button>
 		</div>
-		<hr>
 	</div>
+	<hr>
 </div>
 <div class="container">
 	<div class="row">
@@ -76,9 +78,9 @@
 			</form>
 		</div>
 		<div class="col-md-4">
-			<h4 id="fullName"><%=firstNameNew%> <%=lastNameNew%></h4>
-			<p id="currentUsername"><%=username%></p>
-			<p id="currentEmail"><%=email%></p>
+			<h4><%=firstNameNew%> <%=lastNameNew%></h4>
+			<p>Username: <%=username%></p>
+			<p>Email: <a href="mailto:<%=email%>"><%=email%></a></p>
 		</div>
 	</div>
 </div>

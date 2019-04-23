@@ -31,15 +31,18 @@
 <%@include file="../include/header.jsp"%>
 <div class="container mt-2 mb-5">
 	<div class="row">
-		<div class="col-md-12" id="top-buttons">
-			<a href="profiles.jsp" class="btn btn-primary">Back</a>
-			<button onclick="window.location.href='deletecompany.jsp?id=<%=id%>'" type="button" id="delete-button" class="btn btn-danger">Delete Profile</button>
-			<button type="button" id="edit-button" class="btn btn-success">Edit Profile</button>
+		<div class="col-md-12">
+			<div class="btn-group" id="top-buttons">
+				<a href="profiles.jsp" class="btn btn-primary mr-2">Back</a>
+				<button onclick="window.location.href='deletecompany.jsp?id=<%=id%>'" type="button" id="delete-button" class="btn btn-danger mr-2">Delete Profile</button>
+				<button type="button" id="edit-button" class="btn btn-success mr-2">Edit Profile</button>
+			</div>
 		</div>
 		<hr>
 	</div>
+	<hr>
 </div>
-<div class="container">
+<div class="container mb-5">
 	<div class="row">
 		<div class="col-md-8" id="edit-form">
 			<form class="needs-validation" novalidate action="company.jsp?id=<%=id%>" id="company-form" method="POST">
@@ -132,11 +135,10 @@
 			</form>
 		</div>
 		<div class="col-md-4">
-			<h4><p id="currentCompanyName"><%=companyName%></p></h4>
-			<p id="currentCompanyCity"><%=city%></p>
-			<p id="currentCompanyState"><%=state%></p>
-			<p id="currentCompanyEmail"><%=email%></p>
-			<p id="currentCompanyComment"><%=comments%></p>
+			<h4><%=companyName%></h4>
+			<p>Location: <%=city%>, <%=state%></p>
+			<p>Email: <a href="mailto:<%=email%>"><%=email%></a></p>
+			<p>Comments: <%=comments%></p>
 		</div>
 	</div>
 </div>

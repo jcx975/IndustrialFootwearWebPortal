@@ -43,14 +43,16 @@
 </div>
 <div class="container mt-2 mb-5">
 	<div class="row">
-		<div class="col-md-12" id="top-buttons">
-			<a href="${pageContext.request.contextPath}/<%=group%>/" class="btn btn-primary">Back</a>
-			<button type="button" id="edit-button" class="btn btn-success">Edit Profile</button>
+		<div class="col-md-12">
+			<div class="btn-group" id="top-buttons">
+				<a href="${pageContext.request.contextPath}/<%=group%>/" class="btn btn-primary mr-2">Back</a>
+				<button type="button" id="edit-button" class="btn btn-success mr-2">Edit Profile</button>
+			</div>
 		</div>
 	</div>
 	<hr>
 </div>
-<div class="container">
+<div class="container mb-5">
 	<div class="row">
 		<div class="col-md-8" id="edit-form">
 			<form class="needs-validation" novalidate action="userprofile.jsp" id="profile-form" method="POST">
@@ -93,9 +95,9 @@
 			</form>
 		</div>
 		<div class="col-md-4">
-			<h4 id="fullName"><%=firstNameNew%> <%=lastNameNew%></h4>
-			<p id="currentUsername"><%=username%></p>
-			<p id="currentEmail"><%=email%></p>
+			<h4><%=firstNameNew%> <%=lastNameNew%></h4>
+			<p>Username: <%=username%></p>
+			<p>Email: <a href="mailto:<%=email%>"><%=email%></a></p>
 		</div>
 	</div>
 </div>

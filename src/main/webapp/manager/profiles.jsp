@@ -15,8 +15,10 @@
 <div class="container mb-5">
 	<div class="row">
 		<div class="col-md-12">
-			<a href="index.jsp" class="btn btn-primary mt-auto">Back</a>
-			<a href="companycreate.jsp" class="btn btn-success mt-auto">Create new company profile</a>
+			<div class="btn-group" id="top-buttons">
+				<a href="index.jsp" class="btn btn-primary mr-2">Back</a>
+				<a href="companycreate.jsp" class="btn btn-success mr-2">Create new company profile</a>
+			</div>
 		</div>
 	</div>
 	<hr>

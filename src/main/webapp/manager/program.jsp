@@ -30,17 +30,20 @@
 <%@include file="../include/header.jsp"%>
 <div class="container mt-2 mb-5">
 	<div class="row">
-		<div class="col-md-12" id="top-buttons">
-			<a href="company.jsp?id=<%=companyID%>" class="btn btn-primary">Back</a>
+		<div class="col-md-12">
 			<form class="needs-validation" novalidate action="deleteprogram.jsp" id="delete-form" method="POST">
-				<input type="hidden" name="companyID" value="<%=companyID%>">
-				<input type="hidden" name="programID" value="<%=programID%>">
-				<button type="submit" class="btn btn-primary mt-auto" formmethod="post">Delete Program</button>
-			</form>
-			<button type="button" id="edit-button" class="btn btn-success">Edit Program</button>
-		</div>
+				<div class="btn-group" id="top-buttons">
+					<a href="company.jsp?id=<%=companyID%>" class="btn btn-primary mr-2">Back</a>
+						<input type="hidden" name="companyID" value="<%=companyID%>">
+						<input type="hidden" name="programID" value="<%=programID%>">
+						<button type="submit" class="btn btn-danger mr-2" id="delete-button" formmethod="post">Delete Program</button>
+						<button type="button" id="edit-button" class="btn btn-success mr-2">Edit Program</button>
+					</div>
+				</div>
+		</form>
 		<hr>
 	</div>
+	<hr>
 </div>
 <div class="container">
 	<div class="row">
@@ -57,15 +60,15 @@
 				</div>
 				<div class="form-group">
 					<label for="discount">Discount:</label>
-					<input type="text" class="form-control" id="discount" name="discount" value="<%=discount%>">
+					<input type="number" class="form-control" id="discount" name="discount" value="<%=discount%>">
 				</div>
 				<button type="submit" class="btn btn-success" formmethod="post">Submit</button>
 			</form>
 		</div>
 		<div class="col-md-4">
-			<h4><p id="currentProgramName"><%=programName%></p></h4>
-			<p id="currentProgramDesc"><%=programDesc%></p>
-			<p id="currentDiscount"><%=discount%></p>
+			<h4><%=programName%></h4>
+			<p>Program description: <%=programDesc%></p>
+			<p>Discount: <%=discount%>%</p>
 		</div>
 	</div>
 </div>
