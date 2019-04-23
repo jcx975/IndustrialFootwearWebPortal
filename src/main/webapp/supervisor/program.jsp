@@ -4,7 +4,6 @@
 <%
 
 	String programID = request.getParameter("programID");
-	String companyID = "";
 	String programName = "";
 	String programDesc = "";
 	String discount = "";
@@ -13,7 +12,6 @@
 
 	try {
 		Program prog = data.getProgram(programID);
-		companyID = prog.getCompanyID();
 		programName = prog.getProgramName();
 		programDesc = prog.getProgramDesc();
 		discount = prog.getDiscount();
@@ -52,19 +50,12 @@
 			<div class="col-md-6 border shoes-container">
 				<div class="mb-2">
 					<h2 class="text-center">Shoes</h2>
-						<label for="shoeID">Shoe: </label><select class="form-control" id="shoeID" name="shoeID">
-						<% try {
-							out.print(ListGen.generateShoeSelectHTML());
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}%>
-					</select>
 				</div>
 				<div class="row" id="shoe-list">
 					<jsp:useBean id="shoe" class="footwearwebportal.servlet.ListGen"/>
 					<%
 						try {
-							out.print(ListGen.generateProgramShoeListHTML(programID, true));
+							out.print(ListGen.generateProgramShoeListHTML(programID, false));
 						} catch (SQLException e) {
 							e.printStackTrace();
 						}
