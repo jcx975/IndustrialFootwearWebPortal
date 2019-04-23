@@ -48,7 +48,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-8" id="edit-form">
-			<form class="needs-validation" novalidate action="program.jsp?programID=<%=programID%>&companyID=<%=companyID%>" id="company-form" method="POST">
+			<form class="needs-validation" novalidate action="program.jsp?programID=<%=programID%>&companyID=<%=companyID%>" id="program-form" method="POST">
 				<h2 class="mb-3">Program Information</h2>
 				<div class="mb-3 form-group">
 					<label for="programName">Program Name</label>
