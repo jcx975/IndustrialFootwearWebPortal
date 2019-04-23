@@ -224,7 +224,6 @@ public class DataConnect {
 	}
 
 	//Get list of supervisor accounts under company
-	@SuppressWarnings("Duplicates")
 	public ArrayList<Supervisor> supervisorProfiles(String companyID) throws SQLException {
 		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.supervisor natural join footwearportal.user where companyID = ?");
 		lookup.setString(1, companyID);
@@ -506,12 +505,12 @@ public class DataConnect {
 
 	// get supervisor - supervisor ID + company ID + user info
 	@SuppressWarnings("Duplicates")
-	public Supervisor getSupervisor(String UID, String companyID) throws SQLException {
-		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.supervisor natural join footwearportal.user where UID = ? and companyID = ?");
+	public Supervisor getSupervisor(String UID) throws SQLException {
+		PreparedStatement lookup = dbconn.prepareStatement("select * from footwearportal.supervisor natural join footwearportal.user where UID = ?");
 		lookup.setString(1, UID);
-		lookup.setString(2, companyID);
 		ResultSet rs = lookup.executeQuery();
 		String username = "";
+		String companyID = "";
 		String password = "";
 		String group = "";
 		String firstName = "";

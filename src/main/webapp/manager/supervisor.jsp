@@ -15,7 +15,7 @@
 	DataConnect data = DataConnect.getInstance();
 
 	try {
-		Supervisor supervisor = data.getSupervisor(supervisorID, companyID);
+		Supervisor supervisor = data.getSupervisor(supervisorID);
 		Company company = data.getCompany(companyID);
 		companyName = company.getCompanyName();
 		username = supervisor.getUsername();

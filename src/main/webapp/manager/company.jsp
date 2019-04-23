@@ -156,7 +156,7 @@
 				<jsp:useBean id="company" class="footwearwebportal.servlet.ListGen"/>
 				<%
 					try {
-						out.print(ListGen.generateSupervisorListHTML(id));
+						out.print(ListGen.generateSupervisorListHTML(id, true));
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}

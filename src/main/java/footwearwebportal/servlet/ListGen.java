@@ -31,7 +31,7 @@ public class ListGen {
 		return out.toString();
 	}
 
-	public static String generateSupervisorListHTML(String companyID) throws  SQLException {
+	public static String generateSupervisorListHTML(String companyID, boolean link) throws  SQLException {
 		DataConnect data = DataConnect.getInstance();
 
 		StringWriter out = new StringWriter();
@@ -40,15 +40,17 @@ public class ListGen {
 
 		for (Supervisor supervisor : supervisors) {
 			out.append("<div class=\"col-md-6 supervisor-container\">");
-			out.append("<form action=\"supervisor.jsp\" method=\"GET\">");
+			if(link) out.append("<form action=\"supervisor.jsp\" method=\"GET\">");
 			out.append("<div class=\"program-profile border d-flex flex-column\">");
 			out.append("<p class=\"profile-name\">" + supervisor.getLastName() + ", " + supervisor.getFirstName() + "</p>");
 			out.append("<p>" + supervisor.getEmail() + "</p>");
-			out.append("<input type=\"hidden\" name=\"supervisorID\" value=\"" + supervisor.getUID() + "\">");
-			out.append("<input type=\"hidden\" name=\"companyID\" value=\"" + supervisor.getCompanyID() + "\">");
-			out.append("<input type=\"submit\" class=\"btn btn-primary\" value=\"View\">");
+			if(link) {
+				out.append("<input type=\"hidden\" name=\"supervisorID\" value=\"" + supervisor.getUID() + "\">");
+				out.append("<input type=\"hidden\" name=\"companyID\" value=\"" + supervisor.getCompanyID() + "\">");
+				out.append("<input type=\"submit\" class=\"btn btn-primary\" value=\"View\">");
+			}
 			out.append("</div>");
-			out.append("</form>");
+			if(link) out.append("</form>");
 			out.append("</div>");
 		}
 
@@ -124,7 +126,7 @@ public class ListGen {
 		return out.toString();
 	}
 
-	public static String generateProgramShoeListHTML(String programID) throws  SQLException {
+	public static String generateProgramShoeListHTML(String programID, boolean link) throws  SQLException {
 		DataConnect data = DataConnect.getInstance();
 
 		StringWriter out = new StringWriter();
@@ -138,15 +140,17 @@ public class ListGen {
 		for (Shoe shoe : shoes) {
 			double discountPrice = Double.parseDouble(shoe.getShoePrice()) * (1.00 - (shoeDiscount / 100.00));
 			out.append("<div class=\"col-md-6 supervisor-container\">");
-			out.append("<form action=\"program.jsp?programID=" + programID +"\" method=\"POST\">");
+			if(link) out.append("<form action=\"program.jsp?programID=" + programID +"\" method=\"POST\">");
 			out.append("<div class=\"program-profile border d-flex flex-column\">");
 			out.append("<p class=\"shoe-name\">" + shoe.getShoeName() + "</p>");
 			out.append("<p>$" + shoe.getShoePrice() + "</p>");
 			out.append("<p>$" + discountPrice + "</p>");
-			out.append("<input type=\"hidden\" name=\"removeShoe\" value=\"" + shoe.getShoeID() + "\">");
-			out.append("<input type=\"submit\" class=\"btn btn-primary\" value=\"Remove\">");
+			if(link) {
+				out.append("<input type=\"hidden\" name=\"removeShoe\" value=\"" + shoe.getShoeID() + "\">");
+				out.append("<input type=\"submit\" class=\"btn btn-primary\" value=\"Remove\">");
+			}
 			out.append("</div>");
-			out.append("</form>");
+			if(link) out.append("</form>");
 			out.append("</div>");
 		}
 

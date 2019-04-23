@@ -39,7 +39,6 @@
 						<button type="submit" class="btn btn-danger mr-2" id="delete-button" formmethod="post">Delete Program</button>
 						<button type="button" id="edit-button" class="btn btn-success mr-2">Edit Program</button>
 					</div>
-				</div>
 		</form>
 		<hr>
 	</div>
@@ -92,7 +91,7 @@
 				<jsp:useBean id="shoe" class="footwearwebportal.servlet.ListGen"/>
 				<%
 					try {
-						out.print(ListGen.generateProgramShoeListHTML(programID));
+						out.print(ListGen.generateProgramShoeListHTML(programID, true));
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
