@@ -33,20 +33,22 @@
 <%@include file="../include/header.jsp"%>
 <div class="container mt-2 mb-5">
 	<div class="row">
-		<div class="col-md-12" id="top-buttons">
-			<a href="${pageContext.request.contextPath}/supervisor/" class="btn btn-primary">Back</a>
+		<div class="col-md-12">
+			<div class="btn-group" id="top-buttons">
+				<a href="index.jsp" class="btn btn-primary mr-2">Back</a>
+			</div>
 		</div>
 		<hr>
 	</div>
+	<hr>
 </div>
 <div class="container">
 	<div class="row">
 		<div class="col-md-4">
 			<h4><%=companyName%></h4>
-			<p id="currentCompanyCity"><%=city%></p>
-			<p id="currentCompanyState"><%=state%></p>
-			<p id="currentCompanyEmail"><%=email%></p>
-			<p id="currentCompanyComment"><%=comments%></p>
+			<p>Location: <%=city%>, <%=state%></p>
+			<p>Email: <a href="mailto:<%=email%>"><%=email%></a></p>
+			<p>Comments: <%=comments%></p>
 		</div>
 	</div>
 </div>

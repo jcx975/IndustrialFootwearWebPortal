@@ -99,8 +99,8 @@ public class ListGen {
 		Collections.sort(shoes);
 
 		for (Shoe shoe : shoes) {
-			out.append("<div class=\"col-md-6 mb-5 profile-container\">");
-			out.append("<div class=\"company-profile\">");
+			out.append("<div class=\"col-md-4 mb-3 profile-container\">");
+			out.append("<div class=\"company-profile border\">");
 			out.append("<p class=\"profile-name\">" + shoe.getShoeName() + "</p>");
 			out.append("<form action=\"shoe.jsp\" method=\"GET\">");
 			out.append("<input type=\"hidden\" name=\"shoeID\" value=\"" + shoe.getShoeID() + "\">");
